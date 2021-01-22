@@ -1,0 +1,202 @@
+
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=3949.00 sozlesme = 15323420.00sozlesme Kdv = 160.00 
+ 
+ tanimi  =Antalya Kaþ Adalet Hizmet Binasý1 
+ butce cinsi  =Genel 
+ butce yili  =2014 
+ proje cinsi  =Adalet Binasý 
+ ihale tarihi  =06/01/2017 
+ sozlesme tarihi =02/03/2017 
+ issuresi =120 
+ city  =9 
+ aistart  =06/03/2017 
+ aifinish  =04/07/2018 
+ karakteristik =ETÜT-PROJE 
+ Status  =Ýhale sürecinde 
+ company  = 
+ sorumlu =5veriler kaydedildi
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=3949.00 sozlesme = 15323420.00sozlesme Kdv = 160.00 
+ 
+ tanimi  =Antalya Kaþ Adalet Hizmet Binasý1 
+ butce cinsi  =Genel 
+ butce yili  =2014 
+ proje cinsi  =Adalet Binasý 
+ ihale tarihi  =06/01/2017 
+ sozlesme tarihi =02/03/2017 
+ issuresi =120 
+ city  =9 
+ aistart  =06/03/2017 
+ aifinish  =04/07/2018 
+ karakteristik =ETÜT-PROJE 
+ Status  =Ýhale sürecinde 
+ company  = 
+ sorumlu =5veriler kaydedildi
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=3949.00 sozlesme = 15323420.00sozlesme Kdv = 160.00 
+ 
+ tanimi  =Antalya Kaþ Adalet Hizmet Binasý1 
+ butce cinsi  =Genel 
+ butce yili  =2014 
+ proje cinsi  =Ceza Ýnfaz Kurumu 
+ ihale tarihi  =06/01/2017 
+ sozlesme tarihi =02/03/2017 
+ issuresi =120 
+ city  =2 
+ aistart  =06/03/2017 
+ aifinish  =04/07/2018 
+ karakteristik =ETÜT-PROJE 
+ Status  =Ýhale sürecinde 
+ company  = 
+ sorumlu =5
+ sisteme giris
+
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=50000.00 sozlesme = 140.00sozlesme Kdv = 140.00 
+ 
+ tanimi  =Ardahan Göle Adalet Hizmet Binasý 
+ butce cinsi  =Ýþ Yurtlarý 
+ butce yili  =2014 
+ proje cinsi  =Ceza Ýnfaz Kurumu 
+ ihale tarihi  =20/12/2017 
+ sozlesme tarihi =03/01/2018 
+ issuresi =340 
+ city  =8 
+ aistart  =08/01/2018 
+ aifinish  =14/12/2018 
+ karakteristik =ETÜT-PROJE 
+ Status  =Proje Ýptal Edildi 
+ company  =1 
+ sorumlu =25
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=50000.00 sozlesme = 140.00sozlesme Kdv = 140.00 
+ 
+ tanimi  =Ardahan Göle Adalet Hizmet Binasý 
+ butce cinsi  =Ýþ Yurtlarý 
+ butce yili  =2015 
+ proje cinsi  =Ceza Ýnfaz Kurumu 
+ ihale tarihi  =20/12/2017 
+ sozlesme tarihi =03/01/2018 
+ issuresi =340 
+ city  =8 
+ aistart  =08/01/2018 
+ aifinish  =14/12/2018 
+ karakteristik =ETÜT-PROJE 
+ Status  =Proje Ýptal Edildi 
+ company  =1 
+ sorumlu =25
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=50000.00 sozlesme = 140.00sozlesme Kdv = 140.00 
+ 
+ tanimi  =Ardahan Göle Adalet Hizmet Binasý 
+ butce cinsi  =Ýþ Yurtlarý 
+ butce yili  =2015 
+ proje cinsi  =Adalet Binasý 
+ ihale tarihi  =20/12/2017 
+ sozlesme tarihi =03/01/2018 
+ issuresi =340 
+ city  =8 
+ aistart  =08/01/2018 
+ aifinish  =14/12/2018 
+ karakteristik =ETÜT-PROJE 
+ Status  =Proje Ýptal Edildi 
+ company  =1 
+ sorumlu =25
+ sisteme giris
+
+ sisteme giris
+
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=3949.00 sozlesme = 0.00sozlesme Kdv = 148000.00 
+ 
+ tanimi  =Antalya Kaþ Adalet Hizmet Binasý 
+ butce cinsi  =Ýþ Yurtlarý 
+ butce yili  =2014 
+ proje cinsi  =Adalet Binasý 
+ ihale tarihi  =06/01/2017 
+ sozlesme tarihi =02/03/2017 
+ issuresi =120 
+ is bitim tarihi =None 
+ city  =8 
+ sorumlu =13 
+ aistart  =06/03/2017 
+ aifinish  =04/07/2017 
+ karakteristik =ETÜT-PROJE 
+ Status  =Proje tamamlandý 
+ company  =1Alanlari kontrol ediniz 
+ sisteme giris
+
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=3949.00 sozlesme = 15135.00sozlesme Kdv = 148000.00 
+ 
+ tanimi  =Antalya Kaþ Adalet Hizmet Binasý 
+ butce cinsi  =Ýþ Yurtlarý 
+ butce yili  =2017 
+ proje cinsi  =Adalet Binasý 
+ ihale tarihi  =06/01/2017 
+ sozlesme tarihi =02/03/2017 
+ issuresi =120 
+ is bitim tarihi =None 
+ city  =8 
+ sorumlu =13 
+ aistart  =06/03/2017 
+ aifinish  =04/07/2017 
+ karakteristik =ETÜT-PROJE 
+ Status  =Proje tamamlandý 
+ company  =1Alanlari kontrol ediniz 
+ sisteme giris
+
+ sisteme giris
+
+ sisteme giris
+ 
+ arsa=50000.00 sozlesme = 140.00sozlesme Kdv = 140.00 
+ 
+ tanimi  =Ardahan Göle Adalet Hizmet Binasý 
+ butce cinsi  =Ýþ Yurtlarý 
+ butce yili  =2014 
+ proje cinsi  =Adalet Binasý 
+ ihale tarihi  =20/12/2017 
+ sozlesme tarihi =03/01/2018 
+ issuresi =340 
+ is bitim tarihi =None 
+ city  =8 
+ sorumlu =25 
+ aistart  =08/01/2018 
+ aifinish  =14/12/2018 
+ karakteristik =ETÜT-PROJE 
+ Status  =Proje Ýptal Edildi 
+ company  =1
+ sisteme giris
+
+ sisteme giris
+Alanlari kontrol ediniz 
+ sisteme giris
+Alanlari kontrol ediniz 
+ sisteme giris
+Alanlari kontrol ediniz Alanlari kontrol ediniz 

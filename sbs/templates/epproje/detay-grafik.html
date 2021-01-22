@@ -1,0 +1,173 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+
+    <div class="row">
+
+
+        <div class="col-lg-4">
+
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Toplam İnşaat Alanlari</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" height="200" width="auto">
+
+                    <ul class="nav nav-pills nav-stacked">
+
+
+                        <li><a href="{% url 'sbs:detay' %}?get=Ceza İnfaz Kurumu">Ceza İnfaz Kurumu
+                            <small class="label label-primary  pull-right"> {{ cezainfaz }}</small></a>
+                        </li>
+                        <li><a href="{% url 'sbs:detay' %}?get=Adalet Binası">Adalet Binası <small
+                                class="label label-primary  pull-right"> {{ adaletbinasi }}</small></a>
+                        </li>
+                        <li><a href="{% url 'sbs:detay' %}?get=Adli Tıp">Adli Tıp
+                            <small class="label label-primary  pull-right"> {{ adlitip }}</small></a>
+                        </li>
+
+
+                        <li><a href="{% url 'sbs:detay' %}?get=Bölge Adliye Mahkemesi">Bölge Adliye Mahkemesi
+                            <small class="label label-primary  pull-right"> {{ bolgeadliye }}</small></a>
+                        </li>
+                        <li><a href="{% url 'sbs:detay' %}?get=Bölge İdare Mahkemesi">Bölge İdare Mahkemesi <small
+                                class="label label-primary  pull-right">
+                            {{ bolgeidari }}</small></a>
+                        </li>
+
+                        <li><a href="{% url 'sbs:detay' %}?get=Denetimli Serbestlik">Denetimli Serbestlik
+                            <small class="label label-primary  pull-right"> {{ denetimserbeslik }}</small></a>
+                        </li>
+                        <li><a href="{% url 'sbs:detay' %}?get=Bakanlık Bİnası">Bakanlık Bİnası <small
+                                class="label label-primary  pull-right">
+                            {{ bakanlikbinasi }}</small></a>
+                        </li>
+
+                        <li><a href="{% url 'sbs:detay' %}?get=Personel Eğitim Merkezi">Personel Eğitim Merkezi
+                            <small class="label label-primary  pull-right"> {{ personelegitim }}</small></a>
+                        </li>
+                        <li><a href="{% url 'sbs:detay' %}?get=Lojman">Lojman
+                            <small class="label label-primary  pull-right"> {{ lojman }}</small></a>
+                        </li>
+                        <li><a href="{% url 'sbs:detay' %}?get=ATGV">ATGV
+                            <small class="label label-primary  pull-right"> {{ ATGV }}</small></a>
+                        </li>
+                        <li><a href="{% url 'sbs:detay' %}?get=Diger">Diger <small
+                                class="label label-primary  pull-right"> {{ diger }}</small></a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-8">
+
+
+            <div class="box box-success">
+                <div class="box with-border ">
+                    <h3 class="box-title">{{ isim }} İnşaat Alani Grafiği</h3>
+
+
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="canvas" class="response"></canvas>
+                    </div>
+                    <center>
+                        <p class="label  layout-boxed  pull-left margin-right: 2rem  "
+                           style="background-color:rgba(151,187,205,0.5);">
+                            Toplam
+                        </p>
+                        <p class="label  layout-boxed " style="background-color:#FFB4B4;">
+                            Tamamlanan </p>
+
+
+                        <p class="label  layout-boxed pull-right " style="background-color:rgba(151,187,106,0.5);">Devam
+                            Eden
+                        </p>
+
+                    </center>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    </section>
+    </section>
+
+
+
+
+
+    <script>
+
+
+        var barChartData = {
+            labels: ["{{ isim }}"],
+            datasets: [
+
+                {
+                    label: "Toplam Projeler",
+                    fillColor: "rgba(151,187,205,0.5)",
+                    strokeColor: "rgba(151,187,205,0.8)",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: [{{ cins_sum }}]
+                },
+                {
+                    label: "Tamamlanan Projeler ",
+                    fillColor: "rgba(255,106,106,0.5)",
+                    strokeColor: "rgba(151,187,205,0.8)",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: [{{cins_tam}}]
+                },
+                {
+                    label: "Devam Eden Projeler ",
+                    fillColor: "rgba(151,187,106,0.5)",
+                    strokeColor: "rgba(151,187,205,0.8)",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: [{{cins_dev}}]
+                },
+            ]
+
+        }
+        window.onload = function () {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx).Bar(barChartData, {
+                responsive: true,
+
+            });
+
+
+        }
+
+    </script>
+
+
+{% endblock %}
