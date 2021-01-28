@@ -1,12 +1,12 @@
 from django.conf.urls import url
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from sbs.api.message import UserModelViewSet, MessageModelViewSet, UserModelEndMessageViewSet, EmployeModelViewSet, \
-    CompanyModelViewSet
 
 from sbs.Views import DashboardViews, AthleteViews, RefereeViews, ClubViews, CoachViews, DirectoryViews, UserViews, \
     CompetitionViews, AdminViews, HelpViews, PageViews, PreRegistration, EPProjectViews, EmployeeViews, PdfView, \
-    TechnicalViews, LogViews, NotificationView, CompanyView, ClaimView
+    TechnicalViews, LogViews, NotificationView, CompanyView, ClaimView, GtasinamazView
+from sbs.api.message import UserModelViewSet, MessageModelViewSet, UserModelEndMessageViewSet, EmployeModelViewSet, \
+    CompanyModelViewSet
 
 app_name = 'sbs'
 
@@ -506,6 +506,16 @@ urlpatterns = [
     url(r'destek/guncelle/(?P<pk>\d+)$', ClaimView.claim_update, name='destek-guncelle'),
 
     url(r'menu', ClaimView.menu, name='destek-talep-menu'),
+
+    #     gayrimenkul eklemeler
+    #     tasinamaz ekle
+
+    url(r'gayrimenkul/tasinmaz-ekle/$', GtasinamazView.add_tasinmaz, name='tasinmaz-add'),
+    url(r'gayrimenkul/tasinmaz-duzenle/(?P<pk>\d+)$', GtasinamazView.edit_tasinmaz, name='tasinmaz-duzenle'),
+    url(r'gayrimenkul/tasinmazlar/$', GtasinamazView.tasinmaz_list, name='tasinmaz-list'),
+    url(r'gayrimenkul/tasinmaz/delete/(?P<pk>\d+)$', GtasinamazView.delete_tasinmaz,
+        name='tasinmaz-delete'),
+
 
 
 

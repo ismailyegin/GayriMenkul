@@ -129,8 +129,7 @@
             {% for item in data %}
                 var ctx = document.getElementById("employe-{{ item.employe.pk }}").getContext("2d");
                 window.myBar = new Chart(ctx).Bar(barChartData{{item.employe.pk  }}, {
-                    responsive: true,
-
+                    responsive: true
                 });
             {% endfor %}
         }
