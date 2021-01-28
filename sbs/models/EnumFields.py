@@ -63,7 +63,6 @@ class EnumFields(enum.Enum):
     LOJMAN = 'Lojman'
     SOS = "SOSYAL TESİS "
     HAK = "HAKİM EVİ"
-
     DIGER = 'Diğer'
 
     TAHSİS_AMACİ = (

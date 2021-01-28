@@ -1,10 +1,37 @@
 from django.db import models
 
-from sbs.models.EnumFields import EnumFields
 from sbs.models.GkiraBedeli import GkiraBedeli
 
 
 class Gkira(models.Model):
+    CIK = 'Ceza İnfaz Kurumu'
+    AB = 'Adalet Binası'
+    AT = 'Adli Tıp'
+    BAM = 'Bölge Adliye Mahkemesi'
+    BIM = 'Bölge İdare Mahkemesi'
+    DS = 'Denetimli Serbestlik'
+    PEM = 'Personel Eğitim Merkezi'
+    BB = 'Bakanlık Binası'
+    LOJMAN = 'Lojman'
+    SOS = "SOSYAL TESİS "
+    HAK = "HAKİM EVİ"
+    DIGER = 'Diğer'
+
+    TAHSİS_AMACİ = (
+        (CIK, 'Ceza İnfaz Kurumu'),
+        (AB, 'Adalet Binası'),
+        (AT, 'Adli Tıp'),
+        (BAM, 'Bölge Adliye Mahkemesi'),
+        (BIM, 'Bölge İdare Mahkemesi'),
+        (DS, 'Denetimli Serbestlik'),
+        (BB, 'Bakanlık Bİnası'),
+        (PEM, 'Personel Eğitim Merkezi'),
+        (LOJMAN, 'Lojman'),
+
+        (SOS, 'Sosyal Tesis'),
+        (HAK, 'Hakim Evi'),
+        (DIGER, 'Diğer'),
+    )
     creationDate = models.DateTimeField(auto_now_add=True)
     modificationDate = models.DateTimeField(auto_now=True)
 
@@ -17,8 +44,8 @@ class Gkira(models.Model):
     kirabedeli = models.ManyToManyField(GkiraBedeli)
     adres = models.TextField(blank=True, null=True, verbose_name='Tasınmazin Kira Adresi')
     kapalialan = models.IntegerField(null=True, blank=True)
-    tahsis_amaci = models.CharField(max_length=128, verbose_name='Kullanim Amaci', choices=EnumFields.TAHSİS_AMACİ, )
+    tahsis_amaci = models.CharField(max_length=128, verbose_name='Kullanim Amaci', choices=TAHSİS_AMACİ, default=AB)
 
-    block = models.IntegerField(blank=True, null=True, )
-    floor = models.IntegerField(blank=True, null=True, )
-    UsageArea = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0)
+    # block = models.IntegerField(blank=True, null=True, )
+    # floor = models.IntegerField(blank=True, null=True, )
+    # UsageArea = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0)

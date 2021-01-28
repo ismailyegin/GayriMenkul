@@ -516,6 +516,11 @@ urlpatterns = [
     url(r'gayrimenkul/tasinmaz/delete/(?P<pk>\d+)$', GtasinamazView.delete_tasinmaz,
         name='tasinmaz-delete'),
 
+    url(r'gayrimenkul/tasimaz-oneri-ekle/(?P<pk>\d+)$',
+        GtasinamazView.add_offer_to_project, name='tasinmaz-oneri-ekle'),
+    url(r'gayrimenkul/tasimaz-gorus-sil/(?P<project_pk>\d+)/(?P<employee_pk>\d+)/$',
+        GtasinamazView.delete_ofters_from_project, name='tasinmaz-gorus-kaldir'),
+
 
 
 

@@ -13,7 +13,7 @@ class GtasinmazForm(ModelForm):
             'arsaDegeri', 'yapiRaic', 'yapiMalitet',
             'tasinmazinTuru', 'definition')
 
-        labels = {'name': 'İsim',
+        labels = {'name': 'Tanımı',
                   'sirano': 'Sıra numarası',
                   'block': 'Blok Adeti',
                   'floor': 'Kat Sayısı',

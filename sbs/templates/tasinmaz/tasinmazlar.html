@@ -234,10 +234,10 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Tanımı</th>
+                                    <th>Binayı Kullanan Birim</th>
                                     <th>Sıra Numarası</th>
                                     <th>Tkgm Numarasi</th>
                                     <th>Mülkiyet</th>
-                                    <th>Binayı Kullanan Birim</th>
                                     <th>Tahsis Durumu</th>
                                     <th>Taşınmazin Türü</th>
                                     <th>Açıklama</th>
@@ -252,12 +252,11 @@
                                         <tr>
                                             <td>{{ forloop.counter }} </td>
                                             <td>{{ project.name }} </td>
+                                            <td> {{ project.kurum.name }}</td>
                                             <td>{{ project.sirano }} </td>
                                             <td>{{ project.tkgmno }} </td>
                                             <td>{{ project.mulkiyet }} </td>
-                                            <td>
-                                                {{ project.kurum }}
-                                            <td>
+
                                             <td>{{ project.tahsis_durumu }}</td>
 
                                             <td>{{ project.tasinmazinTuru }}</td>

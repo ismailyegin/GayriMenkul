@@ -692,7 +692,7 @@
                             </div>
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label> {{ project_form.name.label }}</label>
                                             {{ project_form.name }}
@@ -712,12 +712,7 @@
                                             {{ project_form.tkgmno }}
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label> {{ project_form.mulkiyet.label }}</label>
-                                            {{ project_form.mulkiyet }}
-                                        </div>
-                                    </div>
+
                                     {#                                <div class="col-lg-3">#}
                                     {#                                    <div class="form-group">#}
                                     {#                                        <label> ilçe</label>#}
@@ -730,6 +725,13 @@
                                     {#                                </div>#}
                                     <div class="col-lg-12">
                                         <div class="row">
+
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label> {{ project_form.mulkiyet.label }}</label>
+                                                    {{ project_form.mulkiyet }}
+                                                </div>
+                                            </div>
 
 
                                             <div class="col-lg-3">
@@ -785,7 +787,7 @@
             {% endif %}
 
             <div class="row">
-                {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}
+                {#                {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}#}
                     {#    taşınmazin yapı   bilgileri           ------------------------------#}
 
 
@@ -913,160 +915,80 @@
                                 <!-- /.box-tools -->
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body" style="display: none;">
-                                <div class="row" style="padding-bottom: 10px">
 
 
+                            <div class="box-body">
+                                <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label> {{ project_form.ihaleTarihi.label }}</label>
-                                            {{ project_form.ihaleTarihi }}
+                                            <label> {{ tapu_form.country.label }}</label>
+                                            {{ tapu_form.country }}
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label> {{ project_form.sozlesmeTarihi.label }}</label>
-                                            {{ project_form.sozlesmeTarihi }}
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ project_form.aistart.label }}</label>
-                                            {{ project_form.aistart }}
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ project_form.aifinish.label }}</label>
-                                            {{ project_form.aifinish }}
+                                            <label> {{ tapu_form.city.label }}</label>
+                                            {{ tapu_form.city }}
                                         </div>
                                     </div>
 
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label> Sözleşme Bedeli (₺)</label>
-                                            <input type="text" name="sozlesmebedeli"
-                                                   value="{{ project.sozlesmeBedeli }}"
-                                                   class="form-control format "
-                                                   id="sozlesmebedeli" pattern="^\$\d{1.}(.\d{3})*(\,\d+)?$"
-                                                   data-type="currency">
-
+                                            <label> {{ tapu_form.town.label }}</label>
+                                            {{ tapu_form.town }}
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label> Sözleşme Bedeli Kdv Dahil(₺)</label>
-                                            <input type="text" name="sozlesmebedeliKdv"
-                                                   value="{{ project.sozlesmeBedeliKdv }}"
-                                                   class="form-control format "
-                                                   id="sozlesmebedeliKdv" pattern="^\$\d{1.}(.\d{3})*(\,\d+)?$"
-                                                   data-type="currency">
+                                            <label> {{ tapu_form.neighborhood.label }}</label>
+                                            {{ tapu_form.neighborhood }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tapu_form.location.label }}</label>
+                                            {{ tapu_form.location }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tapu_form.parcel.label }}</label>
+                                            {{ tapu_form.parcel }}
                                         </div>
                                     </div>
 
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label> {{ project_form.isSUresi.label }}</label>
-                                            {{ project_form.isSUresi }}
+                                            <label> {{ tapu_form.island.label }}</label>
+                                            {{ tapu_form.island }}
                                         </div>
                                     </div>
-                                    {% if project.projectStatus == "Proje tamamlandı" %}
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label> Kaç Gün Kaldı</label>
-                                                <input type="text" name="days" value="Proje Tamamlandı"
-                                                       class="form-control"
-                                                       readonly="readonly">
-                                            </div>
-                                        </div>
-                                    {% elif project.projectStatus == "Proje İptal Edildi" %}
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label> Kaç Gün Kaldı</label>
-                                                <input type="text" name="days" value="Proje İptal Edildi"
-                                                       class="form-control"
-                                                       readonly="readonly">
-                                            </div>
-                                        </div>
-                                    {% else %}
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label> Kaç Gün Kaldı</label>
-                                                <input type="text" name="days" value="{{ days }}" class="form-control"
-                                                       readonly="readonly">
-                                            </div>
-                                        </div>
-
-                                    {% endif %}
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
-
-                                            <label>{{ project_form.company.label }}</label>
-
-
-                                            <div class="input-group margin">
-
-
-                                                <div class="input-group-btn">
-                                                    <button type="button"
-                                                            class="btn btn-default dropdown-toggle"
-                                                            data-toggle="dropdown"
-                                                            aria-expanded="false">
-
-                                                        <span class="fa fa-plus-circle"></span></button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a onclick="modalCompany()">Degistir</a></li>
-                                                        <li class="divider"></li>
-                                                        <li>
-                                                            {% if project.company %}
-                                                                <a id="companyDetail" target="_blank"
-                                                                   href="{% url 'sbs:company-update' pk=project.company.pk %}">İncele </a>
-                                                            {% else %}
-                                                                <a id="companyDetail" href="#">İncele </a>
-                                                            {% endif %}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <select name="company"
-                                                        class="form-control select2 select2-hidden-accessible"
-                                                        style="width: 100%;" id="id_company">
-
-
-                                                    {% if project.company %}
-
-                                                        <option value="" selected="">--------</option>
-
-                                                        <option value="{{ project.company.pk }}"
-                                                                selected="">{{ project.company }}</option>
-                                                    {% else %}
-                                                        <option value="" selected="">--------</option>
-
-                                                    {% endif %}
-
-
-                                                </select>
-
-
-                                            </div>
-
-
+                                            <label> {{ tapu_form.area.label }}</label>
+                                            {{ tapu_form.area }}
                                         </div>
                                     </div>
-
-
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tapu_form.year.label }} </label>
+                                            {{ tapu_form.year }}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="box-footer text-right">
-                                    <button class="btn btn-primary " type="submit">Kaydet</button>
-                                </div>
-
-
+                            </div>
+                            <div class="box-footer">
+                                <button class="btn btn-primary" type="submit">Kaydet</button>
                             </div>
                             <!-- /.box-body -->
                         </div>
                         <!-- /.box -->
                     </div>
+
+
+                {% if project.tahsis_durumu == "Tahsisli Arsa" %}
                     {#   tahsis arsa bilgileri ödenek             ----------------------------------------#}
                     <div class="col-md-6">
                         <div class="box box-info collapsed-box">
@@ -1081,73 +1003,52 @@
                                 <!-- /.box-tools -->
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body" style="display: none;">
-                                {#                                <div class="row" style="padding-bottom: 10px">#}
-                                {##}
-                                {#                                    <div class="col-lg-6">#}
-                                {#                                        <div class="form-group">#}
-                                {#                                            <label> Arsa Alanı (m2)</label>#}
-                                {#                                            <input type="text" name="arsa" value="{{ project.arsaAlani }}"#}
-                                {#                                                   class="form-control  format"#}
-                                {#                                                   id="arsa" pattern="^\$\d{1.}(.\d{3})*(\,\d+)?$"#}
-                                {#                                                   data-type="currency">#}
-                                {#                                        </div>#}
-                                {##}
-                                {##}
-                                {#                                    </div>#}
-                                {##}
-                                {##}
-                                {#                                    <div class="col-lg-6">#}
-                                {#                                        <div class="form-group">#}
-                                {#                                            <label> İnşaat Alanı (m2)</label>#}
-                                {#                                            <input type="text" name="insaat" value="{{ project.insaatAlani }}"#}
-                                {#                                                   class="form-control format "#}
-                                {#                                                   id="insaat" pattern="^\$\d{1.}(.\d{3})*(\,\d+)?$"#}
-                                {#                                                   data-type="currency">#}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {#                                    <div class="col-lg-6">#}
-                                {#                                        <div class="form-group">#}
-                                {#                                            <label> Tahmini Ödenek Tutarı (₺)</label>#}
-                                {#                                            <input type="text" name="tahmini"#}
-                                {#                                                   value="{{ project.tahminiOdenekTutari }}"#}
-                                {#                                                   class="form-control  format"#}
-                                {#                                                   id="tahmini" pattern="^\$\d{1.}(.\d{3})*(\,\d+)?$"#}
-                                {#                                                   data-type="currency">#}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {#  Yaklaşıkı maliyet engellendi#}
-                                {#                                    <div class="col-lg-6">#}
-                                {#                                        <div class="form-group">#}
-                                {#                                            <label> Yaklaşık Maliyet (₺)</label>#}
-                                {#                                            <input type="text" name="yaklasik"#}
-                                {#                                                   value="{{ project.yaklasikMaliyet }}"#}
-                                {#                                                   class="form-control "#}
-                                {#                                                   id="yaklasik" pattern="^\$\d{1.}(.\d{3})*(\,\d+)?$"#}
-                                {#                                                   data-type="currency">#}
-                                {##}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {##}
-                                {#                                    <div class="col-lg-12">#}
-                                {#                                        <div class="box-footer text-right">#}
-                                {#                                            <button class="btn btn-primary " type="submit">Kaydet</button>#}
-                                {#                                        </div>#}
-                                {##}
-                                {#                                    </div>#}
-                                {##}
-                                {##}
-                                {#                                </div>#}
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.tahsisTarihi.label }}</label>
+                                            {{ tahsis_form.tahsisTarihi }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.tahsisSuresi.label }}</label>
+                                            {{ tahsis_form.tahsisSuresi }}
+                                        </div>
+                                    </div>
 
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.tahsis_amaci.label }}</label>
+                                            {{ tahsis_form.tahsis_amaci }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.tahsis_kurum.label }}</label>
+                                            {{ tahsis_form.tahsis_kurum }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.emsal.label }} </label>
+                                            {{ tahsis_form.emsal }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button class="btn btn-primary" type="submit">Kaydet</button>
                             </div>
                             <!-- /.box-body -->
                         </div>
                         <!-- /.box -->
                     </div>
-
-
+                {% endif %}
+                {% if project.tahsis_durumu == "Kiralık" %}
                     {#        kiralama  bilgileri        ----------------------------------------#}
-
                     <div class="col-md-6">
                         <div class="box box-info collapsed-box">
                             <div class="box-header with-border">
@@ -1161,83 +1062,74 @@
                                 <!-- /.box-tools -->
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body" style="display: none;">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.sahibi.label }}</label>
+                                            {{ tahsis_form.sahibi }}
+                                        </div>
+                                    </div>
 
-                                {#                                <div class="row" style="padding-bottom: 10px">#}
-                                {##}
-                                {##}
-                                {#                                    <div class="col-lg-12">#}
-                                {#                                        <div class="btn-group">#}
-                                {#                                            <a class="btn btn-success"#}
-                                {#                                               data-toggle="modal"#}
-                                {#                                               onclick=addvest({{ project.pk }})><i#}
-                                {#                                                    class="fa fa-plus"></i> Hakediş Ekle</a>#}
-                                {##}
-                                {##}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {##}
-                                {##}
-                                {#                                </div>#}
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.tahsis_amaci.label }}</label>
+                                            {{ tahsis_form.tahsis_amaci }}
+                                        </div>
+                                    </div>
 
 
-                                {#                                <div class="row">#}
-                                {#                                    <div class="col-lg-12">#}
-                                {#                                        <table id="hakedistablo" class="table table-bordered table-hover">#}
-                                {#                                            <thead>#}
-                                {#                                            <tr>#}
-                                {#                                                <th>No</th>#}
-                                {#                                                <th>Tarihi</th>#}
-                                {#                                                <th>Miktari (KDV dahil)</th>#}
-                                {#                                                <th>İşlemler</th>#}
-                                {##}
-                                {#                                            </tr>#}
-                                {#                                            </thead>#}
-                                {##}
-                                {#                                            <tbody>#}
-                                {##}
-                                {#                                            {% if project.vest.all %}#}
-                                {#                                                {% for item in project.vest.all %}#}
-                                {#                                                    <tr id="hakedis-{{ item.pk }}">#}
-                                {#                                                        <td>{{ forloop.counter }} </td>#}
-                                {#                                                        <td>{{ item.vestDate |date:" d/m/Y" }}</td>#}
-                                {#                                                        <td class="formatTd">{{ item.vest }}</td>#}
-                                {#                                                        <td>#}
-                                {#                                                            <div class="btn-group">#}
-                                {##}
-                                {#                                                                <a class="btn btn-warning"#}
-                                {#                                                                   data-toggle="modal"#}
-                                {#                                                                   onclick=editVest({{ project.pk }},{{ item.pk }})><i#}
-                                {#                                                                        class="fa fa-edit"></i></a>#}
-                                {##}
-                                {##}
-                                {#                                                                <a class="btn btn-danger"#}
-                                {#                                                                   data-toggle="modal"#}
-                                {#                                                                   onclick=deleteVest({{ project.pk }},{{ item.pk }})><i#}
-                                {#                                                                        class="fa fa-trash"></i></a>#}
-                                {#                                                            </div>#}
-                                {#                                                        </td>#}
-                                {#                                                    </tr>#}
-                                {##}
-                                {#                                                {% endfor %}#}
-                                {#                                            {% endif %}#}
-                                {##}
-                                {##}
-                                {#                                            </tbody>#}
-                                {#                                        </table>#}
-                                {#                                    </div>#}
-                                {##}
-                                {##}
-                                {#                                </div>#}
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.onayTarihi.label }}</label>
+                                            {{ tahsis_form.onayTarihi }}
+                                        </div>
+                                    </div>
 
 
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.sozlesmeTarihi.label }}</label>
+                                            {{ tahsis_form.sozlesmeTarihi }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.sozlesmeSonTarihi.label }}</label>
+                                            {{ tahsis_form.sozlesmeSonTarihi }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.kiralamaSuresi.label }}</label>
+                                            {{ tahsis_form.kiralamaSuresi }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.adres.label }}</label>
+                                            {{ tahsis_form.adres }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tahsis_form.kapalialan.label }}</label>
+                                            {{ tahsis_form.kapalialan }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button class="btn btn-primary" type="submit">Kaydet</button>
                             </div>
                             <!-- /.box-body -->
                         </div>
                         <!-- /.box -->
                     </div>
-
                 {% endif %}
+
 
 
                 {#         teşkilat  bilgileri        ----------------------------------------#}
@@ -1256,70 +1148,79 @@
                             <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body" style="display: none;">
-                            {#                        <div class="row" style="padding-bottom: 10px">#}
-                            {#                            <div class="col-lg-12">#}
-                            {#                                <div class="btn-group">#}
-                            {#                                    <a class="btn btn-success"#}
-                            {#                                       data-toggle="modal"#}
-                            {#                                       onclick=addEmployee({{ project.pk }})><i#}
-                            {#                                            class="fa fa-plus"></i> Personel Ekle</a>#}
-                            {##}
-                            {##}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {##}
-                            {#                        </div>#}
-                            {#                        <div class="row">#}
-                            {#                            <div class="col-lg-12">#}
-                            {#                                <table id="personelbilgi" class="table table-bordered table-hover">#}
-                            {#                                    <thead>#}
-                            {#                                    <tr>#}
-                            {#                                        <th>No</th>#}
-                            {#                                        <th>Ünvan</th>#}
-                            {#                                        <th>Personel</th>#}
-                            {#                                        <th>İşlemler</th>#}
-                            {##}
-                            {#                                    </tr>#}
-                            {#                                    </thead>#}
-                            {##}
-                            {#                                    <tbody>#}
-                            {##}
-                            {#                                    {% if project.employees.all %}#}
-                            {#                                        {% for item in project.employees.all %}#}
-                            {#                                            <tr id="personel-{{ item.pk }}">#}
-                            {#                                                <td>{{ forloop.counter }} </td>#}
-                            {#                                                <td>{{ item.projectEmployeeTitle }}</td>#}
-                            {#                                                <td>{{ item.employee }}</td>#}
-                            {#                                                <td>#}
-                            {#                                                    <div class="btn-group">#}
-                            {##}
-                            {#                                                        <a class="btn btn-warning"#}
-                            {#                                                           data-toggle="modal"#}
-                            {#                                                           onclick=editEmployee({{ project.pk }},{{ item.pk }})><i#}
-                            {#                                                                class="fa fa-edit"></i></a>#}
-                            {##}
-                            {##}
-                            {#                                                        <a class="btn btn-danger"#}
-                            {#                                                           data-toggle="modal"#}
-                            {#                                                           onclick=deleteEmployee({{ project.pk }},{{ item.pk }})><i#}
-                            {#                                                                class="fa fa-trash"></i></a>#}
-                            {#                                                    </div>#}
-                            {#                                                </td>#}
-                            {#                                            </tr>#}
-                            {##}
-                            {#                                        {% endfor %}#}
-                            {#                                    {% endif %}#}
-                            {##}
-                            {##}
-                            {#                                    </tbody>#}
-                            {#                                </table>#}
-                            {#                            </div>#}
-                            {##}
-                            {##}
-                            {#                        </div>#}
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.depremderecesi.label }}</label>
+                                        {{ teskilat_form.depremderecesi }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.yargiBolgesi.label }}</label>
+                                        {{ teskilat_form.yargiBolgesi }}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.merkeznufus.label }}</label>
+                                        {{ teskilat_form.merkeznufus }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.yargiAlaniNufus.label }}</label>
+                                        {{ teskilat_form.yargiAlaniNufus }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.agirCezaMerkezi.label }}</label>
+                                        {{ teskilat_form.agirCezaMerkezi }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.asliyeCezaMerkezi.label }}</label>
+                                        {{ teskilat_form.asliyeCezaMerkezi }}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.hakim_sayisi.label }}</label>
+                                        {{ teskilat_form.hakim_sayisi }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.savci_sayisi.label }}</label>
+                                        {{ teskilat_form.savci_sayisi }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.personel_sayisi.label }}</label>
+                                        {{ teskilat_form.personel_sayisi }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.mulhakat.label }}</label>
+                                        {{ teskilat_form.mulhakat }}
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
                     </div>
                     <!-- /.box -->
                 </div>
@@ -1370,10 +1271,10 @@
                                                             class="fa fa-clock-o"></i> {{ item.creationDate | date:"d/m/Y H:i" }}
 
 
-                                                        {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}
+                                                        {#                                                        {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}#}
                                                             <i class="fa fa-trash-o"
                                                                onclick=deleteoffers({{ project.pk }},{{ item.pk }})></i>
-                                                        {% endif %}
+                                                        {#                                                        {% endif %}#}
                                                     </small>
                                                     {{ item.added_by.first_name }} {{ item.added_by.last_name }}
                                                 </a>
@@ -1403,7 +1304,70 @@
     </section>
 
 
+    <script>
 
+        function addOffer(id,) {
+
+            $.ajax({
+                url: "{% url "sbs:tasinmaz-oneri-ekle" pk=212121223232323232  %}".replace(/212121223232323232/, id.toString()),
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    message: $('#offer').val(),
+                    isActive: 'False'
+
+                },
+                success: function (result) {
+
+                    var currentTime = new Date();
+                    $("#chat-box").prepend('<div class="item"><img src="' + result.image + '" alt="user image" class="offline">' +
+                        '<p class="message"><a href="#" class="name"><small class="text-muted pull-right">' +
+                        '<i class="fa fa-clock-o"></i>' + result.dates + '</small>' + result.username + '</a>' +
+                        $('#offer').val() + '</p></div>');
+
+                    $("#offer").val("");
+
+                }
+            });
+
+        };
+
+        function deleteoffers(id, competitionId) {
+
+            console.log(id);
+            var html = '';
+            $("#modal-danger").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function (e) {
+
+                    $.ajax({
+                        url: "{% url "sbs:tasinmaz-gorus-kaldir" project_pk=212121223232323232 employee_pk=999999999999999 %}".replace(/212121223232323232/, id.toString()).replace(/999999999999999/, competitionId.toString()),
+                        type: "POST",
+                        data: {
+                            'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                            isActive: 'False'
+                        },
+                        success: function (result) {
+                            if (result.status == 'Success') {
+                                html = 'Aşama başarıyla kaldırıldı.';
+                                $('#offset-' + competitionId).hide();
+
+                                console.log(result.status);
+
+
+                            }
+                        }
+                    });
+
+                });
+            }).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
+            });
+
+        };
+
+
+    </script>
 
 
 
