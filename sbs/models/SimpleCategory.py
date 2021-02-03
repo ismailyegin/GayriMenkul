@@ -1,9 +1,6 @@
 
 from django.db import models
 
-from sbs.models.Athlete import Athlete
-from sbs.models.Competition import Competition
-
 
 class SimpleCategory(models.Model):
     categoryName = models.CharField(max_length=255, null=True, blank=True)
@@ -17,9 +14,6 @@ class SimpleCategory(models.Model):
     recordCompleted = models.BooleanField(null=True, blank=True)
     competition = models.IntegerField(null=True, blank=True)
     area = models.IntegerField(null=True, blank=True)
-
-
-
 
     def __str__(self):
         return '%s' (self.categoryName)

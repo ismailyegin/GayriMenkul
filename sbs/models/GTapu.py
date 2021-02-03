@@ -21,3 +21,4 @@ class GTapu(models.Model):
                              null=True)
     country = models.ForeignKey(Country, on_delete=models.SET_NULL, verbose_name='Ülke', db_column='country',
                                 blank=True, null=True)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)

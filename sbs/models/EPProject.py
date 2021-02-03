@@ -1,18 +1,18 @@
-from django.core.validators import RegexValidator, DecimalValidator
 from django.db import models
 
 from sbs.models import City
-from sbs.models.Town import Town
-from sbs.models.EPEmployee import EPEmployee
-from sbs.models.Employee import Employee
-from sbs.models.EPRequirements import EPRequirements
-from sbs.models.EPPhase import EPPhase
-from sbs.models.EPOffer import EPOffer
-from sbs.models.EPDocument import EPDocument
-from sbs.models.EPVest import EPVest
 from sbs.models.Company import Company
-from sbs.models.SubCompany import SubCompany
+from sbs.models.EPDocument import EPDocument
+from sbs.models.EPEmployee import EPEmployee
 from sbs.models.EPNeedDocument import EPNeedDocument
+from sbs.models.EPOffer import EPOffer
+from sbs.models.EPPhase import EPPhase
+from sbs.models.EPRequirements import EPRequirements
+from sbs.models.EPVest import EPVest
+from sbs.models.Employee import Employee
+from sbs.models.SubCompany import SubCompany
+
+
 class EPProject(models.Model):
 
 
@@ -128,6 +128,8 @@ class EPProject(models.Model):
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, verbose_name='Sirket', related_name='Sirket',
                                 null=True, blank=True)
     subcompany = models.ManyToManyField(SubCompany)
+
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
 
 
 

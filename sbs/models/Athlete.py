@@ -1,12 +1,10 @@
-from random import choices
-
 from django.contrib.auth.models import User
 from django.db import models
 
-from sbs.models.License import License
-from sbs.models.Level import Level
-from sbs.models.Person import Person
 from sbs.models.Communication import Communication
+from sbs.models.Level import Level
+from sbs.models.License import License
+from sbs.models.Person import Person
 
 
 class Athlete(models.Model):
@@ -17,6 +15,7 @@ class Athlete(models.Model):
     licenses = models.ManyToManyField(License)
     creationDate = models.DateTimeField(auto_now_add=True)
     operationDate = models.DateTimeField(auto_now=True)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
         return '%s %s' % (self.user.first_name, self.user.last_name)

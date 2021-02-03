@@ -1,10 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-from sbs.models.Level import Level
-from sbs.models.Punishment import Punishment
-from sbs.models.Person import Person
 from sbs.models.Communication import Communication
-from django.contrib.auth.models import User
+from sbs.models.Level import Level
+from sbs.models.Person import Person
 
 
 class Judge(models.Model):

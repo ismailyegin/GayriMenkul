@@ -42,3 +42,4 @@ class Gtahsis(models.Model):
     tahsis_kurum = models.ForeignKey(Gkurum, on_delete=models.SET_NULL, verbose_name='Tahsis Eden Kurum', null=True,
                                      blank=True)
     emsal = models.CharField(max_length=128, verbose_name='Emsal', null=True, blank=True)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)

@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from sbs.models import SportsClub
-from sbs.models.Person import Person
-from sbs.models.Communication import Communication
 from sbs.models.ClubRole import ClubRole
+from sbs.models.Communication import Communication
+from sbs.models.Person import Person
 
 
 class SportClubUser(models.Model):
@@ -14,6 +13,7 @@ class SportClubUser(models.Model):
     role = models.ForeignKey(ClubRole, on_delete=models.CASCADE, verbose_name='Üye Rolü')
     creationDate = models.DateTimeField(auto_now_add=True)
     modificationDate = models.DateTimeField(auto_now=True)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
     def __str__(self):
         return '%s %s' % (self.user.first_name, self.user.last_name)
 

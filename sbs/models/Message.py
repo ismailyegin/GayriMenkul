@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
-from django.db import models
+import uuid
+
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-
-import uuid
+from django.contrib.auth.models import User
+from django.db import models
 
 
 class Message(models.Model):
@@ -24,6 +24,8 @@ class Message(models.Model):
     is_show = models.BooleanField(default=False)
 
     chat_id = models.UUIDField(default=uuid.uuid4, editable=False, blank=False, null=False)
+
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
         return str(self.pk)

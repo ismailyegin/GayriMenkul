@@ -47,5 +47,6 @@ class Gteskilat(models.Model):
     savci_sayisi = models.IntegerField(blank=True, null=True, )
     personel_sayisi = models.IntegerField(blank=True, null=True, )
     mulhakat = models.CharField(max_length=128, blank=True, null=True, )
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
     #
     # UsageArea = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0)

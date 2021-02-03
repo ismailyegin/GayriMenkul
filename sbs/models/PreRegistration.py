@@ -1,10 +1,8 @@
 from django.db import models
-from sbs.models.City import City
-from sbs.models.Country import Country
-from sbs.models.SportClubUser import SportClubUser
-from sbs.models.Coach import Coach
-from sbs.models.ClubRole import ClubRole
 
+from sbs.models.City import City
+from sbs.models.ClubRole import ClubRole
+from sbs.models.Country import Country
 
 
 class PreRegistration(models.Model):
@@ -103,6 +101,7 @@ class PreRegistration(models.Model):
     petition= models.FileField(upload_to='dekont/', null=False, blank=False, verbose_name='Dilekçe ')
     # Sportclup user
     role = models.ForeignKey(ClubRole, on_delete=models.CASCADE, verbose_name='Üye Rolü')
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
 
 
     class Meta:

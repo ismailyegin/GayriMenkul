@@ -8,6 +8,7 @@ from sbs.models.Competition import Competition
 class SandaAthlete(models.Model):
     athlete = models.OneToOneField(Athlete, on_delete=models.CASCADE)
     competition = models.OneToOneField(Competition, on_delete=models.CASCADE)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
         return '%s %s' % (self.athlete.user.first_name, self.athlete.user.last_name)

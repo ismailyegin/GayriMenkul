@@ -1,10 +1,8 @@
-import enum
-
 from django.db import models
 
 from sbs.models.Coach import Coach
-from sbs.models.Judge import Judge
 from sbs.models.EnumFields import EnumFields
+from sbs.models.Judge import Judge
 
 
 class VisaSeminar(models.Model):
@@ -33,7 +31,6 @@ class VisaSeminar(models.Model):
     coach=models.ManyToManyField(Coach)
     referee = models.ManyToManyField(Judge)
     forWhichClazz = models.CharField(blank=False, null=False, max_length=255)
-
 
     def __str__(self):
         return '%s ' % self.name

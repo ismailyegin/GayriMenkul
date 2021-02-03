@@ -7,3 +7,4 @@ class GkiraBedeli(models.Model):
 
     kiraTarihi = models.DateTimeField(null=False, blank=False)
     kiraBedeli = models.IntegerField(null=False, blank=False)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)

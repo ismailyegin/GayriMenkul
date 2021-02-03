@@ -43,6 +43,8 @@ class Person(models.Model):
     bloodType = models.CharField(max_length=128, verbose_name='Kan Grubu', choices=BLOODTYPE, default=AB1)
     gender = models.IntegerField(blank=True, null=True, choices=GENDER_CHOICES)
 
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
+
     class Meta:
         default_permissions = ()
         db_table = 'person'

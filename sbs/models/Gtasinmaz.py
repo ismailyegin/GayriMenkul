@@ -91,3 +91,5 @@ class Gtasinmaz(models.Model):
     yapiRaic = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
 
     offers = models.ManyToManyField(EPOffer)
+
+    kobilid = models.IntegerField(null=True, blank=True, default=2)

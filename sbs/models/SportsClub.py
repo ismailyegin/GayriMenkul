@@ -1,8 +1,8 @@
 from django.db import models
 
-from sbs.models.SportClubUser import SportClubUser
 from sbs.models.Coach import Coach
 from sbs.models.Communication import Communication
+from sbs.models.SportClubUser import SportClubUser
 
 
 class SportsClub(models.Model):
@@ -25,6 +25,7 @@ class SportsClub(models.Model):
     dataAccessControl=models.BooleanField(blank=True, null=True)
     password=models.CharField(blank=True, null=True, max_length=120)
     username=models.CharField(blank=True, null=True, max_length=120)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
 
 
 

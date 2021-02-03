@@ -1,7 +1,5 @@
 from django.db import models
 
-from sbs.models import CategoryItem
-
 
 class Punishment(models.Model):
     creationDate = models.DateTimeField(auto_now_add=True)
@@ -11,6 +9,7 @@ class Punishment(models.Model):
     durationDay = models.IntegerField()
     #definition = models.ForeignKey(CategoryItem, on_delete=models.CASCADE)
     description = models.CharField(blank=True, null=True, max_length=1000)
+    kobilid = models.IntegerField(null=True, blank=True, default=2)
 
     class Meta:
         default_permissions = ()
