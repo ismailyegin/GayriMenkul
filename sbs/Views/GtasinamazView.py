@@ -11,9 +11,11 @@ from sbs.Forms.GkiraForm import GkiraForm
 from sbs.Forms.GtahsisForm import GtahsisForm
 from sbs.Forms.GtasinmazForm import GtasinmazForm
 from sbs.Forms.GteskilatForm import GteskilatForm
+from sbs.Forms.KurumForm import KurumForm
 from sbs.Forms.TapuForm import TapuForm
 from sbs.models.GTapu import GTapu
 from sbs.models.Gkira import Gkira
+from sbs.models.Gkurum import Gkurum
 from sbs.models.Gtahsis import Gtahsis
 from sbs.models.Gtasinmaz import Gtasinmaz
 from sbs.models.Gteskilat import Gteskilat
@@ -212,3 +214,39 @@ def delete_ofters_from_project(request, project_pk, employee_pk):
 
     else:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+
+
+@login_required
+def add_kurum(request):
+    perm = general_methods.control_access_personel(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    kurum_form = KurumForm(request.POST or None)
+    if request.method == 'POST':
+        if kurum_form.is_valid():
+            kurum = kurum_form.save(commit=False)
+            kurum.save()
+            return redirect('sbs:kurum-duzenle', kurum.pk)
+        else:
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'kurum/kurumEkle.html', {'kurum_form': kurum_form})
+
+
+@login_required
+def edit_kurum(request, pk):
+    perm = general_methods.control_access_personel(request)
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    kurum = Gkurum.objects.get(pk=pk)
+    kurum_form = KurumForm(request.POST or None, instance=kurum)
+    kurum = Gkurum.objects.all()
+    if request.method == 'POST':
+        if kurum_form.is_valid():
+            kurum_form.save()
+
+    return render(request, 'kurum/KurumGuncelle.html', {'kurum': kurum, 'kurum_form': kurum_form})

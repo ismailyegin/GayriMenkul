@@ -1,12 +1,6 @@
 {% extends 'base_layout.html' %}
-
-
-
-
 {% block content %}
     {# turkiye haritasi    #}
-
-
     <style>
         .svg-turkiye-haritasi {
             max-width: 1140px;
@@ -114,14 +108,16 @@
 
             <div class="row">
 
-                <a href="{% url 'sbs:tasinmaz-list' %}?get=Projeler">
+                <a
+                        {#                        href="{% url 'sbs:tasinmaz-list' %}?get=Projeler"#}
+                >
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
                         <span class="info-box-icon bg-yellow">
                             <i class="ion ion-android-open"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Toplam Proje Sayısı </span>
+                                <span class="info-box-text">Taşınmaz </span>
                                 <span class="info-box-number">{{ proje_count }}</span>
                             </div>
 
@@ -131,13 +127,15 @@
                         <!-- /.info-box -->
                     </div>
                 </a>
-                <a href="{% url 'sbs:tasinmaz-list' %}?get=AçıkProje">
+                <a
+                        {#                        href="{% url 'sbs:tasinmaz-list' %}?get=AçıkProje"#}
+                >
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
                             <span class="info-box-icon bg-aqua"><i class="ion ion-android-home"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Proje Devam ediyor </span>
+                                <span class="info-box-text">Taşınmaz  </span>
                                 <span class="info-box-number header">{{ proje_status_PDE }}</span>
                             </div>
                             <!-- /.info-box-content -->
@@ -145,13 +143,15 @@
                         <!-- /.info-box -->
                     </div>
                 </a>
-                <a href="{% url 'sbs:tasinmaz-list' %}?get=TamamlananProje">
+                <a
+                        {#                        href="{% url 'sbs:tasinmaz-list' %}?get=TamamlananProje"#}
+                >
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
                             <span class="info-box-icon bg-red"><i class="fa ion-stats-bars"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Proje Tamamlandı</span>
+                                <span class="info-box-text">Taşınmaz </span>
                                 <span class="info-box-number">{{ proje_status_PT }}</span>
                             </div>
                             <!-- /.info-box-content -->
@@ -163,13 +163,15 @@
                 <a>
 
 
-                    <a href="{% url 'sbs:tasinmaz-list' %}?get=durdurulanProje">
+                    <a
+                            {#                            href="{% url 'sbs:tasinmaz-list' %}?get=durdurulanProje"#}
+                    >
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="info-box">
                                 <span class="info-box-icon bg-green"><i class="ion ion-android-bulb"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Proje Durduruldu</span>
+                                    <span class="info-box-text">Taşınmaz</span>
                                     <span class="info-box-number">{{ proje_status_PD }}</span>
                                 </div>
                                 <!-- /.info-box-content -->
@@ -185,7 +187,7 @@
 
 
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">Şehir Degerlendirme</h3>
@@ -514,105 +516,105 @@
                     </div>
 
                 </div>
-                <div class="col-lg-4">
+                {#                <div class="col-lg-4">#}
 
 
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Projelerin Dağılımı</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                        class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="chart-responsive">
-                                        <canvas id="pieChart2" class="response"></canvas>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer no-padding">
-
-
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{% url 'sbs:detay' %}?get=Ceza İnfaz Kurumu">Ceza İnfaz Kurumu
-                                    <small class="label   pull-right"
-                                           style="background-color:#00868b; "> {{ cezainfaz }}</small></a>
-                                </li>
-                                <li><a href="{% url 'sbs:detay' %}?get=Adalet Binası">Adalet Binası <small
-                                        class="label   pull-right"
-                                        style="background-color:#cd5c5c"> {{ adaletbinasi }}</small></a>
-                                </li>
-                                <li><a href="{% url 'sbs:detay' %}?get=Adli Tıp">Adli Tıp
-                                    <small class="label  pull-right"
-                                           style="background-color:#ffff00;color:#000000;"> {{ adlitip }}</small></a>
-                                </li>
-
-
-                                <li><a href="{% url 'sbs:detay' %}?get=Bölge Adliye Mahkemesi">Bölge Adliye Mahkemesi
-                                    <small class="label label-primary  pull-right"
-                                           style="background-color:#8b4513; "> {{ bolgeadliye }}</small></a>
-                                </li>
-                                <li><a href="{% url 'sbs:detay' %}?get=Bölge İdare Mahkemesi">Bölge İdare Mahkemesi
-                                    <small class="label  pull-right"
-                                           style="background-color:#ee9a00; text-c ">
-                                        {{ bolgeidari }}</small></a>
-                                </li>
-
-                                <li><a href="{% url 'sbs:detay' %}?get=Denetimli Serbestlik">Denetimli Serbestlik
-                                    <small class="label   pull-right"
-                                           style="background-color:#ff00ff; "> {{ denetimserbeslik }}</small></a>
-                                </li>
-                                <li><a href="{% url 'sbs:detay' %}?get=Bakanlık Binası">Bakanlık Binası <small
-                                        class="label  pull-right"
-                                        style="background-color:#000000; ">
-                                    {{ bakanlikbinasi }}</small></a>
-                                </li>
-
-                                <li><a href="{% url 'sbs:detay' %}?get=Personel Eğitim Merkezi">Personel Eğitim Merkezi
-                                    <small class="label   pull-right"
-                                           style="background-color:#a9a9a9; "> {{ personelegitim }}</small></a>
-                                </li>
-
-                                <li><a href="{% url 'sbs:detay' %}?get=ATGV ">ATGV
-                                    <small class="label   pull-right"
-                                           style="background-color:#a9a9a9; ">{{ ATGV }}</small></a>
-                                </li>
-                                <li><a href="{% url 'sbs:detay' %}?get=Lojman">Lojman
-                                    <small class="label   pull-right"
-                                           style="background-color:#00cd00; "> {{ lojman }}</small></a>
-                                </li>
-                                <li><a href="{% url 'sbs:detay' %}?get=Diger">Diger <small class="label   pull-right"
-                                                                                           style="background-color:#00f5ff; "> {{ diger }}</small></a>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                        <!-- /.footer -->
-
-                        <!-- /.box -->
-
-                        <!-- PRODUCT LIST -->
-
-
-                        <!-- /.box -->
-                    </div>
-                    <!-- /.box -->
-                </div>
+                {#                    <div class="box box-default">#}
+                {#                        <div class="box-header with-border">#}
+                {#                            <h3 class="box-title">Projelerin Dağılımı</h3>#}
+                {##}
+                {#                            <div class="box-tools pull-right">#}
+                {#                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i#}
+                {#                                        class="fa fa-minus"></i>#}
+                {#                                </button>#}
+                {#                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i#}
+                {#                                        class="fa fa-times"></i></button>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                        <!-- /.box-header -->#}
+                {#                        <div class="box-body">#}
+                {#                            <div class="row">#}
+                {#                                <div class="col-md-12">#}
+                {#                                    <div class="chart-responsive">#}
+                {#                                        <canvas id="pieChart2" class="response"></canvas>#}
+                {#                                    </div>#}
+                {##}
+                {##}
+                {#                                </div>#}
+                {##}
+                {#                            </div>#}
+                {#                            <!-- /.row -->#}
+                {#                        </div>#}
+                {#                        <!-- /.box-body -->#}
+                {#                        <div class="box-footer no-padding">#}
+                {##}
+                {##}
+                {#                            <ul class="nav nav-pills nav-stacked">#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Ceza İnfaz Kurumu">Ceza İnfaz Kurumu#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#00868b; "> {{ cezainfaz }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Adalet Binası">Adalet Binası <small#}
+                {#                                        class="label   pull-right"#}
+                {#                                        style="background-color:#cd5c5c"> {{ adaletbinasi }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Adli Tıp">Adli Tıp#}
+                {#                                    <small class="label  pull-right"#}
+                {#                                           style="background-color:#ffff00;color:#000000;"> {{ adlitip }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Bölge Adliye Mahkemesi">Bölge Adliye Mahkemesi#}
+                {#                                    <small class="label label-primary  pull-right"#}
+                {#                                           style="background-color:#8b4513; "> {{ bolgeadliye }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Bölge İdare Mahkemesi">Bölge İdare Mahkemesi#}
+                {#                                    <small class="label  pull-right"#}
+                {#                                           style="background-color:#ee9a00; text-c ">#}
+                {#                                        {{ bolgeidari }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Denetimli Serbestlik">Denetimli Serbestlik#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#ff00ff; "> {{ denetimserbeslik }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Bakanlık Binası">Bakanlık Binası <small#}
+                {#                                        class="label  pull-right"#}
+                {#                                        style="background-color:#000000; ">#}
+                {#                                    {{ bakanlikbinasi }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Personel Eğitim Merkezi">Personel Eğitim Merkezi#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#a9a9a9; "> {{ personelegitim }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=ATGV ">ATGV#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#a9a9a9; ">{{ ATGV }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Lojman">Lojman#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#00cd00; "> {{ lojman }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Diger">Diger <small class="label   pull-right"#}
+                {#                                                                                           style="background-color:#00f5ff; "> {{ diger }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {##}
+                {#                            </ul>#}
+                {#                        </div>#}
+                {#                        <!-- /.footer -->#}
+                {##}
+                {#                        <!-- /.box -->#}
+                {##}
+                {#                        <!-- PRODUCT LIST -->#}
+                {##}
+                {##}
+                {#                        <!-- /.box -->#}
+                {#                    </div>#}
+                <!-- /.box -->
+                {#                </div>#}
 
 
             </div>
