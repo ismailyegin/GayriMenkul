@@ -13,6 +13,7 @@ from sbs.Forms.GtasinmazForm import GtasinmazForm
 from sbs.Forms.GteskilatForm import GteskilatForm
 from sbs.Forms.KurumForm import KurumForm
 from sbs.Forms.TapuForm import TapuForm
+from sbs.models import City
 from sbs.models.GTapu import GTapu
 from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
@@ -24,8 +25,6 @@ from sbs.services.general_methods import getProfileImage
 
 
 # from twisted.conch.insults.insults import privateModes
-
-
 @login_required
 def add_tasinmaz(request):
     perm = general_methods.control_access(request)
@@ -61,15 +60,6 @@ def edit_tasinmaz(request, pk):
     tasinmaz = Gtasinmaz.objects.get(pk=pk)
     user = request.user
     project_form = GtasinmazForm(request.POST or None, instance=tasinmaz)
-
-    if tasinmaz.teskilat == None:
-        teskilat = Gteskilat()
-        teskilat.save()
-        tasinmaz.teskilat = teskilat
-        tasinmaz.save()
-        teskilat_form = GteskilatForm(request.POST or None, instance=teskilat)
-    else:
-        teskilat_form = GteskilatForm(request.POST or None, instance=tasinmaz.teskilat)
 
     if tasinmaz.tapu == None:
         tapu = GTapu()
@@ -117,7 +107,7 @@ def edit_tasinmaz(request, pk):
     return render(request, 'tasinmaz/tasinmazGuncelle.html',
                   {'project_form': project_form,
                    'project': tasinmaz, 'tahsis_form': tahsis_form, 'tapu_form': tapu_form,
-                   'teskilat_form': teskilat_form})
+                   })
 
 
 @login_required
@@ -225,6 +215,7 @@ def add_kurum(request):
         return redirect('accounts:login')
 
     kurum_form = KurumForm(request.POST or None)
+    kurum = Gkurum.objects.all()
     if request.method == 'POST':
         if kurum_form.is_valid():
             kurum = kurum_form.save(commit=False)
@@ -233,7 +224,7 @@ def add_kurum(request):
         else:
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'kurum/kurumEkle.html', {'kurum_form': kurum_form})
+    return render(request, 'kurum/kurumEkle.html', {'kurum_form': kurum_form, 'kurum': kurum})
 
 
 @login_required
@@ -248,5 +239,83 @@ def edit_kurum(request, pk):
     if request.method == 'POST':
         if kurum_form.is_valid():
             kurum_form.save()
+            return redirect('sbs:kurum-add', )
+
 
     return render(request, 'kurum/KurumGuncelle.html', {'kurum': kurum, 'kurum_form': kurum_form})
+
+
+@login_required
+def add_teskilat(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    teskilat_form = GteskilatForm()
+    if request.method == 'POST':
+        teskilat_form = GteskilatForm(request.POST)
+        if teskilat_form.is_valid():
+            project = teskilat_form.save()
+            log = str(project.city) + " teşkilat yapısı kaydedildi"
+            log = general_methods.logwrite(request, log)
+            messages.success(request, 'Teşkilat Yapısı Kaydedildi.  Kaydedilmiştir.')
+
+            return redirect('sbs:teskilat-duzenle', pk=project.pk)
+        else:
+            messages.warning(request, 'Alanları kontrol ediniz.')
+    return render(request, 'teskilat/teskilatEkle.html',
+                  {'project_form': teskilat_form})
+
+
+def list_teskilat(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    teskilat = Gteskilat.objects.all()
+
+    return render(request, 'teskilat/teskilatlar.html',
+                  {'teskilat': teskilat})
+
+
+@login_required
+def edit_teskilat(request, pk):
+    perm = general_methods.control_access_personel(request)
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    teskilat = Gteskilat.objects.get(pk=pk)
+    teskilat_form = GteskilatForm(request.POST or None, instance=teskilat)
+
+    if request.method == 'POST':
+
+        if teskilat_form.is_valid():
+            project = teskilat_form.save()
+            log = str(project.city) + " teşkilat yapısı güncellendi."
+            log = general_methods.logwrite(request, log)
+            messages.success(request, 'Teşkilat Yapısı güncellendi.')
+
+            return redirect('sbs:teskilat-duzenle', pk=project.pk)
+        else:
+            messages.warning(request, 'Alanları kontrol ediniz.')
+    return render(request, 'teskilat/teskilatGuncelle.html',
+                  {'project_form': teskilat_form})
+
+
+@login_required
+def add_teskilat_olustur(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    cities = City.objects.all()
+    for item in cities:
+        if not (Gteskilat.objects.filter(city=item)):
+            teskilat = Gteskilat(city=item)
+            teskilat.save()
+
+    return render(request, 'tasinmaz/tasinmazEkle.html')

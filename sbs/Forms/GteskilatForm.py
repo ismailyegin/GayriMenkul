@@ -18,7 +18,8 @@ class GteskilatForm(ModelForm):
             'hakim_sayisi',
             'savci_sayisi',
             'personel_sayisi',
-            'mulhakat'
+            'mulhakat',
+            'city'
 
         )
 
@@ -33,6 +34,7 @@ class GteskilatForm(ModelForm):
             'savci_sayisi': 'Savcı Sayısı ',
             'personel_sayisi': 'Personel Sayısı',
             'mulhakat': 'Mülhakat',
+            'city': 'Şehir'
 
         }
 
@@ -40,6 +42,8 @@ class GteskilatForm(ModelForm):
 
             'depremderecesi': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                   'style': 'width: 100%; ', }),
+            'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                        'style': 'width: 100%; ', }),
             'yargiBolgesi': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%; ', }),
 

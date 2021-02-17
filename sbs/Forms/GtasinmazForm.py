@@ -11,7 +11,7 @@ class GtasinmazForm(ModelForm):
         fields = (
             'name', 'sirano', 'block', 'floor', 'mulkiyet', 'tkgmno', 'UsageArea', 'kurum', 'tahsis_durumu',
             'arsaDegeri', 'yapiRaic', 'yapiMalitet',
-            'tasinmazinTuru', 'definition')
+            'tasinmazinTuru', 'definition', 'arsaTuru')
 
         labels = {'name': 'Tanımı',
                   'sirano': 'Sıra numarası',
@@ -26,7 +26,9 @@ class GtasinmazForm(ModelForm):
                   'definition': 'Açıklama',
                   'arsaDegeri': 'Arsa Degeri:',
                   'yapiMalitet': 'Yapı Maliyet degeri ',
-                  'yapiRaic': 'Yapı Raiç Degeri'
+                  'yapiRaic': 'Yapı Raiç Degeri',
+                  'arsaTuru': 'Bina mı?'
+
 
                   }
 
@@ -40,6 +42,8 @@ class GtasinmazForm(ModelForm):
 
             'kurum': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                          'style': 'width: 100%; ', 'required': 'required'}),
+            'arsaTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                            'style': 'width: 100%; '}),
 
             'mulkiyet': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                             'style': 'width: 100%; ', 'required': 'required'}),

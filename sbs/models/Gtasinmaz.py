@@ -5,17 +5,25 @@ from sbs.models.GTapu import GTapu
 from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
 from sbs.models.Gtahsis import Gtahsis
-from sbs.models.Gteskilat import Gteskilat
 
 
 class Gtasinmaz(models.Model):
-    Arsa = "Tahsisli Arsa"
+    TahsisliArsa = "Tahsisli Arsa"
     Kira = "Kiralık"
 
     TahsisDurumu = (
 
-        (Arsa, 'Tahsisli Arsa '),
+        (TahsisliArsa, 'Tahsisli Arsa '),
         (Kira, 'Kiralık'),
+    )
+
+    Bina = "Bina"
+    Arsa = "Arsa"
+
+    ArsaDurumu = (
+
+        (Bina, 'Bina'),
+        (Arsa, 'Arsa'),
     )
 
     Hazine = 'HAZİNE'
@@ -80,10 +88,10 @@ class Gtasinmaz(models.Model):
 
     tahsis_durumu = models.CharField(max_length=128, verbose_name='Tahsis durumu ', choices=TahsisDurumu, default=Arsa)
     tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TAHSIS_AMACI, default=AB)
+    arsaTuru = models.CharField(max_length=128, verbose_name='Arsa Türü ', choices=ArsaDurumu, default=Arsa)
 
     kira = models.ForeignKey(Gkira, on_delete=models.SET_NULL, verbose_name='Kurum', null=True, blank=True)
     tahsis = models.ForeignKey(Gtahsis, on_delete=models.SET_NULL, verbose_name='Tahsis', null=True, blank=True)
-    teskilat = models.ForeignKey(Gteskilat, on_delete=models.SET_NULL, verbose_name='Teskilat', null=True, blank=True)
     definition = models.CharField(max_length=128, verbose_name='Tasınmaz Açıklama ', null=True, blank=True)
 
     arsaDegeri = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)

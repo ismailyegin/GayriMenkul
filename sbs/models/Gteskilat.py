@@ -1,5 +1,7 @@
 from django.db import models
 
+from sbs.models.City import City
+
 
 class Gteskilat(models.Model):
     D1 = "1.DERECE"
@@ -48,5 +50,6 @@ class Gteskilat(models.Model):
     personel_sayisi = models.IntegerField(blank=True, null=True, )
     mulhakat = models.CharField(max_length=128, blank=True, null=True, )
     kobilid = models.IntegerField(null=True, blank=True, default=2)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='sehir', null=False, blank=False)
     #
     # UsageArea = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0)

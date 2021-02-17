@@ -524,6 +524,13 @@ urlpatterns = [
     url(r'gayrimenkul/kurum-ekle/$', GtasinamazView.add_kurum, name='kurum-add'),
     url(r'gayrimenkul/kurum-duzenle/(?P<pk>\d+)$', GtasinamazView.edit_kurum, name='kurum-duzenle'),
 
+    url(r'gayrimenkul/teskilat/olustur/$', GtasinamazView.add_teskilat_olustur, name='teskilat-add-olustur'),
+    url(r'gayrimenkul/teskilat-ekle/$', GtasinamazView.add_teskilat, name='teskilat-add'),
+    url(r'gayrimenkul/teskilat-duzenle/(?P<pk>\d+)$', GtasinamazView.edit_teskilat, name='teskilat-duzenle'),
+    url(r'gayrimenkul/teskilat/listesi/$', GtasinamazView.list_teskilat, name='teskilat-listesi'),
+
+
+
 
 
 
