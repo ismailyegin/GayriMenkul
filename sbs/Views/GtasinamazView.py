@@ -60,6 +60,7 @@ def edit_tasinmaz(request, pk):
     tasinmaz = Gtasinmaz.objects.get(pk=pk)
     user = request.user
     project_form = GtasinmazForm(request.POST or None, instance=tasinmaz)
+    gkurum = Gkurum.objects.all()
 
     if tasinmaz.tapu == None:
         tapu = GTapu()
@@ -107,8 +108,8 @@ def edit_tasinmaz(request, pk):
     return render(request, 'tasinmaz/tasinmazGuncelle.html',
                   {'project_form': project_form,
                    'project': tasinmaz, 'tahsis_form': tahsis_form, 'tapu_form': tapu_form,
+                   'gkurum': gkurum,
                    })
-
 
 @login_required
 def tasinmaz_list(request):
@@ -319,3 +320,54 @@ def add_teskilat_olustur(request):
             teskilat.save()
 
     return render(request, 'tasinmaz/tasinmazEkle.html')
+
+
+@login_required
+def project_subfirma(request, pk):
+    perm = general_methods.control_access_personel(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    try:
+        tasinmaz = Gtasinmaz.objects.get(pk=pk)
+        if request.POST.get('title'):
+            birim = Gkurum.objects.get(pk=request.POST.get('title'))
+            tasinmaz.kurum.add(birim)
+            tasinmaz.save()
+            log = str(tasinmaz.name) + " tasinmaz kullanan birim eklendi" + str(birim.name)
+            log = general_methods.logwrite(request, log)
+        return JsonResponse({'status': 'Success', 'messages': 'save successfully', 'pk': birim.pk})
+
+    except:
+        return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+        messages.warning(request, 'Yeniden deneyiniz.')
+
+    return redirect('sbs:tasinmaz-duzenle', pk=pk)
+
+
+@login_required
+def delete_birim_tasinmaz(request, tasinmaz, kurum):
+    perm = general_methods.control_access_personel(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    if request.method == 'POST' and request.is_ajax():
+        tasinmaz = Gtasinmaz.objects.get(pk=tasinmaz)
+        kurum = Gkurum.objects.get(pk=kurum)
+        tasinmaz.kurum.remove(kurum)
+        tasinmaz.save()
+        try:
+            # tasinmaz = Gtasinmaz.objects.get(pk=tasinmaz)
+            # kurum=Gkurum.objects.get(pk=kurum)
+            # tasinmaz.kurum.remove(kurum)
+            # tasinmaz.save()
+            print()
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+        except:
+            return JsonResponse({'status': 'Fail', 'msg': 'Object does not exist'})
+
+    else:
+        return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})

@@ -78,7 +78,7 @@ class Gtasinmaz(models.Model):
     sirano = models.IntegerField(blank=True, null=True, )
     tkgmno = models.IntegerField(blank=True, null=True, )
     tapu = models.ForeignKey(GTapu, on_delete=models.SET_NULL, verbose_name='Tapu', null=True, blank=True)
-    kurum = models.ForeignKey(Gkurum, on_delete=models.SET_NULL, verbose_name='Kurum', null=True, blank=True)
+    kurum = models.ManyToManyField(Gkurum)
 
     block = models.IntegerField(blank=True, null=True, )
     floor = models.IntegerField(blank=True, null=True)

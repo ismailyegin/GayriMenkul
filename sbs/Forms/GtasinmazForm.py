@@ -9,7 +9,7 @@ class GtasinmazForm(ModelForm):
         model = Gtasinmaz
 
         fields = (
-            'name', 'sirano', 'block', 'floor', 'mulkiyet', 'tkgmno', 'UsageArea', 'kurum', 'tahsis_durumu',
+            'name', 'sirano', 'block', 'floor', 'mulkiyet', 'tkgmno', 'UsageArea', 'tahsis_durumu',
             'arsaDegeri', 'yapiRaic', 'yapiMalitet',
             'tasinmazinTuru', 'definition', 'arsaTuru')
 
@@ -20,7 +20,6 @@ class GtasinmazForm(ModelForm):
                   'mulkiyet': 'Mülkiyet',
                   'tkgmno': 'Tkgm numarası',
                   'UsageArea': 'Kullanılan Alan (m2) ',
-                  'kurum': 'Binayı Kullanan Birim',
                   'tahsis_durumu': "Tahsis durumu",
                   'tasinmazinTuru': 'Taşınmazın Türü',
                   'definition': 'Açıklama',
@@ -40,8 +39,6 @@ class GtasinmazForm(ModelForm):
             'arsaDegeri': forms.TextInput(
                 attrs={'class': 'form-control ', }),
 
-            'kurum': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                         'style': 'width: 100%; ', 'required': 'required'}),
             'arsaTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                             'style': 'width: 100%; '}),
 

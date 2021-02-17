@@ -528,6 +528,9 @@ urlpatterns = [
     url(r'gayrimenkul/teskilat-ekle/$', GtasinamazView.add_teskilat, name='teskilat-add'),
     url(r'gayrimenkul/teskilat-duzenle/(?P<pk>\d+)$', GtasinamazView.edit_teskilat, name='teskilat-duzenle'),
     url(r'gayrimenkul/teskilat/listesi/$', GtasinamazView.list_teskilat, name='teskilat-listesi'),
+    url(r'gayrimenkul/birimEkle/(?P<pk>\d+)$', GtasinamazView.project_subfirma, name='proje-birim-ekle'),
+    url(r'gayrimenkul/tasinmaz-birim-sil/(?P<tasinmaz>\d+)/(?P<kurum>\d+)/$', GtasinamazView.delete_birim_tasinmaz,
+        name='tasinmaz-birim-kaldir'),
 
 
 
