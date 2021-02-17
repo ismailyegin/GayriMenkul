@@ -327,7 +327,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
 
-                            <img src="{{ MEDIA_URL }}{{ person.profileImage }}" class="user-image" alt=""
+                            <img src="{{ MEDIA_URL }}/{{ person.profileImage }}" class="user-image" alt=""
                                  style=" width: 30px;height: 30px;">
                             <span class="hidden-xs">{{ user.first_name }}  {{ user.last_name }}  <i
                                     class="fa fa-angle-down pull-right"></i></span>
@@ -335,7 +335,7 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ MEDIA_URL }}{{ person.profileImage }}" class="img-circle" alt="">
+                                <img src="{{ MEDIA_URL }}/{{ person.profileImage }}" class="img-circle" alt="">
 
                                 <p>
                                     {{ user.first_name }} {{ user.last_name }}
