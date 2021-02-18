@@ -71,7 +71,7 @@ def edit_tasinmaz(request, pk):
     else:
         tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
 
-    if tasinmaz.tahsis_durumu == Gtasinmaz.Arsa:
+    if tasinmaz.tahsis_durumu == "Tahsisli Arsa":
         if tasinmaz.tahsis == None:
             tahsis = Gtahsis()
             tahsis.save()
@@ -81,7 +81,7 @@ def edit_tasinmaz(request, pk):
             tahsis = tasinmaz.tahsis
         tahsis_form = GtahsisForm(request.POST or None, instance=tahsis)
 
-    elif tasinmaz.tahsis_durumu == Gtasinmaz.Kira:
+    elif tasinmaz.tahsis_durumu == "Kiralık":
         if tasinmaz.kira == None:
             kira = Gkira()
             kira.save()
@@ -104,8 +104,8 @@ def edit_tasinmaz(request, pk):
             messages.success(request, 'Tasinmaz Başarıyla Güncellendi')
             return redirect('sbs:tasinmaz-duzenle', pk=tasinmaz.pk)
         else:
-            print('alanlari kontrol ediniz')
             messages.warning(request, 'Alanları Kontrol Ediniz')
+
     return render(request, 'tasinmaz/tasinmazGuncelle.html',
                   {'project_form': project_form,
                    'project': tasinmaz, 'tahsis_form': tahsis_form, 'tapu_form': tapu_form,

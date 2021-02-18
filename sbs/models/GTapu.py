@@ -11,8 +11,8 @@ class GTapu(models.Model):
 
     year = models.DateTimeField(null=True, blank=True)
     area = models.CharField(max_length=120, null=True, blank=True)
-    parcel = models.CharField(max_length=120, null=True)
-    island = models.CharField(max_length=120, null=True)
+    parcel = models.CharField(max_length=120, null=True, blank=True)
+    island = models.CharField(max_length=120, null=True, blank=True)
     neighborhood = models.TextField(blank=True, null=True, verbose_name='Mahallle')
     location = models.TextField(blank=True, null=True, verbose_name='konum')
     town = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='İlce', db_column='town', blank=True,

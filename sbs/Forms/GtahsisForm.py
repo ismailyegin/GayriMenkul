@@ -8,7 +8,11 @@ class GtahsisForm(ModelForm):
     class Meta:
         model = Gtahsis
 
-        fields = ('tahsisTarihi', 'tahsisSuresi', 'tahsis_amaci', 'tahsis_kurum', 'emsal')
+        fields = ('tahsisTarihi',
+                  'tahsisSuresi',
+                  'tahsis_amaci',
+                  'tahsis_kurum',
+                  'emsal')
 
         labels = {'tahsisTarihi ': 'Tahsis Tarihi',
                   'tahsisSuresi ': 'Tahsis Süresi',
