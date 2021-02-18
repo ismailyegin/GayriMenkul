@@ -13,6 +13,7 @@ from sbs.Forms.GtahsisForm import GtahsisForm
 from sbs.Forms.GtasinmazForm import GtasinmazForm
 from sbs.Forms.GtasinmazSearchForm import GtasinmazSearchForm
 from sbs.Forms.GteskilatForm import GteskilatForm
+from sbs.Forms.GteskilatSearchForm import GteskilatSearchForm
 from sbs.Forms.KurumForm import KurumForm
 from sbs.Forms.TapuForm import TapuForm
 from sbs.models import City
@@ -310,10 +311,34 @@ def list_teskilat(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
-    teskilat = Gteskilat.objects.all()
+    teskilat = Gteskilat.objects.none()
+    teskilat_form = GteskilatSearchForm()
+    if request.method == 'POST':
+        tasinmaz_form = GteskilatSearchForm(request.POST)
+        if tasinmaz_form.is_valid():
+            depremderecesi = tasinmaz_form.cleaned_data.get('depremderecesi')
+            city = tasinmaz_form.cleaned_data.get('city')
+            yargiBolgesi = tasinmaz_form.cleaned_data.get('yargiBolgesi')
+
+            if not (depremderecesi or city or yargiBolgesi):
+                teskilat = Gteskilat.objects.all()
+            else:
+                query = Q()
+                if depremderecesi:
+                    query &= Q(depremderecesi=depremderecesi)
+                if city:
+                    query &= Q(city=city)
+                if yargiBolgesi:
+                    query &= Q(tkgmno=tkgmno)
+
+                if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
+                    teskilat = Gteskilat.objects.filter(query).distinct()
+
+
+
 
     return render(request, 'teskilat/teskilatlar.html',
-                  {'teskilat': teskilat})
+                  {'teskilat': teskilat, 'teskilat_form': teskilat_form})
 
 
 @login_required
