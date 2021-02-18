@@ -146,20 +146,51 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label> {{ tasinmaz_form.arsaTuru.label }}</label>
-                                        {{ tasinmaz_form.arsaTuru }}
+                                        <label> Bina mı?</label>
+                                        <select name="arsaTuru" class="form-control select2 select2-hidden-accessible"
+                                                style="width: 100%; " id="id_arsaTuru">
+                                            <option value="" selected>Seçiniz</option>
+                                            <option value="Bina">Bina</option>
+
+                                            <option value="Arsa">Arsa</option>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label> {{ tasinmaz_form.mulkiyet.label }}</label>
-                                        {{ tasinmaz_form.mulkiyet }}
+                                        <label> Mülkiyet</label>
+                                        <select name="mulkiyet" class="form-control select2 select2-hidden-accessible"
+                                                style="width: 100%; " id="id_mulkiyet">
+                                            <option value="" selected>Seçiniz</option>
+                                            <option value="HAZİNE">HAZİNE</option>
+
+                                            <option value="HÜKÜMET KONAGI İÇERİSİNDE">HÜKÜMET KONAĞI İÇİNDE</option>
+
+                                            <option value="HÜKÜMET KONAGI AYRİ BLOK">HÜKÜMET KONAĞINDA AYRI BLOK
+                                            </option>
+
+                                            <option value="İŞ YURTLARI">İŞ YURTLARI</option>
+
+                                            <option value="DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR">DİĞER KAMU KURUM
+                                                KURULUŞLARINA AİT YAPILAR
+                                            </option>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label> {{ tasinmaz_form.tahsis_durumu.label }}</label>
-                                        {{ tasinmaz_form.tahsis_durumu }}
+                                        <label> Tahsis durumu</label>
+                                        <select name="tahsis_durumu"
+                                                class="form-control select2 select2-hidden-accessible"
+                                                style="width: 100%; " id="id_tahsis_durumu">
+                                            <option value="" selected>Seçiniz</option>
+                                            <option value="Tahsisli Arsa">Tahsisli Arsa</option>
+
+                                            <option value="Kiralık">Kiralık</option>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-2">

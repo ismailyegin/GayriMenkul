@@ -5,6 +5,23 @@ from sbs.models.Gtasinmaz import Gtasinmaz
 
 
 class GtasinmazSearchForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(GtasinmazSearchForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = False
+        self.fields['definition'].required = False
+        self.fields['UsageArea'].required = False
+        self.fields['block'].required = False
+        self.fields['floor'].required = False
+        self.fields['tkgmno'].required = False
+        self.fields['sirano'].required = False
+        self.fields['tasinmazinTuru'].required = False
+        self.fields['tahsis_durumu'].required = False
+        self.fields['mulkiyet'].required = False
+        self.fields['arsaDegeri'].required = False
+        self.fields['yapiRaic'].required = False
+        self.fields['yapiMalitet'].required = False
+
+
     class Meta:
         model = Gtasinmaz
 
@@ -42,11 +59,11 @@ class GtasinmazSearchForm(ModelForm):
                                             'style': 'width: 100%; '}),
 
             'mulkiyet': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                            'style': 'width: 100%; ', 'required': 'required'}),
+                                            'style': 'width: 100%; ', }),
             'tahsis_durumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                                 'style': 'width: 100%; ', 'required': 'required'}),
+                                                 'style': 'width: 100%; ', }),
             'tasinmazinTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                                  'style': 'width: 100%; ', 'required': 'required'}),
+                                                  'style': 'width: 100%; '}),
             'sirano': forms.TextInput(
                 attrs={'class': 'form-control '}),
             'tkgmno': forms.TextInput(
@@ -63,19 +80,3 @@ class GtasinmazSearchForm(ModelForm):
                 attrs={'class': 'form-control ', 'rows': '2'}),
 
         }
-
-    def __init__(self, *args, **kwargs):
-        super(GtasinmazSearchForm, self).__init__(*args, **kwargs)
-        self.fields['name'].required = False
-        self.fields['definition'].required = False
-        self.fields['UsageArea'].required = False
-        self.fields['block'].required = False
-        self.fields['floor'].required = False
-        self.fields['tkgmno'].required = False
-        self.fields['sirano'].required = False
-        self.fields['tasinmazinTuru'].required = False
-        self.fields['tahsis_durumu'].required = False
-        self.fields['mulkiyet'].required = False
-        self.fields['arsaDegeri'].required = False
-        self.fields['yapiRaic'].required = False
-        self.fields['yapiMalitet'].required = False

@@ -127,35 +127,33 @@ def tasinmaz_list(request):
     tasinmaz_form = GtasinmazSearchForm()
 
     if request.method == 'POST':
-        tasinmaz_form = GtasinmazSearchForm(request.POST)
+        name = request.POST.get('name')
+        sirano = request.POST.get('sirano')
+        tkgmno = request.POST.get('tkgmno')
+        mulkiyet = request.POST.get('mulkiyet')
+        tahsis_durumu = request.POST.get('tahsis_durumu')
+        arsaTuru = request.POST.get('arsaTuru')
 
-        if tasinmaz_form.is_valid():
-            name = tasinmaz_form.cleaned_data.get('name')
-            sirano = tasinmaz_form.cleaned_data.get('sirano')
-            tkgmno = tasinmaz_form.cleaned_data.get('tkgmno')
-            mulkiyet = tasinmaz_form.cleaned_data.get('mulkiyet')
-            tahsis_durumu = tasinmaz_form.cleaned_data.get('tahsis_durumu')
-            arsaTuru = tasinmaz_form.cleaned_data.get('arsaTuru')
+        if not (name or sirano or tkgmno or mulkiyet or tahsis_durumu or arsaTuru):
+            projects = Gtasinmaz.objects.all()
+        else:
+            query = Q()
+            if name:
+                query &= Q(name__icontains=name)
+            if sirano:
+                query &= Q(sirano=sirano)
+            if tkgmno:
+                query &= Q(tkgmno=tkgmno)
+            if mulkiyet:
+                query &= Q(mulkiyet=mulkiyet)
+            if tahsis_durumu:
+                query &= Q(tahsis_durumu=tahsis_durumu)
+            if arsaTuru:
+                query &= Q(arsaTuru=arsaTuru)
 
-            if not (name or sirano or tkgmno or mulkiyet or tahsis_durumu or arsaTuru):
-                projects = Gtasinmaz.objects.all()
-            else:
-                query = Q()
-                if name:
-                    query &= Q(name__icontains=name)
-                if sirano:
-                    query &= Q(sirano=sirano)
-                if tkgmno:
-                    query &= Q(tkgmno=tkgmno)
-                if mulkiyet:
-                    query &= Q(mulkiyet=mulkiyet)
-                if tahsis_durumu:
-                    query &= Q(tahsis_durumu=tahsis_durumu)
-                if arsaTuru:
-                    query &= Q(arsaTuru=arsaTuru)
+            if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
+                projects = Gtasinmaz.objects.filter(query).distinct()
 
-                if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
-                    projects = Gtasinmaz.objects.filter(query).distinct()
 
     return render(request, 'tasinmaz/tasinmazlar.html', {'projects': projects,
                                                          'tasinmaz_form': tasinmaz_form})
