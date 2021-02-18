@@ -1,5 +1,9 @@
 {% extends 'base_layout.html' %}
 {% block content %}
+
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
     <div class="modal fade" id="examine" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -180,12 +184,6 @@
         </div>
 
     </div>
-
-
-
-
-
-
 
 
     <div class="modal modal-warning  fade in deneme23" tabindex="-1" role="dialog" id="pdf"
@@ -1271,13 +1269,36 @@
                 </div>
 
             </div>
+
+            <div class="row">
+                {#genel bilgiler #}
+                <div class="col-lg-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Harita BİLGİLER</h3>
+                        </div>
+                        <div class="box-body" style="background-color: white; height:600px;">
+
+                            <div id="map"></div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
         </form>
 
 
     </section>
 
 
+
     <script>
+
 
         function addOffer(id,) {
 
@@ -1493,8 +1514,15 @@
 
 
         }
-
     </script>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdhFttkLXEZFcX9Gik0NzcbSonvpt2VWk&callback=initMap&libraries=&v=weekly"
+            async
+    ></script>
+
+
+
 {% endblock %}
 
 
