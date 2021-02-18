@@ -104,6 +104,7 @@ def edit_tasinmaz(request, pk):
             messages.success(request, 'Tasinmaz Başarıyla Güncellendi')
             return redirect('sbs:tasinmaz-duzenle', pk=tasinmaz.pk)
         else:
+            print('alanlari kontrol ediniz')
             messages.warning(request, 'Alanları Kontrol Ediniz')
     return render(request, 'tasinmaz/tasinmazGuncelle.html',
                   {'project_form': project_form,

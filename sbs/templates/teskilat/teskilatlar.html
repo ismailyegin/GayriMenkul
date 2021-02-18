@@ -218,7 +218,7 @@
 
                         <div class="box-header with-border">
                             <div class="btn-group">
-                                {% if user.groups.all.0.name == 'Admin' %}
+                                {% if user.groups.all.0.name == 'Admin' or  user.groups.all.0.name == 'Yonetim' %}
 
                                     <a href="{% url "sbs:teskilat-add" %}"
                                        type="button" class="btn btn-success"><i
@@ -242,7 +242,7 @@
                                     <th>mulhakat</th>
                                     <th>Yargı Bölgesi</th>
                                     <th>Deprem Derecesi</th>
-                                    {% if user.groups.all.0.name == 'Admin' %}
+                                    {% if user.groups.all.0.name == 'Admin' or  user.groups.all.0.name == 'Yonetim' %}
 
                                         <th>İşlemler</th>
 
@@ -270,7 +270,7 @@
                                             <td>
                                                 <div class="btn-group ">
 
-                                                    {% if user.groups.all.0.name == 'Admin' %}
+                                                    {% if user.groups.all.0.name == 'Admin' or  user.groups.all.0.name == 'Yonetim' %}
                                                         <a href="{% url "sbs:teskilat-duzenle" item.pk %}"
                                                            type="button" class="btn btn-warning btn-lg"><i
                                                                 class="fa fa-edit"></i>

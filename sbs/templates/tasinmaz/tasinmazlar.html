@@ -218,7 +218,7 @@
 
                         <div class="box-header with-border">
                             <div class="btn-group">
-                                {% if user.groups.all.0.name == 'Admin' %}
+                                {% if user.groups.all.0.name == 'Admin' or  user.groups.all.0.name == 'Yonetim' %}
 
                                     <a href="{% url "sbs:tasinmaz-add" %}"
                                        type="button" class="btn btn-success"><i
@@ -264,7 +264,7 @@
                                             <td>
                                                 <div class="btn-group ">
 
-                                                    {% if user.groups.all.0.name == 'Admin' %}
+                                                    {% if user.groups.all.0.name == 'Admin' or  user.groups.all.0.name == 'Yonetim' %}
                                                         <a href="{% url "sbs:tasinmaz-duzenle" project.pk %}"
                                                            type="button" class="btn btn-warning btn-lg"><i
                                                                 class="fa fa-edit"></i>
