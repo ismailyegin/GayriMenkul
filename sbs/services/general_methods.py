@@ -31,7 +31,6 @@ def getMenu(request):
 
 def getAdminMenu(request):
     adminmenus = MenuAdmin.objects.filter(kobilid=2).order_by('count')
-
     return {'adminmenus': adminmenus}
 
 def getPersonelMenu(request):
