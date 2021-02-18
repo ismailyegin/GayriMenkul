@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from sbs.models import SportClubUser, SportsClub, Coach, Level, Athlete, City, CategoryItem
+from sbs.models.DirectoryMember import DirectoryMember
 from sbs.models.EPProject import EPProject
 from sbs.models.Employee import Employee
 from sbs.models.Message import Message
@@ -56,7 +57,9 @@ def return_coach_dashboard(request):
 def return_directory_dashboard(request):
     perm = general_methods.control_access(request)
 
-    if not perm:
+    member = DirectoryMember.objects.get(user=request.user)
+
+    if not perm or member.kobilid != 2:
         logout(request)
         return redirect('accounts:login')
     return render(request, 'anasayfa/federasyon.html')

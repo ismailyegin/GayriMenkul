@@ -12,7 +12,6 @@ from django.db.models import Sum
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.utils import timezone
-from rest_framework.fields import empty
 
 from oxiterp.settings.base import MEDIA_URL
 from sbs.Forms.CategoryItemForm import CategoryItemForm
@@ -25,6 +24,7 @@ from sbs.models import EPProject, CategoryItem, City
 from sbs.models.Company import Company
 from sbs.models.EPDocument import EPDocument
 from sbs.models.EPEmployee import EPEmployee
+from sbs.models.EPNeedDocument import EPNeedDocument
 from sbs.models.EPPhase import EPPhase
 from sbs.models.EPRequirements import EPRequirements
 from sbs.models.EPVest import EPVest
@@ -34,7 +34,6 @@ from sbs.models.SubCompany import SubCompany
 from sbs.models.Town import Town
 from sbs.services import general_methods
 from sbs.services.general_methods import getProfileImage
-from sbs.models.EPNeedDocument import EPNeedDocument
 
 
 # from twisted.conch.insults.insults import privateModes
@@ -1253,6 +1252,10 @@ def dokumanAdd(request):
 def return_personel_dashboard(request):
     perm = general_methods.control_access_personel(request)
     user = request.user
+    employe = Employee.objects.get(user=request.user)
+    if not perm or employe.kobilid != 2:
+        logout(request)
+        return redirect('accounts:login')
 
     proje = EPProject.objects.filter(employees__employee__user=user).distinct()
     proje |= EPProject.objects.filter(sorumlu__user=user).distinct()
@@ -1358,21 +1361,6 @@ def return_personel_dashboard(request):
     lojman_dev = int(
         projects.filter(projeCinsi=EPProject.LOJMAN, projectStatus=EPProject.PDE).aggregate(Sum('insaatAlani'))[
             'insaatAlani__sum'] or 0)
-
-
-
-
-
-
-
-
-
-
-
-
-    if not perm:
-        logout(request)
-        return redirect('accounts:login')
     return render(request, 'anasayfa/personel.html', {'proje_count': proje_count,
                                                       'proje_status_PT': proje_status_PT,
                                                       'sorumlu_count': sorumlu_count,
