@@ -1,18 +1,12 @@
+from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import SetPasswordForm
-from django.contrib.auth.models import User, Group
-from django.contrib import messages
-from django.core.mail import EmailMultiAlternatives
-from django.db.models import Q
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from sbs.Forms.ClaimForm import ClaimForm
-from sbs.services import general_methods
-from sbs.models.Claim import Claim
-
 from sbs.models import MenuDirectory, MenuAdmin
+from sbs.models.Claim import Claim
+from sbs.services import general_methods
 
 
 @login_required
@@ -22,7 +16,7 @@ def return_claim(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
-    destek = Claim.objects.all().order_by('-creationDate')
+    destek = Claim.objects.filter(kobilid=2).order_by('-creationDate')
 
     return render(request, 'Destek/DestekTalepListesi.html', {'claims': destek})
 
