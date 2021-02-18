@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
@@ -10,6 +11,7 @@ from oxiterp.settings.base import MEDIA_URL
 from sbs.Forms.GkiraForm import GkiraForm
 from sbs.Forms.GtahsisForm import GtahsisForm
 from sbs.Forms.GtasinmazForm import GtasinmazForm
+from sbs.Forms.GtasinmazSearchForm import GtasinmazSearchForm
 from sbs.Forms.GteskilatForm import GteskilatForm
 from sbs.Forms.KurumForm import KurumForm
 from sbs.Forms.TapuForm import TapuForm
@@ -120,10 +122,42 @@ def tasinmaz_list(request):
         logout(request)
         return redirect('accounts:login')
 
-    projects = Gtasinmaz.objects.all()
-    user = request.user
+    projects = Gtasinmaz.objects.none()
+    tasinmaz_form = GtasinmazSearchForm()
 
-    return render(request, 'tasinmaz/tasinmazlar.html', {'projects': projects})
+    if request.method == 'POST':
+        tasinmaz_form = GtasinmazSearchForm(request.POST)
+
+        if tasinmaz_form.is_valid():
+            name = tasinmaz_form.cleaned_data.get('name')
+            sirano = tasinmaz_form.cleaned_data.get('sirano')
+            tkgmno = tasinmaz_form.cleaned_data.get('tkgmno')
+            mulkiyet = tasinmaz_form.cleaned_data.get('mulkiyet')
+            tahsis_durumu = tasinmaz_form.cleaned_data.get('tahsis_durumu')
+            arsaTuru = tasinmaz_form.cleaned_data.get('arsaTuru')
+
+            if not (name or sirano or tkgmno or mulkiyet or tahsis_durumu or arsaTuru):
+                projects = Gtasinmaz.objects.all()
+            else:
+                query = Q()
+                if name:
+                    query &= Q(name__icontains=name)
+                if sirano:
+                    query &= Q(sirano=sirano)
+                if tkgmno:
+                    query &= Q(tkgmno=tkgmno)
+                if mulkiyet:
+                    query &= Q(mulkiyet=mulkiyet)
+                if tahsis_durumu:
+                    query &= Q(tahsis_durumu=tahsis_durumu)
+                if arsaTuru:
+                    query &= Q(arsaTuru=arsaTuru)
+
+                if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
+                    projects = Gtasinmaz.objects.filter(query).distinct()
+
+    return render(request, 'tasinmaz/tasinmazlar.html', {'projects': projects,
+                                                         'tasinmaz_form': tasinmaz_form})
 
 
 @login_required

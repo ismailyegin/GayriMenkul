@@ -124,82 +124,78 @@
 
     <section class="content">
 
-        {#filtre eklenecek#}
-        {#    <div class="row">#}
-        {#        <section class="col-lg-12 ">#}
-        {##}
-        {#            <div class="box-body">#}
-        {##}
-        {##}
-        {#                <div class="box box-primary">#}
-        {#                    <div class="box-header with-border">#}
-        {#                        <h3 class="box-title">Proje Filtrele</h3>#}
-        {#                    </div>#}
-        {#                    <form method="post" role="form">#}
-        {#                        <div class="box-body">#}
-        {#                            {% csrf_token %}#}
-        {##}
-        {#                            <div class="col-md-4">#}
-        {#                                <div class="form-group">#}
-        {#                                    <label> {{ search_form.name.label }}</label>#}
-        {#                                    {{ search_form.name }}#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {#                            <div class="col-md-2">#}
-        {#                                <div class="form-group">#}
-        {#                                    <label> {{ search_form.butceCinsi.label }}</label>#}
-        {#                                    {{ search_form.butceCinsi }}#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {#                            <div class="col-md-2">#}
-        {#                                <div class="form-group">#}
-        {#                                    <label> {{ search_form.butceYili.label }}</label>#}
-        {#                                    {{ search_form.butceYili }}#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {#                            <div class="col-md-2">#}
-        {#                                <div class="form-group">#}
-        {#                                    <label> {{ search_form.projeCinsi.label }}</label>#}
-        {#                                    {{ search_form.projeCinsi }}#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {#                            <div class="col-md-2">#}
-        {#                                <div class="form-group">#}
-        {#                                    <label> {{ search_form.city.label }}</label>#}
-        {#                                    {{ search_form.city }}#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {#                            <div class="col-md-2">#}
-        {#                                <div class="form-group">#}
-        {#                                    <label> {{ search_form.projectStatus.label }}</label>#}
-        {#                                    {{ search_form.projectStatus }}#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {##}
-        {#                            <div class="col-md-2">#}
-        {#                                <div class="form-group">#}
-        {#                                    <label> {{ search_form.karakteristik.label }}</label>#}
-        {#                                    {{ search_form.karakteristik }}#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {##}
-        {##}
-        {#                        </div>#}
-        {#                        <!-- /.box-body -->#}
-        {##}
-        {#                        <div class="box-footer">#}
-        {#                            <button type="submit" class="btn btn-primary">Ara</button>#}
-        {#                        </div>#}
-        {#                    </form>#}
-        {##}
-        {##}
-        {#                </div>#}
-        {#                <!-- /.box -->#}
-        {##}
-        {##}
-        {#            </div>#}
-        {#        </section>#}
-        {#    </div>#}
+        <div class="row">
+            <section class="col-lg-12 ">
+
+                <div class="box-body">
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Tasinmaz Filtrele</h3>
+                        </div>
+                        <form method="post" role="form">
+                            <div class="box-body">
+                                {% csrf_token %}
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ tasinmaz_form.name.label }}</label>
+                                        {{ tasinmaz_form.name }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ tasinmaz_form.arsaTuru.label }}</label>
+                                        {{ tasinmaz_form.arsaTuru }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ tasinmaz_form.mulkiyet.label }}</label>
+                                        {{ tasinmaz_form.mulkiyet }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ tasinmaz_form.tahsis_durumu.label }}</label>
+                                        {{ tasinmaz_form.tahsis_durumu }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ tasinmaz_form.tkgmno.label }}</label>
+                                        {{ tasinmaz_form.tkgmno }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ tasinmaz_form.sirano.label }}</label>
+                                        {{ tasinmaz_form.sirano }}
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Ara</button>
+
+
+                            </div>
+                            <!-- /.box-body -->
+
+
+                        </form>
+
+
+                    </div>
+                    <!-- /.box -->
+
+
+                </div>
+            </section>
+        </div>
 
         <div class="row">
 
@@ -234,13 +230,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Tanımı</th>
-                                    <th>Binayı Kullanan Birim</th>
+                                    {#                                    <th>Binayı Kullanan Birim</th>#}
                                     <th>Sıra Numarası</th>
                                     <th>Tkgm Numarasi</th>
                                     <th>Mülkiyet</th>
                                     <th>Tahsis Durumu</th>
                                     <th>Taşınmazin Türü</th>
-                                    <th>Açıklama</th>
+                                    {#                                    <th>Açıklama</th>#}
                                     <th>İşlemler</th>
 
 
@@ -252,7 +248,7 @@
                                         <tr>
                                             <td>{{ forloop.counter }} </td>
                                             <td>{{ project.name }} </td>
-                                            <td> {{ project.kurum.name }}</td>
+                                            {#                                            <td> {{ project.kurum.name }}</td>#}
                                             <td>{{ project.sirano }} </td>
                                             <td>{{ project.tkgmno }} </td>
                                             <td>{{ project.mulkiyet }} </td>
@@ -260,7 +256,7 @@
                                             <td>{{ project.tahsis_durumu }}</td>
 
                                             <td>{{ project.tasinmazinTuru }}</td>
-                                            <td>{{ project.definition }} </td>
+                                            {#                                            <td>{{ project.definition }} </td>#}
                                             <td>
                                                 <div class="btn-group ">
 
