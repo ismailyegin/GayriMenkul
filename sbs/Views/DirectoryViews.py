@@ -1,12 +1,12 @@
+from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.models import User, Group
-from django.contrib import messages
-from django.core.mail import EmailMultiAlternatives
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+
 from sbs.Forms.CommunicationForm import CommunicationForm
 from sbs.Forms.DirectoryCommissionForm import DirectoryCommissionForm
 from sbs.Forms.DirectoryForm import DirectoryForm
@@ -14,10 +14,9 @@ from sbs.Forms.DirectoryMemberRoleForm import DirectoryMemberRoleForm
 from sbs.Forms.DisabledCommunicationForm import DisabledCommunicationForm
 from sbs.Forms.DisabledDirectoryForm import DisabledDirectoryForm
 from sbs.Forms.DisabledPersonForm import DisabledPersonForm
-from sbs.Forms.DisabledSportClubUserForm import DisabledSportClubUserForm
 from sbs.Forms.DisabledUserForm import DisabledUserForm
-from sbs.Forms.UserForm import UserForm
 from sbs.Forms.PersonForm import PersonForm
+from sbs.Forms.UserForm import UserForm
 from sbs.Forms.UserSearchForm import UserSearchForm
 from sbs.models import Person, Communication
 from sbs.models.DirectoryCommission import DirectoryCommission
@@ -65,18 +64,17 @@ def add_directory_member(request):
 
             directoryMember = DirectoryMember(user=user, person=person, communication=communication)
             directoryMember.role = member_form.cleaned_data['role']
-            directoryMember.commission = member_form.cleaned_data['commission']
 
             directoryMember.save()
 
-            subject, from_email, to = 'Halter - Yönetim/Federasyon Bilgi Sistemi Kullanıcı Giriş Bilgileri', 'no-reply@twf.gov.tr', user.email
-            text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
-            html_content = '<p> <strong>Site adresi: </strong> <a href="http://sbs.twf.gov.tr:81/"></a>sbs.twf.gov.tr:81</p>'
-            html_content = html_content + '<p><strong>Kullanıcı Adı:  </strong>' + user.username + '</p>'
-            html_content = html_content + '<p><strong>Şifre: </strong>' + password + '</p>'
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            # mail gönderimi yapılacak
+            # subject, from_email, to = 'Adalet - Yönetim/ Bilgi Sistemi Kullanıcı Giriş Bilgileri', 'etutproje@kobiltek.com', user.email
+            # text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
+            # html_content = '<p><strong>Kullanıcı Adı:  </strong>' + user.username + '</p>'
+            # html_content = html_content + '<p><strong>Şifre: </strong>' + password + '</p>'
+            # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            # msg.attach_alternative(html_content, "text/html")
+            # msg.send()
 
             messages.success(request, 'Yönetim Kurulu Üyesi Başarıyla Kayıt Edilmiştir.')
 
