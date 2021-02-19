@@ -249,15 +249,15 @@ def add_kurum(request):
         logout(request)
         return redirect('accounts:login')
 
-    kurum_form = KurumForm(request.POST or None)
-    kurum = Gkurum.objects.all()
     if request.method == 'POST':
+        kurum_form = KurumForm(request.POST or None)
         if kurum_form.is_valid():
             kurum = kurum_form.save(commit=False)
             kurum.save()
-            return redirect('sbs:kurum-duzenle', kurum.pk)
         else:
             messages.warning(request, 'Alanları Kontrol Ediniz')
+    kurum = Gkurum.objects.all()
+    kurum_form = KurumForm()
 
     return render(request, 'kurum/kurumEkle.html', {'kurum_form': kurum_form, 'kurum': kurum})
 
