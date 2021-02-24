@@ -49,9 +49,69 @@
             color: #666;
         }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
+    <script>
+        "use strict";
 
+        var citymap = {
+            Ankara: {
+                center: {
+                    lat: 39.998127,
+                    lng: 32.754388,
+                },
+                population: 45000,
+            },
+            İstanbul: {
+                center: {
+                    lat: 41.016052,
+                    lng: 29.059475,
+                },
+                population: 45000,
+            },
+            Samsun: {
+                center: {
+                    lat: 41.292742,
+                    lng: 36.334981,
+                },
+                population: 45000,
+            },
+            Sivas: {
+                center: {
+                    lat: 39.749331,
+                    lng: 37.014582,
+                },
+                population: 45000,
+            },
+        };
 
+        function initMap() {
+            // Create the map.
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 5.8,
+                center: {
+                    lat: 38.5,
+                    lng: 36.0,
+                },
+                mapTypeId: "terrain",
+            }); // Construct the circle for each value in citymap.
+            // Note: We scale the area of the circle based on the population.
+
+            for (var city in citymap) {
+                // Add the circle for this city to the map.
+                var cityCircle = new google.maps.Circle({
+                    strokeColor: "#000000",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#FF0000",
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: citymap[city].center,
+                    radius: Math.sqrt(citymap[city].population) * 100,
+                });
+            }
+        }
+    </script>
 
     <script type="text/javascript">
         $(function () {
@@ -92,6 +152,8 @@
                 });
 
         })
+
+
     </script>
 
 
@@ -183,7 +245,134 @@
                     <!-- /.col -->
             </div>
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Harita Degerlendirme</h3>
 
+
+                            <div class="box-tools pull-right">
+
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding" style="height:400px;">
+                            <div id="map"></div>
+
+                            <!-- /.box-footer -->
+                        </div>
+                    </div>
+
+                </div>
+                {#                <div class="col-lg-4">#}
+
+
+                {#                    <div class="box box-default">#}
+                {#                        <div class="box-header with-border">#}
+                {#                            <h3 class="box-title">Projelerin Dağılımı</h3>#}
+                {##}
+                {#                            <div class="box-tools pull-right">#}
+                {#                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i#}
+                {#                                        class="fa fa-minus"></i>#}
+                {#                                </button>#}
+                {#                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i#}
+                {#                                        class="fa fa-times"></i></button>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                        <!-- /.box-header -->#}
+                {#                        <div class="box-body">#}
+                {#                            <div class="row">#}
+                {#                                <div class="col-md-12">#}
+                {#                                    <div class="chart-responsive">#}
+                {#                                        <canvas id="pieChart2" class="response"></canvas>#}
+                {#                                    </div>#}
+                {##}
+                {##}
+                {#                                </div>#}
+                {##}
+                {#                            </div>#}
+                {#                            <!-- /.row -->#}
+                {#                        </div>#}
+                {#                        <!-- /.box-body -->#}
+                {#                        <div class="box-footer no-padding">#}
+                {##}
+                {##}
+                {#                            <ul class="nav nav-pills nav-stacked">#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Ceza İnfaz Kurumu">Ceza İnfaz Kurumu#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#00868b; "> {{ cezainfaz }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Adalet Binası">Adalet Binası <small#}
+                {#                                        class="label   pull-right"#}
+                {#                                        style="background-color:#cd5c5c"> {{ adaletbinasi }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Adli Tıp">Adli Tıp#}
+                {#                                    <small class="label  pull-right"#}
+                {#                                           style="background-color:#ffff00;color:#000000;"> {{ adlitip }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Bölge Adliye Mahkemesi">Bölge Adliye Mahkemesi#}
+                {#                                    <small class="label label-primary  pull-right"#}
+                {#                                           style="background-color:#8b4513; "> {{ bolgeadliye }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Bölge İdare Mahkemesi">Bölge İdare Mahkemesi#}
+                {#                                    <small class="label  pull-right"#}
+                {#                                           style="background-color:#ee9a00; text-c ">#}
+                {#                                        {{ bolgeidari }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Denetimli Serbestlik">Denetimli Serbestlik#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#ff00ff; "> {{ denetimserbeslik }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Bakanlık Binası">Bakanlık Binası <small#}
+                {#                                        class="label  pull-right"#}
+                {#                                        style="background-color:#000000; ">#}
+                {#                                    {{ bakanlikbinasi }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Personel Eğitim Merkezi">Personel Eğitim Merkezi#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#a9a9a9; "> {{ personelegitim }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=ATGV ">ATGV#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#a9a9a9; ">{{ ATGV }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Lojman">Lojman#}
+                {#                                    <small class="label   pull-right"#}
+                {#                                           style="background-color:#00cd00; "> {{ lojman }}</small></a>#}
+                {#                                </li>#}
+                {#                                <li><a href="{% url 'sbs:detay' %}?get=Diger">Diger <small class="label   pull-right"#}
+                {#                                                                                           style="background-color:#00f5ff; "> {{ diger }}</small></a>#}
+                {#                                </li>#}
+                {##}
+                {##}
+                {#                            </ul>#}
+                {#                        </div>#}
+                {#                        <!-- /.footer -->#}
+                {##}
+                {#                        <!-- /.box -->#}
+                {##}
+                {#                        <!-- PRODUCT LIST -->#}
+                {##}
+                {##}
+                {#                        <!-- /.box -->#}
+                {#                    </div>#}
+                <!-- /.box -->
+                {#                </div>#}
+
+
+            </div>
 
 
             <div class="row">
@@ -816,7 +1005,10 @@
         </section>
     </section>
 
-
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdhFttkLXEZFcX9Gik0NzcbSonvpt2VWk&callback=initMap&libraries=&v=weekly"
+            async
+    ></script>
 
     <script>
 
@@ -855,217 +1047,8 @@
 
         }
 
-
-
-
-        $(function () {
-
-
-
-            var data = new Array();
-            {% for city in cities %}
-                data.push("{{ city }}");
-                count = data.filter(x => x =={{ city }}).length;
-                degerAta(count, {{ city }});
-            {% endfor %}
-            deprem = ({{ proje_status_DYRY }} * 100
-        )/{{ proje_count }}
-            deprem = deprem.toString() + "%";
-            iptal = ({{ proje_status_PIE }} * 100
-        )/{{ proje_count }}
-            iptal = iptal.toString() + "%";
-            ihale = ({{ proje_status_IH }} * 100
-        )/{{ proje_count }}
-            ihale = ihale.toString() + "%";
-            $("#deprem").css("width", deprem);
-            $("#iptal").css("width", iptal);
-            $("#ihale").css("width", ihale);
-
-            $("#depremtext").text(deprem);
-            $("#iptaltext").text(iptal);
-            $("#ihaletext").text(ihale);
-
-            {#pie log#}
-            var pieChartCanvas = $('#pieChart2').get(0).getContext('2d');
-            var pieChart = new Chart(pieChartCanvas);
-            var PieData = [
-                {
-                    value: {{adaletbinasi}},
-                    color: '#cd5c5c',
-                    highlight: '#d3d3d3',
-                    label: 'Adalet Binası'
-                },
-                {
-                    value: {{cezainfaz}},
-                    color: '#00868b',
-                    highlight: '#d3d3d3',
-                    label: 'Ceza İnfaz Kurumu'
-                },
-                {
-                    value: {{adlitip}},
-                    color: '#ffff00',
-                    highlight: '#d3d3d3',
-                    label: 'Adli Tıp'
-                },
-                {
-                    value: {{bolgeadliye}},
-                    color: '#8b4513',
-                    highlight: '#d3d3d3',
-                    label: 'Bölge Adliye Mahkemesi'
-                },
-                {
-                    value: {{bolgeidari}},
-                    color: '#ee9a00',
-                    highlight: '#d3d3d3',
-                    label: 'Bölge İdare Mahkemesi'
-                },
-                {
-                    value: {{denetimserbeslik}},
-                    color: '#ff00ff',
-                    highlight: '#d3d3d3',
-                    label: 'Denetimli Serbestlik'
-                },
-
-                {
-                    value: {{bakanlikbinasi}},
-                    color: '#000000',
-                    highlight: '#d3d3d3',
-                    label: 'Bakanlık Bİnası'
-                },
-                {
-                    value: {{personelegitim}},
-                    color: '#a9a9a9',
-                    highlight: '#d3d3d3',
-                    label: 'Personel Eğitim Merkezi'
-                },
-                {
-                    value: {{lojman}},
-                    color: '#00cd00',
-                    highlight: '#d3d3d3',
-                    label: 'Lojman'
-                },
-
-                {
-                    value: {{ ATGV  }},
-                    color: '#00cd22',
-                    highlight: '#d3d3d3',
-                    label: 'ATGV'
-                },
-                {
-                    value: {{diger}},
-                    color: '#00f5ff',
-                    highlight: '#d3d3d3',
-                    label: 'Diger'
-                },
-
-            ];
-            var pieOptions = {
-                // Boolean - Whether we should show a stroke on each segment
-                segmentShowStroke: true,
-                // String - The colour of each segment stroke
-                segmentStrokeColor: '#fff',
-                // Number - The width of each segment stroke
-                segmentStrokeWidth: 1,
-                // Number - The percentage of the chart that we cut out of the middle
-                percentageInnerCutout: 50, // This is 0 for Pie charts
-                // Number - Amount of animation steps
-                animationSteps: 100,
-                // String - Animation easing effect
-                animationEasing: 'easeOutBounce',
-                // Boolean - Whether we animate the rotation of the Doughnut
-                animateRotate: true,
-                // Boolean - Whether we animate scaling the Doughnut from the centre
-                animateScale: true,
-                // Boolean - whether to make the chart responsive to window resizing
-                responsive: true,
-                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-                maintainAspectRatio: false,
-                // String - A legend template
-                legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><br><% for (var i=0; i<segments.length; i++){ %><li><span style= \'background-color:<%=segments[i].fillColor%>\'></span><%if(segments[i].label){ %><%=segments[i].label%><%}%></li><%}%></ul>',
-                // String - A tooltip template
-                tooltipTemplate: '<%=value%>  Tane  <%=label%>'
-            };
-            // Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            pieChart.Doughnut(PieData, pieOptions);
-            // -----------------
-            // - END PIE CHART -
-
-
-        });
-
-
-
-        var randomScalingFactor = function () {
-            return Math.round(Math.random() * 100)
-        };
-
-        var barChartData = {
-            labels: ["Adalet Binası", "Ceza İnfaz", "Adli Tıp", "Bölge Adliye", "Bölge İdare", "Denetimli Serbestlik", "Bakanlık Bİnası", "Personel Eğitim", "Lojman", "ATGV", "Diger"],
-            datasets: [
-
-                {
-                    fillColor: "rgba(151,187,205,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: [{{ adaletbinasi_sum }}, {{cezainfaz_sum}}, {{adlitip_sum}}, {{ bolgeadliye_sum }}, {{ bolgeidari_sum }}, {{ denetimserbeslik_sum }}, {{ bakanlikbinasi_sum }}, {{ personelegitim_sum }}, {{ lojman_sum }}, {{ ATGV_sum }}, {{ diger_sum }}]
-                },
-                {
-                    fillColor: "rgba(255,106,106,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: [{{ adaletbinasi_tam }}, {{cezainfaz_tam}}, {{adlitip_tam}}, {{ bolgeadliye_tam }}, {{ bolgeidari_tam }}, {{ denetimserbeslik_tam }}, {{ bakanlikbinasi_tam }}, {{ personelegitim_tam }}, {{ lojman_tam }}, {{ ATGV_tam }}, {{ diger_tam }}]
-                },
-                {
-                    fillColor: "rgba(151,187,106,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: [{{ adaletbinasi_dev }}, {{cezainfaz_dev}}, {{adlitip_dev}}, {{ bolgeadliye_dev }}, {{ bolgeidari_dev }}, {{ denetimserbeslik_dev }}, {{ bakanlikbinasi_dev }}, {{ personelegitim_dev }}, {{ lojman_dev }}, {{ ATGV_dev }}, {{ diger_dev }}]
-                },
-            ]
-
-        }
-
-        {#employe table #}
-
-
-        var barChartDataEmploye = {
-            labels: [{% for item in data %}{% if item.count != 0 %} "{{ item.categori }}", {% endif %}{% endfor %}],
-            datasets: [
-
-                {
-                    fillColor: "rgba(151,187,106,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: [{% for item in data %}{% if item.count != 0 %} "{{ item.count }}", {% endif %}{% endfor %}
-
-                    ],
-                }],
-
-        };
-
-
-        {#        employe Table the end  #}
-
-
-        window.onload = function () {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myBar = new Chart(ctx).Bar(barChartData, {
-                responsive: true
-
-
-            });
-            var ctx = document.getElementById("employe").getContext("2d");
-            window.myBar = new Chart(ctx).Bar(barChartDataEmploye, {
-                responsive: true
-            });
-        }
-
     </script>
+
 
 
 {% endblock %}
