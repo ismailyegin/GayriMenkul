@@ -5,6 +5,7 @@ from sbs.models.GTapu import GTapu
 from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
 from sbs.models.Gtahsis import Gtahsis
+from sbs.models.GtasinmazDocument import GtasinmazDocument
 
 
 class Gtasinmaz(models.Model):
@@ -99,5 +100,6 @@ class Gtasinmaz(models.Model):
     yapiRaic = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
 
     offers = models.ManyToManyField(EPOffer)
+    documents = models.ManyToManyField(GtasinmazDocument)
 
     kobilid = models.IntegerField(null=True, blank=True, default=2)

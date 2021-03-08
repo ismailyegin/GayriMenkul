@@ -22,6 +22,7 @@ from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
 from sbs.models.Gtahsis import Gtahsis
 from sbs.models.Gtasinmaz import Gtasinmaz
+from sbs.models.GtasinmazDocument import GtasinmazDocument
 from sbs.models.Gteskilat import Gteskilat
 from sbs.services import general_methods
 from sbs.services.general_methods import getProfileImage
@@ -97,6 +98,17 @@ def edit_tasinmaz(request, pk):
         tahsis_form = GkiraForm()
 
     if request.method == 'POST':
+
+        if request.method == 'POST':
+            if request.FILES.get('file'):
+                document = GtasinmazDocument(name=request.FILES.get('file'))
+                document.save()
+                tasinmaz.documents.add(document)
+                tasinmaz.save()
+
+
+
+
         if project_form.is_valid() and tahsis_form.is_valid() and tapu_form.is_valid():
             projectSave = project_form.save()
             tahsis = tahsis_form.save()
