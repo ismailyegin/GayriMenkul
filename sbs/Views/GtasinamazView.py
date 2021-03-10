@@ -1,3 +1,4 @@
+from builtins import print
 from datetime import datetime
 
 from django.contrib import messages
@@ -24,6 +25,7 @@ from sbs.models.Gtahsis import Gtahsis
 from sbs.models.Gtasinmaz import Gtasinmaz
 from sbs.models.GtasinmazDocument import GtasinmazDocument
 from sbs.models.Gteskilat import Gteskilat
+from sbs.models.Town import Town
 from sbs.services import general_methods
 from sbs.services.general_methods import getProfileImage
 
@@ -65,7 +67,6 @@ def edit_tasinmaz(request, pk):
     user = request.user
     project_form = GtasinmazForm(request.POST or None, instance=tasinmaz)
     gkurum = Gkurum.objects.all()
-
     if tasinmaz.tapu == None:
         tapu = GTapu()
         tapu.save()
@@ -75,56 +76,69 @@ def edit_tasinmaz(request, pk):
     else:
         tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
 
-    if tasinmaz.tahsis_durumu == "Tahsisli Arsa":
-        if tasinmaz.tahsis == None:
-            tahsis = Gtahsis()
-            tahsis.save()
-            tasinmaz.tahsis = tahsis
-            tasinmaz.save()
+    if tasinmaz.tapu.city:
+        if tasinmaz.tapu.town:
+            tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+            tapu_form.fields['town'].initial = tasinmaz.tapu.town
         else:
-            tahsis = tasinmaz.tahsis
-        tahsis_form = GtahsisForm(request.POST or None, instance=tahsis)
-
-    elif tasinmaz.tahsis_durumu == "Kiralık":
-        if tasinmaz.kira == None:
-            kira = Gkira()
-            kira.save()
-            tasinmaz.kira = kira
-            tasinmaz.save()
-        else:
-            kira = tasinmaz.kira
-        tahsis_form = GkiraForm(request.POST or None, instance=kira)
+            tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
     else:
-        tahsis_form = GkiraForm()
+        tapu_form.fields['town'].queryset = Town.objects.none()
+
+    if tasinmaz.tahsis == None:
+        tahsis = Gtahsis()
+        tahsis.save()
+        tasinmaz.tahsis = tahsis
+        tasinmaz.save()
+    else:
+        tahsis = tasinmaz.tahsis
+    tahsis_form = GtahsisForm(request.POST or None, instance=tahsis)
+
+    if tasinmaz.kira == None:
+        kira = Gkira()
+        kira.save()
+        tasinmaz.kira = kira
+        tasinmaz.save()
+    else:
+        kira = tasinmaz.kira
+    kira_form = GkiraForm(request.POST or None, instance=kira)
+
+
+
+
+
 
     if request.method == 'POST':
 
-        if request.method == 'POST':
-            if request.FILES.get('file'):
-                document = GtasinmazDocument(name=request.FILES.get('file'))
-                document.save()
-                tasinmaz.documents.add(document)
-                tasinmaz.save()
+        if request.FILES.get('file'):
+            document = GtasinmazDocument(name=request.FILES.get('file'))
+            document.save()
+            tasinmaz.documents.add(document)
+            tasinmaz.save()
 
+        if project_form.is_valid():
+            projectSave = project_form.save(commit=False)
+            projectSave.save()
 
+        if tahsis_form.is_valid():
+            tahsisSave = tahsis_form.save()
+            tahsisSave.save()
 
+        if tapu_form.is_valid():
+            tapuSave = tapu_form.save(commit=False)
+            tapuSave.save()
 
-        if project_form.is_valid() and tahsis_form.is_valid() and tapu_form.is_valid():
-            projectSave = project_form.save()
-            tahsis = tahsis_form.save()
-            tapu = tapu_form.save()
-            log = str(tasinmaz.name) + "tasinmaz  güncelledi"
-            log = general_methods.logwrite(request, log)
+        if kira_form.is_valid():
+            kiraSave = kira_form.save(commit=False)
+            kiraSave.save()
 
-            messages.success(request, 'Tasinmaz Başarıyla Güncellendi')
-            return redirect('sbs:tasinmaz-duzenle', pk=tasinmaz.pk)
-        else:
-            messages.warning(request, 'Alanları Kontrol Ediniz')
+        log = str(tasinmaz.name) + "tasinmaz  güncelledi"
+        log = general_methods.logwrite(request, log)
 
     return render(request, 'tasinmaz/tasinmazGuncelle.html',
                   {'project_form': project_form,
                    'project': tasinmaz, 'tahsis_form': tahsis_form, 'tapu_form': tapu_form,
-                   'gkurum': gkurum,
+                   'kira_form': kira_form, 'gkurum': gkurum,
                    })
 
 @login_required
