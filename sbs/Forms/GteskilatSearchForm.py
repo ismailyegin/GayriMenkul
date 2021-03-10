@@ -12,13 +12,9 @@ class GteskilatSearchForm(ModelForm):
             'depremderecesi',
             'yargiBolgesi',
             'merkeznufus',
-            'yargiAlaniNufus',
-            'agirCezaMerkezi',
-            'asliyeCezaMerkezi',
             'hakim_sayisi',
             'savci_sayisi',
             'personel_sayisi',
-            'mulhakat',
             'city'
 
         )
@@ -27,13 +23,9 @@ class GteskilatSearchForm(ModelForm):
             'depremderecesi': 'Deprem Derecesi',
             'yargiBolgesi': 'Yargı Bölgesi',
             'merkeznufus': 'Merkez Nufusu',
-            'yargiAlaniNufus': 'Yargı Alanı',
-            'agirCezaMerkezi': 'Agır Ceza Merkezi',
-            'asliyeCezaMerkezi': 'Asliye Ceza Merkezi',
             'hakim_sayisi': 'Hakim Sayısı',
             'savci_sayisi': 'Savcı Sayısı ',
             'personel_sayisi': 'Personel Sayısı',
-            'mulhakat': 'Mülhakat',
             'city': 'Şehir'
 
         }
@@ -50,22 +42,12 @@ class GteskilatSearchForm(ModelForm):
             'merkeznufus': forms.TextInput(
                 attrs={'class': 'form-control ', }),
 
-            'agirCezaMerkezi': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-            'yargiAlaniNufus': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-
-            'asliyeCezaMerkezi': forms.TextInput(
-                attrs={'class': 'form-control ', }),
             'hakim_sayisi': forms.TextInput(
                 attrs={'class': 'form-control ', }),
 
             'savci_sayisi': forms.TextInput(
                 attrs={'class': 'form-control ', }),
             'personel_sayisi': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-
-            'mulhakat': forms.TextInput(
                 attrs={'class': 'form-control ', }),
 
         }

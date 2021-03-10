@@ -103,12 +103,12 @@ def edit_tasinmaz(request, pk):
         kira = tasinmaz.kira
     kira_form = GkiraForm(request.POST or None, instance=kira)
 
-
-
-
-
-
     if request.method == 'POST':
+
+        tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+        kira_form = GkiraForm(request.POST, instance=tasinmaz.kira)
+        tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
+        project_form = GtasinmazForm(request.POST, instance=tasinmaz)
 
         if request.FILES.get('file'):
             document = GtasinmazDocument(name=request.FILES.get('file'))
@@ -116,21 +116,13 @@ def edit_tasinmaz(request, pk):
             tasinmaz.documents.add(document)
             tasinmaz.save()
 
-        if project_form.is_valid():
+        if project_form.is_valid() and tahsis_form.is_valid() and tapu_form.is_valid():
             projectSave = project_form.save(commit=False)
             projectSave.save()
-
-        if tahsis_form.is_valid():
-            tahsisSave = tahsis_form.save()
-            tahsisSave.save()
-
-        if tapu_form.is_valid():
-            tapuSave = tapu_form.save(commit=False)
-            tapuSave.save()
-
-        if kira_form.is_valid():
-            kiraSave = kira_form.save(commit=False)
-            kiraSave.save()
+            tahsis_form.save(commit=False)
+            tapu_form.save()
+        else:
+            messages.warning(request, 'Alanlari kontrol ediniz')
 
         log = str(tasinmaz.name) + "tasinmaz  güncelledi"
         log = general_methods.logwrite(request, log)
@@ -260,7 +252,7 @@ def delete_ofters_from_project(request, project_pk, employee_pk):
             athlete = Gtasinmaz.objects.get(pk=project_pk)
             athlete.offers.remove(employee_pk)
             return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
-        except EPProject.DoesNotExist:
+        except:
             return JsonResponse({'status': 'Fail', 'msg': 'Object does not exist'})
 
     else:
@@ -352,8 +344,8 @@ def list_teskilat(request):
                     query &= Q(depremderecesi=depremderecesi)
                 if city:
                     query &= Q(city=city)
-                if yargiBolgesi:
-                    query &= Q(tkgmno=tkgmno)
+                # if yargiBolgesi:
+                #     query &= Q(tkgmno=tkgmno)
 
                 if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
                     teskilat = Gteskilat.objects.filter(query).distinct()
@@ -363,8 +355,6 @@ def list_teskilat(request):
 
     return render(request, 'teskilat/teskilatlar.html',
                   {'teskilat': teskilat, 'teskilat_form': teskilat_form})
-
-
 @login_required
 def edit_teskilat(request, pk):
     perm = general_methods.control_access_personel(request)
@@ -372,21 +362,24 @@ def edit_teskilat(request, pk):
         logout(request)
         return redirect('accounts:login')
     teskilat = Gteskilat.objects.get(pk=pk)
+
+    # acm_form =GAcmForm(request.POST or None, instance=teskilat.acm)
+    # bam_form = GBamForm(request.POST or None, instance=teskilat.bam)
+    # bim_form = GBimForm(request.POST or None, instance=teskilat.bim)
+
     teskilat_form = GteskilatForm(request.POST or None, instance=teskilat)
-
     if request.method == 'POST':
-
         if teskilat_form.is_valid():
             project = teskilat_form.save()
             log = str(project.city) + " teşkilat yapısı güncellendi."
             log = general_methods.logwrite(request, log)
             messages.success(request, 'Teşkilat Yapısı güncellendi.')
-
             return redirect('sbs:teskilat-duzenle', pk=project.pk)
         else:
             messages.warning(request, 'Alanları kontrol ediniz.')
     return render(request, 'teskilat/teskilatGuncelle.html',
-                  {'project_form': teskilat_form})
+                  {'project_form': teskilat_form,
+                   })
 
 
 @login_required
@@ -402,7 +395,6 @@ def add_teskilat_olustur(request):
         if not (Gteskilat.objects.filter(city=item)):
             teskilat = Gteskilat(city=item)
             teskilat.save()
-
     return render(request, 'tasinmaz/tasinmazEkle.html')
 
 

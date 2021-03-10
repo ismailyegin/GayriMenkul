@@ -1,6 +1,7 @@
 from django.db import models
 
 from sbs.models.City import City
+from sbs.models.Town import Town
 
 
 class Gteskilat(models.Model):
@@ -34,6 +35,21 @@ class Gteskilat(models.Model):
         (B4, '4.BÖLGE'),
         (B5, '5.BÖLGE'),
     )
+
+    C1 = "AĞIR CEZA CUMHURİYET BAŞSAVCILIĞI"
+    C2 = "ASLİYE CEZA CUMHURİYET BAŞSAVCILIĞI"
+    C3 = "DİĞER MÜLHAKAT"
+    teskilatturu = (
+
+        (C1, 'AĞIR CEZA CUMHURİYET BAŞSAVCILIĞI'),
+        (C2, 'ASLİYE CEZA CUMHURİYET BAŞSAVCILIĞI'),
+        (C3, 'DİĞER MÜLHAKAT'),
+
+    )
+
+
+
+
     creationDate = models.DateTimeField(auto_now_add=True)
     modificationDate = models.DateTimeField(auto_now=True)
 
@@ -43,13 +59,46 @@ class Gteskilat(models.Model):
                                     blank=True)
     merkeznufus = models.IntegerField(blank=True, null=True, )
     yargiAlaniNufus = models.IntegerField(blank=True, null=True, )
-    agirCezaMerkezi = models.CharField(max_length=128, blank=True, null=True, )
-    asliyeCezaMerkezi = models.CharField(max_length=128, blank=True, null=True, )
+    acmyargiAlaniNufus = models.IntegerField(blank=True, null=True, )
+
+
+
     hakim_sayisi = models.CharField(max_length=128, blank=True, null=True, )
     savci_sayisi = models.IntegerField(blank=True, null=True, )
     personel_sayisi = models.IntegerField(blank=True, null=True, )
-    mulhakat = models.CharField(max_length=128, blank=True, null=True, )
+
     kobilid = models.IntegerField(null=True, blank=True, default=2)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='sehir', null=False, blank=False)
+    town = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='ilce', null=True, blank=True)
+    sirano = models.IntegerField(blank=True, null=True)
+
+    teskilatturu = models.CharField(max_length=128, verbose_name='teskilatturu', choices=teskilatturu, null=True,
+                                    blank=True)
+
+    bamcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bamsehir', null=False, blank=False)
+    bamtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='bamilce', null=True, blank=True)
+    bimcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bimsehir', null=False, blank=False)
+    bimtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='bimilce', null=True, blank=True)
+    acmcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='acmsehir', null=False, blank=False)
+    acmtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='acmilce', null=True, blank=True)
+
+    # adli yargı
+    ilkDereceAdliYargiHakimSayisi = models.IntegerField(blank=True, null=True, )
+    ilkDereceAdliYargiSavcıSayisi = models.IntegerField(blank=True, null=True, )
+    ilkderecePersonelSayisi = models.IntegerField(blank=True, null=True, )
+    bolgeAdliyeHakimSayisi = models.IntegerField(blank=True, null=True, )
+    bolgeAdliyeSavcıSayisi = models.IntegerField(blank=True, null=True, )
+    bolgeAdliyePersonelSayisi = models.IntegerField(blank=True, null=True, )
+
+    # idari yargı
+    bolgeIdaremahkemesiHakimSayisi = models.IntegerField(blank=True, null=True, )
+    bolgeIdareMahkemsiPersonelSayisi = models.IntegerField(blank=True, null=True, )
+    idareveVergiMahkemeleriHakimSayisi = models.IntegerField(blank=True, null=True, )
+    idariVergiMahkemeleriPersonelSayisi = models.IntegerField(blank=True, null=True, )
+
+    # bam=models.ForeignKey(Gbolge,on_delete=models.SET_NULL,verbose_name='bam',null=True,blank=True)
+    # bim=models.ForeignKey(Gbolge,on_delete=models.SET_NULL,verbose_name='bim',null=True,blank=True)
+    # acm=models.ForeignKey(Gbolge,on_delete=models.SET_NULL,verbose_name='acm',null=True,blank=True)
+
     #
     # UsageArea = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0)
