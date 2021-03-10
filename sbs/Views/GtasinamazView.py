@@ -370,7 +370,8 @@ def edit_teskilat(request, pk):
     teskilat_form = GteskilatForm(request.POST or None, instance=teskilat)
     if request.method == 'POST':
         if teskilat_form.is_valid():
-            project = teskilat_form.save()
+            project = teskilat_form.save(commit=False)
+            project.sa
             log = str(project.city) + " teşkilat yapısı güncellendi."
             log = general_methods.logwrite(request, log)
             messages.success(request, 'Teşkilat Yapısı güncellendi.')

@@ -48,11 +48,11 @@
 
     <section class="content-header">
         <h1>
-            {{ project_form.instance.city.name }} Teşkilat Güncelle
+            Teşkilat Güncelle
 
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> {{ project_form.instance.city.name }} Teşkilat Güncelle </a>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Teşkilat Güncelle </a>
             </li>
 
         </ol>
@@ -61,8 +61,6 @@
 
         <form method="post" enctype="multipart/form-data" role="form">
             {% csrf_token %}
-            <div class="row">
-
                 <div class="col-lg-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -139,20 +137,20 @@
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label> {{ project_form.hakim_sayisi.label }}</label>
-                                    {{ project_form.hakim_sayisi }}
+                                    <label> {{ project_form.merkeznufus.label }}</label>
+                                    {{ project_form.merkeznufus }}
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label> {{ project_form.savci_sayisi.label }}</label>
-                                    {{ project_form.savci_sayisi }}
+                                    <label> {{ project_form.yargiAlaniNufus.label }}</label>
+                                    {{ project_form.yargiAlaniNufus }}
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label> {{ project_form.personel_sayisi.label }}</label>
-                                    {{ project_form.personel_sayisi }}
+                                    <label> {{ project_form.acmyargiAlaniNufus.label }}</label>
+                                    {{ project_form.acmyargiAlaniNufus }}
                                 </div>
                             </div>
 
@@ -328,7 +326,7 @@
 
                                 <div class="form-group">
                                     <label> {{ project_form.acmcity.label }}</label>
-                                    {{ project_form.acmtown }}
+                                    {{ project_form.acmcity }}
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -343,14 +341,60 @@
                     </div>
                     <!-- /.box -->
                 </div>
-
             </div>
-
-
         </form>
-
-
     </section>
+    <script>
+        $(document).ready(function () {
+            $("#id_city").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_town").empty();
+                ilce(city, 'id_town');
+            });
+
+
+            $("#id_bimcity").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_bimtown").empty();
+                ilce(city, 'id_bimtown');
+
+
+            });
+            $("#id_bamcity").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_bamtown").empty();
+                ilce(city, 'id_bamtown');
+            });
+
+
+            $("#id_acmcity").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_acmtown").empty();
+                ilce(city, 'id_acmtown');
+            });
+
+        });
+
+        function ilce(city, id) {
+            $.ajax({
+                url: "{% url "sbs:ilce-bilgi" %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    "cmd": city,
+                },
+                success: function (result) {
+
+                    $("#" + id).append('<option value="">-----------</option>');
+
+                    for (item in result.data) {
+                        $("#" + id).append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                    }
+                }
+            });
+
+        };
+    </script>
 
 
 

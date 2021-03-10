@@ -47,9 +47,6 @@ class Gteskilat(models.Model):
 
     )
 
-
-
-
     creationDate = models.DateTimeField(auto_now_add=True)
     modificationDate = models.DateTimeField(auto_now=True)
 
@@ -63,10 +60,6 @@ class Gteskilat(models.Model):
 
 
 
-    hakim_sayisi = models.CharField(max_length=128, blank=True, null=True, )
-    savci_sayisi = models.IntegerField(blank=True, null=True, )
-    personel_sayisi = models.IntegerField(blank=True, null=True, )
-
     kobilid = models.IntegerField(null=True, blank=True, default=2)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='sehir', null=False, blank=False)
     town = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='ilce', null=True, blank=True)
@@ -75,11 +68,11 @@ class Gteskilat(models.Model):
     teskilatturu = models.CharField(max_length=128, verbose_name='teskilatturu', choices=teskilatturu, null=True,
                                     blank=True)
 
-    bamcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bamsehir', null=False, blank=False)
+    bamcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bamsehir', null=True, blank=True)
     bamtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='bamilce', null=True, blank=True)
-    bimcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bimsehir', null=False, blank=False)
+    bimcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bimsehir', null=True, blank=True)
     bimtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='bimilce', null=True, blank=True)
-    acmcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='acmsehir', null=False, blank=False)
+    acmcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='acmsehir', null=True, blank=True)
     acmtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='acmilce', null=True, blank=True)
 
     # adli yargı

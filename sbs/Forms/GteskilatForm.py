@@ -13,9 +13,7 @@ class GteskilatForm(ModelForm):
             'yargiBolgesi',
             'merkeznufus',
             'yargiAlaniNufus',
-            'hakim_sayisi',
-            'savci_sayisi',
-            'personel_sayisi',
+            'acmyargiAlaniNufus',
             'city',
             'teskilatturu',
             'sirano',
@@ -46,12 +44,12 @@ class GteskilatForm(ModelForm):
         labels = {
             'depremderecesi': 'Deprem Derecesi',
             'yargiBolgesi': 'Yargı Bölgesi',
-            'merkeznufus': 'Merkez Nufusu',
-            'yargiAlaniNufus': 'Yargı Alanı',
 
-            'hakim_sayisi': 'Hakim Sayısı',
-            'savci_sayisi': 'Savcı Sayısı ',
-            'personel_sayisi': 'Personel Sayısı',
+            'merkeznufus': 'MERKEZ NÜFUSU',
+            'yargiAlaniNufus': 'ARGI ALANI NÜFUSU',
+            'acmyargiAlaniNufus': 'ACM YARGI ALANI NÜFUSU',
+
+
             'city': 'Şehir',
             'teskilatturu': 'Teşkilat Türü',
             'sirano': 'Sıra Numarası',
@@ -89,19 +87,17 @@ class GteskilatForm(ModelForm):
                                                 'style': 'width: 100%; ', }),
             'teskilatturu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%; ', }),
+            'yargiAlaniNufus': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+
+            'acmyargiAlaniNufus': forms.TextInput(
+                attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
             'merkeznufus': forms.TextInput(
-                attrs={'class': 'form-control ', }),
+                attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'sirano': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-
-            'hakim_sayisi': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-
-            'savci_sayisi': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-            'personel_sayisi': forms.TextInput(
-                attrs={'class': 'form-control ', }),
+                attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'acmyargiAlaniNufus': forms.TextInput(
+                attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
             'bamcity': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                            'style': 'width: 100%; ', }),
