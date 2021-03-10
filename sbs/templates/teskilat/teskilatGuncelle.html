@@ -61,6 +61,8 @@
 
         <form method="post" enctype="multipart/form-data" role="form">
             {% csrf_token %}
+            <div class="row">
+
                 <div class="col-lg-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -357,6 +359,7 @@
                 var city = $(this).find('option:selected').text();
                 $("#id_bimtown").empty();
                 ilce(city, 'id_bimtown');
+
 
 
             });
