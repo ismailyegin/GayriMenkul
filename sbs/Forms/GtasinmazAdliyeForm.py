@@ -20,7 +20,8 @@ class GtasinmazAdliyeForm(ModelForm):
             'kapalikullanimalani',
             'blokadeti',
             'katadedi',
-            'mulkiyet'
+            'mustakil',
+            'diger',
         )
 
         labels = {
@@ -36,14 +37,18 @@ class GtasinmazAdliyeForm(ModelForm):
             'blokadeti': 'BLOK ADEDİ',
             'katadedi': "KAT ADEDİ",
             'mulkiyet': 'Mülkiyet',
+            'mustakil': 'Müstakil',
+            'diger': 'Diger',
         }
 
         widgets = {
 
             'tasinmazinTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                   'style': 'width: 100%; ', 'required': 'required'}),
-            'mulkiyet': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+            'mustakil': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                             'style': 'width: 100%; '}),
+            'diger': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                         'style': 'width: 100%; '}),
             'sirano': forms.TextInput(
                 attrs={'class': 'form-control ', 'required': 'required'}),
             'tkgmno': forms.TextInput(

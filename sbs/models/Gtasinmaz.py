@@ -35,15 +35,20 @@ class Gtasinmaz(models.Model):
     Atvg = 'ATVG'
     Kiralik = "KİRALIK"
 
-
-    Mulkiyet = (
+    Mustakil = (
         (Hazine, 'HAZİNE'),
-        (Hukumet_konagi_icinde, 'HÜKÜMET KONAĞI İÇİNDE'),
-        (Hukumet_konagi_ayri, 'HÜKÜMET KONAĞINDA AYRI BLOK'),
         (Is_yurtlari, 'İŞ YURTLARI'),
         (Atvg, 'ATVG'),
         (Diger, 'DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR'),
-        (Kiralik, 'KİRALIK')
+
+    )
+
+    Diger = (
+
+        (Hukumet_konagi_icinde, 'HÜKÜMET KONAĞI İÇİNDE'),
+        (Hukumet_konagi_ayri, 'HÜKÜMET KONAĞINDA AYRI BLOK'),
+        (Diger, 'DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR'),
+
     )
     adaletYapisi = 'ADALET YAPILARI'
     kiraliktasinmaz = 'KİRALIK TAŞINMAZLAR'
@@ -96,7 +101,9 @@ class Gtasinmaz(models.Model):
     tapu = models.ForeignKey(GTapu, on_delete=models.SET_NULL, verbose_name='Tapu', null=True, blank=True)
     kurum = models.ManyToManyField(Gkurum)
 
-    mulkiyet = models.CharField(max_length=128, verbose_name='Mülkiyet ', choices=Mulkiyet, default=Hazine)
+    mustakil = models.CharField(max_length=128, verbose_name='müstakil ', choices=Mustakil, default=Hazine)
+    diger = models.CharField(max_length=128, verbose_name='digermulkiyet ', choices=Diger,
+                             default=Hukumet_konagi_icinde)
 
     tahsisAmaci = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TAHSIS_AMACI,
                                    default=AB)
