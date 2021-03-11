@@ -13,6 +13,7 @@ from sbs.Forms.GkiraForm import GkiraForm
 from sbs.Forms.GtahsisForm import GtahsisForm
 #   adalet alanina göre form üretimi oldu
 from sbs.Forms.GtasinmazAdliyeForm import GtasinmazAdliyeForm
+from sbs.Forms.GtasinmazArsaForm import GtasinmazArsaForm
 from sbs.Forms.GtasinmazForm import GtasinmazForm
 from sbs.Forms.GtasinmazSearchForm import GtasinmazSearchForm
 from sbs.Forms.GteskilatForm import GteskilatForm
@@ -144,15 +145,57 @@ def edit_tasinmaz(request, pk):
                        'tahsis_form': tahsis_form,
                        'kiralik_form': kiralik_form,
                        })
-    elif tasinmaz.tasinmazinTuru == tasinmaz.kiraliktasinmaz:
-        return render(request, 'tasinmaz/tasinmazKiraGuncelle.html',
-                      {
-                          # 'project_form': project_form,
-                      })
+
     elif tasinmaz.tasinmazinTuru == tasinmaz.tahisisliArsalar:
+        project_form = GtasinmazArsaForm(request.POST or None, instance=tasinmaz)
+        tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+
+        if not (tasinmaz.tahsis):
+            tahsis = Gtahsis()
+            tahsis.save()
+            tasinmaz.tahsis = tahsis
+            tasinmaz.save()
+
+        tahsis_form = GtahsisForm(request.POST or None, instance=tasinmaz.tahsis)
+
+        if request.method == 'POST':
+
+            if request.FILES.get('file'):
+                document = GtasinmazDocument(name=request.FILES.get('file'))
+                document.save()
+                tasinmaz.documents.add(document)
+                tasinmaz.save()
+
+            if project_form.is_valid() and tapu_form.is_valid():
+                projectSave = project_form.save(commit=False)
+                projectSave.save()
+                tapu_form.save()
+                log = str(tasinmaz.name) + "tasinmaz  güncelledi"
+                log = general_methods.logwrite(request, log)
+                print('log arsa ')
+            else:
+                print('alanlari kontrol ediniz arsa')
+                messages.warning(request, 'Alanlari kontrol ediniz')
+        if tasinmaz.tapu.city:
+            if tasinmaz.tapu.town:
+                tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+                tapu_form.fields['town'].initial = tasinmaz.tapu.town.name
+            else:
+                tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+        else:
+            tapu_form.fields['town'].queryset = Town.objects.none()
+
+        project_form.fields['tahsisDurumu'].queryset = None
+        project_form.fields['tahsisDurumu'].initial = tasinmaz.TahsisliArsa
+
+
+
         return render(request, 'tasinmaz/tasinmaztahsisliArsaGuncelle.html',
                       {
-                          # 'project_form': project_form,
+                          'project_form': project_form,
+                          'tapu_form': tapu_form,
+                          'tahsis_form': tahsis_form
+
                       })
     elif tasinmaz.tasinmazinTuru == tasinmaz.lojmanlar:
         return render(request, 'tasinmaz/TasinmazLojmanGuncelle.html',

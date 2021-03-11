@@ -16,7 +16,7 @@ class Gtasinmaz(models.Model):
 
     TahsisDurumu = (
 
-        (TahsisliArsa, 'Tahsisli Arsa '),
+        (TahsisliArsa, 'Tahsisli'),
         (Kira, 'Kiralık'),
     )
 
@@ -57,14 +57,14 @@ class Gtasinmaz(models.Model):
         (bos, 'Seçiniz'),
 
     )
-    adaletYapisi = 'ADALET YAPILARI'
+    adaletYapisi = 'ADALET BİNASI'
     # kiraliktasinmaz = 'KİRALIK TAŞINMAZLAR'
-    tahisisliArsalar = 'TAHSİSLİ ARSALAR'
-    lojmanlar = 'LOJMANLAR'
-    cezaInfazKurumlari = 'CEZA İNFAZ KURUMLARI'
+    tahisisliArsalar = 'ARSA'
+    lojmanlar = 'LOJMAN'
+    cezaInfazKurumlari = 'CEZA İNFAZ KURUMU'
 
     TasinmazType = (
-        (adaletYapisi, 'ADALET YAPILARI'),
+        (adaletYapisi, 'ADALET BİNASI'),
         # (kiraliktasinmaz, 'KİRALIK TAŞINMAZLAR'),
         (tahisisliArsalar, 'TAHSİSLİ ARSALAR'),
         (lojmanlar, 'LOJMANLAR'),
