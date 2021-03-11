@@ -142,6 +142,6 @@ class Gtasinmaz(models.Model):
                                    null=True)
 
     tahsisDurumu = models.CharField(max_length=128, verbose_name='tahsis durumu ', choices=TahsisDurumu,
-                                    default=Arsa)
+                                    default=TahsisliArsa)
 
     kobilid = models.IntegerField(null=True, blank=True, default=2)

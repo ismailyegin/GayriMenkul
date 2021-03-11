@@ -838,6 +838,7 @@
                             <!-- /.box -->
                         </div>
 
+
                         {#tahsis bilgileri#}
                         {% if project_form.instance.tahsisDurumu == "Tahsisli Arsa" %}
                             <div class="col-md-6">
@@ -922,50 +923,53 @@
 
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ tahsis_form.sahibi.label }}</label>
-                                                    {{ tahsis_form.sahibi }}
+                                                    <label> {{ kiralik_form.sahibi.label }}</label>
+                                                    {{ kiralik_form.sahibi }}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.tahsis_amaci.label }}</label>
+                                                    {{ kiralik_form.tahsis_amaci }}
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ tahsis_form.onayTarihi.label }}</label>
-                                                    {{ tahsis_form.onayTarihi }}
+                                                    <label> {{ kiralik_form.onayTarihi.label }}</label>
+                                                    {{ kiralik_form.onayTarihi }}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.sozlesmeTarihi.label }}</label>
+                                                    {{ kiralik_form.sozlesmeTarihi }}
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ tahsis_form.tahsis_amaci.label }}</label>
-                                                    {{ tahsis_form.tahsis_amaci }}
+                                                    <label> {{ kiralik_form.sozlesmeSonTarihi.label }}</label>
+                                                    {{ kiralik_form.sozlesmeSonTarihi }}
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ tahsis_form.sozlesmeTarihi.label }}</label>
-                                                    {{ tahsis_form.sozlesmeTarihi }}
+                                                    <label> {{ kiralik_form.kiralamaSuresi.label }}</label>
+                                                    {{ kiralik_form.kiralamaSuresi }}
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ tahsis_form.sozlesmeSonTarihi.label }}</label>
-                                                    {{ tahsis_form.sozlesmeSonTarihi }}
+                                                    <label> {{ kiralik_form.adres.label }}</label>
+                                                    {{ kiralik_form.adres }}
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ tahsis_form.kiralamaSuresi.label }}</label>
-                                                    {{ tahsis_form.kiralamaSuresi }}
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label> {{ tahsis_form.adres.label }}</label>
-                                                    {{ tahsis_form.adres }}
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label> {{ tahsis_form.kapalialan.label }}</label>
-                                                    {{ tahsis_form.kapalialan }}
+                                                    <label> {{ kiralik_form.kapalialan.label }}</label>
+                                                    {{ kiralik_form.kapalialan }}
                                                 </div>
                                             </div>
 

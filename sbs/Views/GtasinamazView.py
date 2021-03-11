@@ -78,25 +78,19 @@ def edit_tasinmaz(request, pk):
         project_form = GtasinmazAdliyeForm(request.POST or None, instance=tasinmaz)
         gkurum = Gkurum.objects.all()
         tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
-        if tasinmaz.tahsisDurumu == Gtasinmaz.Kira:
-            if tasinmaz.kira:
-                tahsis_form = GkiraForm(request.POST, instance=tasinmaz.kira)
-            else:
-                kira = Gkira()
-                kira.save()
-                tasinmaz.kira = kira
-                tasinmaz.save()
-                tahsis_form = GkiraForm(request.POST, instance=tasinmaz.kira)
+        if not tasinmaz.tahsis:
+            tahsis = Gtahsis()
+            tahsis.save()
+            tasinmaz.tahsis = tahsis
+            tasinmaz.save()
 
-        else:
-            if tasinmaz.tahsis:
-                tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
-            else:
-                tahsis = Gtahsis()
-                tahsis.save()
-                tasinmaz.tahsis = tahsis
-                tasinmaz.save()
-                tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
+        if not tasinmaz.kira:
+            kira = Gkira()
+            kira.save()
+            tasinmaz.kira = kira
+            tasinmaz.save()
+        kiralik_form = GkiraForm(request.POST, instance=tasinmaz.kira)
+        tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
 
         if request.method == 'POST':
 
@@ -106,17 +100,22 @@ def edit_tasinmaz(request, pk):
                 tasinmaz.documents.add(document)
                 tasinmaz.save()
 
-            if project_form.is_valid() and tapu_form.is_valid() and tahsis_form.is_valid():
+            if project_form.is_valid() and tapu_form.is_valid():
                 projectSave = project_form.save(commit=False)
                 projectSave.save()
                 tapu_form.save()
-                tahsis_form.save()
                 log = str(tasinmaz.name) + "tasinmaz  güncelledi"
                 log = general_methods.logwrite(request, log)
                 print('log')
             else:
                 print('alanlari kontrol ediniz')
                 messages.warning(request, 'Alanlari kontrol ediniz')
+            if kiralik_form:
+                if kiralik_form.is_valid():
+                    kiralik_form.save()
+            if tahsis_form:
+                if tahsis_form.is_valid():
+                    tahsis_form.save()
 
         if tasinmaz.binaustTur:
             if tasinmaz.binaAltTur:
@@ -140,7 +139,8 @@ def edit_tasinmaz(request, pk):
                        'project': tasinmaz,
                        'tapu_form': tapu_form,
                        'gkurum': gkurum,
-                       'tahsis_form': tahsis_form
+                       'tahsis_form': tahsis_form,
+                       'kiralik_form': kiralik_form,
                        })
     elif tasinmaz.tasinmazinTuru == tasinmaz.kiraliktasinmaz:
         return render(request, 'tasinmaz/tasinmazKiraGuncelle.html',
