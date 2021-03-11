@@ -589,12 +589,22 @@ def edit_teskilat(request, pk):
         logout(request)
         return redirect('accounts:login')
     teskilat = Gteskilat.objects.get(pk=pk)
-
-    # acm_form =GAcmForm(request.POST or None, instance=teskilat.acm)
-    # bam_form = GBamForm(request.POST or None, instance=teskilat.bam)
-    # bim_form = GBimForm(request.POST or None, instance=teskilat.bim)
-
     teskilat_form = GteskilatForm(request.POST or None, instance=teskilat)
+    if teskilat.acm:
+        teskilat_form.fields['acm'].queryset = Gbolge.objects.filter(type=Gbolge.Acm)
+        teskilat_form.fields['acm'].initial = teskilat.acm.name
+    else:
+        teskilat_form.fields['acm'].queryset = Gbolge.objects.filter(type=Gbolge.Acm)
+    if teskilat.bim:
+        teskilat_form.fields['bim'].queryset = Gbolge.objects.filter(type=Gbolge.Bim)
+        teskilat_form.fields['bim'].initial = teskilat.bim.name
+    else:
+        teskilat_form.fields['bim'].queryset = Gbolge.objects.filter(type=Gbolge.Bim)
+    if teskilat.bam:
+        teskilat_form.fields['bam'].queryset = Gbolge.objects.filter(type=Gbolge.Bam)
+        teskilat_form.fields['bam'].initial = teskilat.bam.name
+    else:
+        teskilat_form.fields['bam'].queryset = Gbolge.objects.filter(type=Gbolge.Bam)
     if request.method == 'POST':
         if teskilat_form.is_valid():
             teskilat_form.save()

@@ -18,12 +18,10 @@ class GteskilatForm(ModelForm):
             'teskilatturu',
             'sirano',
             'town',
-            'bamcity',
-            'bamtown',
-            'acmcity',
-            'acmtown',
-            'bimcity',
-            'bimtown',
+
+            'acm',
+            'bam',
+            'bim',
 
             'ilkDereceAdliYargiHakimSayisi',
             'ilkDereceAdliYargiSavcıSayisi',
@@ -53,12 +51,10 @@ class GteskilatForm(ModelForm):
             'teskilatturu': 'Teşkilat Türü',
             'sirano': 'Sıra Numarası',
             'town': 'İlçe',
-            'bamcity': 'BAM İl',
-            'bamtown': "BAM İlçe",
-            'acmcity': "ACM İl",
-            'acmtown': "ACM İlçe",
-            'bimcity': "BİM İl",
-            'bimtown': "BİM İlçe",
+            'acm': 'ACM',
+            'bam': 'BAM',
+            'bim': 'BİM',
+
 
             'ilkDereceAdliYargiHakimSayisi': 'İLK DERECE ADLİ YARGI HÂKİM SAYISI',
             'ilkDereceAdliYargiSavcıSayisi': "İLK DERECE ADLİ YARGI SAVCI SAYISI",
@@ -98,19 +94,6 @@ class GteskilatForm(ModelForm):
             'acmyargiAlaniNufus': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
-            'bamcity': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; ', }),
-            'bamtown': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; ', }),
-            'bimcity': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; ', }),
-            'bimtown': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; ', }),
-            'acmcity': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; ', }),
-            'acmtown': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; ', }),
-
             'ilkDereceAdliYargiHakimSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'ilkDereceAdliYargiSavcıSayisi': forms.TextInput(
@@ -129,5 +112,11 @@ class GteskilatForm(ModelForm):
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'idariVergiMahkemeleriPersonelSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'acm': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                       'style': 'width: 100%; ', }),
+            'bam': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                       'style': 'width: 100%; ', }),
+            'bim': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                       'style': 'width: 100%; ', }),
 
         }

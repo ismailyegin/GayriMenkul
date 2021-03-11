@@ -1,6 +1,7 @@
 from django.db import models
 
 from sbs.models.City import City
+from sbs.models.Gbolge import Gbolge
 from sbs.models.Town import Town
 
 
@@ -68,13 +69,9 @@ class Gteskilat(models.Model):
     teskilatturu = models.CharField(max_length=128, verbose_name='teskilatturu', choices=teskilatturu, null=True,
                                     blank=True)
 
-    bamcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bamsehir', null=True, blank=True)
-    bamtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='bamilce', null=True, blank=True)
-    bimcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='bimsehir', null=True, blank=True)
-    bimtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='bimilce', null=True, blank=True)
-    acmcity = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='acmsehir', null=True, blank=True)
-    acmtown = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='acmilce', null=True, blank=True)
-
+    bam = models.ForeignKey(Gbolge, on_delete=models.SET_NULL, verbose_name='bam', null=True, blank=True)
+    bim = models.ForeignKey(Gbolge, on_delete=models.SET_NULL, verbose_name='bim', null=True, blank=True)
+    acm = models.ForeignKey(Gbolge, on_delete=models.SET_NULL, verbose_name='acm', null=True, blank=True)
     # adli yargı
     ilkDereceAdliYargiHakimSayisi = models.IntegerField(blank=True, null=True, )
     ilkDereceAdliYargiSavcıSayisi = models.IntegerField(blank=True, null=True, )

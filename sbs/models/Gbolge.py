@@ -22,3 +22,6 @@ class Gbolge(models.Model):
     type = models.CharField(max_length=128, verbose_name='Mahal', choices=mahal, default=Bam)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='sehir', null=False, blank=False)
     town = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='ilce', null=True, blank=True)
+
+    def __str__(self):
+        return '%s ' % self.name
