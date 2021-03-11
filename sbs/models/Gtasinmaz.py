@@ -20,6 +20,15 @@ class Gtasinmaz(models.Model):
         (Kira, 'Kiralık'),
     )
 
+    Konut = "Konut"
+    Misafirhane = "Misafirhane"
+
+    lojmanTuru = (
+
+        (Konut, 'Konut'),
+        (Misafirhane, 'Misafirhane'),
+    )
+
     Bina = "Bina"
     Arsa = "Arsa"
 
@@ -28,6 +37,30 @@ class Gtasinmaz(models.Model):
         (Bina, 'Bina'),
         (Arsa, 'Arsa'),
     )
+
+    IsFormal = (
+        (True, 'Evet '),
+        (False, 'Hayır'),
+    )
+
+    ArsaDurumu = (
+
+        (Bina, 'Bina'),
+        (Arsa, 'Arsa'),
+    )
+
+    fall = "Fall"
+    Atıl = "Atıl veya Metrut"
+    yikik = 'Yıkık'
+
+    lojmanKullanimTuru = (
+
+        (fall, 'Fall'),
+        (Atıl, 'Atıl veya Metrut'),
+        (yikik, 'Yıkık'),
+    )
+
+
 
     Hazine = 'HAZİNE'
     Hukumet_konagi_icinde = "HÜKÜMET KONAGI İÇERİSİNDE"
@@ -118,8 +151,7 @@ class Gtasinmaz(models.Model):
     tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TasinmazType,
                                       default=adaletYapisi)
 
-    kira = models.ForeignKey(Gkira, on_delete=models.SET_NULL, verbose_name='kira', null=True, blank=True)
-    tahsis = models.ForeignKey(Gtahsis, on_delete=models.SET_NULL, verbose_name='Tahsis', null=True, blank=True)
+
     definition = models.CharField(max_length=128, verbose_name='Tasınmaz Açıklama ', null=True, blank=True)
 
     offers = models.ManyToManyField(EPOffer)
@@ -140,8 +172,35 @@ class Gtasinmaz(models.Model):
                                    null=True)
     binaustTur = models.ForeignKey(GtasinmazUstTur, on_delete=models.SET_NULL, verbose_name='binaüsttur', blank=True,
                                    null=True)
-
+    # tahsisli arsa
     tahsisDurumu = models.CharField(max_length=128, verbose_name='tahsis durumu ', choices=TahsisDurumu,
                                     default=TahsisliArsa)
+    kira = models.ForeignKey(Gkira, on_delete=models.SET_NULL, verbose_name='kira', null=True, blank=True)
+    tahsis = models.ForeignKey(Gtahsis, on_delete=models.SET_NULL, verbose_name='Tahsis', null=True, blank=True)
+
+    # lojman
+
+    blockSayisi = models.IntegerField(blank=True, null=True, )
+    daireSayisi = models.IntegerField(blank=True, null=True, )
+    lojmanYapimYili = models.DateTimeField(null=True, blank=True)
+    lojmanturu = models.CharField(max_length=128, verbose_name='lojman_turu ', choices=lojmanTuru, default=Konut)
+    daireKapaliKulllanimAlaniNet = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    daireKapaliKulllanimAlaniBrut = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    lojmanKullanimDurumu = models.CharField(max_length=128, verbose_name='lojman_kullanim_turu',
+                                            choices=lojmanKullanimTuru, default=fall)
+
+    hazinelojmaniDaireSayisi = models.IntegerField(blank=True, null=True, )
+    atvglojmaniDaireSayisi = models.IntegerField(blank=True, null=True, )
+    isyurtlariDaireSayisi = models.IntegerField(blank=True, null=True, )
+    mahaldekiToplamDaireSayisi = models.IntegerField(blank=True, null=True, )
+    mahaldekiToplamHakimSavcıSayisi = models.IntegerField(blank=True, null=True, )
+    arsayuzolcumu = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    mustakilAyriBlock = models.BooleanField(default=True, choices=IsFormal)
+    blockicindeDaire = models.IntegerField(blank=True, null=True, )
+
+
+
+
+
 
     kobilid = models.IntegerField(null=True, blank=True, default=2)
