@@ -23,6 +23,7 @@ class GtasinmazAdliyeForm(ModelForm):
             'diger',
             'binaAltTur',
             'binaustTur',
+            'tahsisDurumu'
 
         )
 
@@ -43,11 +44,14 @@ class GtasinmazAdliyeForm(ModelForm):
             'diger': 'Diger',
             'binaAltTur': 'Bina Alt Türü',
             'binaustTur': 'Bina Üst Türü',
+            'tahsisDurumu': 'Tahsis Durumu',
         }
 
         widgets = {
 
             'tasinmazinTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                  'style': 'width: 100%; ', 'required': 'required'}),
+            'tahsisDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                   'style': 'width: 100%; ', 'required': 'required'}),
             'mustakil': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                             'style': 'width: 100%; '}),

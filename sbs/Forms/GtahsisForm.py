@@ -30,8 +30,8 @@ class GtahsisForm(ModelForm):
 
             'tahsis_amaci': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%; ', }),
-            'tahsis_kurum': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                                'style': 'width: 100%; ', }),
+            'tahsis_kurum': forms.TextInput(
+                attrs={'class': 'form-control ', }),
             'tahsisTarihi': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker4', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),

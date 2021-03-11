@@ -9,34 +9,24 @@ class TapuForm(ModelForm):
         model = GTapu
 
         fields = (
-            'year',
-            'area',
+
             'parcel',
             'island',
             'neighborhood',
-            'location',
             'town',
             'city',
-
-
         )
 
         labels = {
-            'year': 'Bina Yapım Yılı',
-            'area': 'Kapalı Kullanım Alanı',
+
             'parcel': 'Parsel',
             'island': 'Ada',
             'neighborhood': 'Mahalle ',
-            'location': 'Konum Bilgisi',
             'town': 'İlçe ',
             'city': 'Şehir',
 
         }
         widgets = {
-            'year': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-            'area': forms.TextInput(
-                attrs={'class': 'form-control ', }),
             'parcel': forms.TextInput(
                 attrs={'class': 'form-control ', }),
             'island': forms.TextInput(
@@ -45,8 +35,6 @@ class TapuForm(ModelForm):
             'kapalialan': forms.TextInput(
                 attrs={'class': 'form-control ', }),
 
-            'location': forms.TextInput(
-                attrs={'class': 'form-control ', }),
 
             'adres': forms.TextInput(
                 attrs={'class': 'form-control ', }),

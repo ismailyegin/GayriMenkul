@@ -11,14 +11,14 @@ from sbs.models.GtasinmazDocument import GtasinmazDocument
 
 
 class Gtasinmaz(models.Model):
-    # TahsisliArsa = "Tahsisli Arsa"
-    # Kira = "Kiralık"
-    #
-    # TahsisDurumu = (
-    #
-    #     (TahsisliArsa, 'Tahsisli Arsa '),
-    #     (Kira, 'Kiralık'),
-    # )
+    TahsisliArsa = "Tahsisli Arsa"
+    Kira = "Kiralık"
+
+    TahsisDurumu = (
+
+        (TahsisliArsa, 'Tahsisli Arsa '),
+        (Kira, 'Kiralık'),
+    )
 
     Bina = "Bina"
     Arsa = "Arsa"
@@ -36,31 +36,36 @@ class Gtasinmaz(models.Model):
     Diger = "DİĞER KAMU KURUM KURULUŞLARINDAN TAHSİSLİ "
     Atvg = 'ATVG'
     Kiralik = "KİRALIK"
+    bos = None
 
     Mustakil = (
+
         (Hazine, 'HAZİNE'),
         (Is_yurtlari, 'İŞ YURTLARI'),
         (Atvg, 'ATVG'),
         (Diger, 'DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR'),
+        (bos, 'Seçiniz'),
 
     )
 
     Diger = (
 
+
         (Hukumet_konagi_icinde, 'HÜKÜMET KONAĞI İÇİNDE'),
         (Hukumet_konagi_ayri, 'HÜKÜMET KONAĞINDA AYRI BLOK'),
         (Diger, 'DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR'),
+        (bos, 'Seçiniz'),
 
     )
     adaletYapisi = 'ADALET YAPILARI'
-    kiraliktasinmaz = 'KİRALIK TAŞINMAZLAR'
+    # kiraliktasinmaz = 'KİRALIK TAŞINMAZLAR'
     tahisisliArsalar = 'TAHSİSLİ ARSALAR'
     lojmanlar = 'LOJMANLAR'
     cezaInfazKurumlari = 'CEZA İNFAZ KURUMLARI'
 
     TasinmazType = (
         (adaletYapisi, 'ADALET YAPILARI'),
-        (kiraliktasinmaz, 'KİRALIK TAŞINMAZLAR'),
+        # (kiraliktasinmaz, 'KİRALIK TAŞINMAZLAR'),
         (tahisisliArsalar, 'TAHSİSLİ ARSALAR'),
         (lojmanlar, 'LOJMANLAR'),
         (cezaInfazKurumlari, 'CEZA İNFAZ KURUMLARI'),
@@ -103,9 +108,10 @@ class Gtasinmaz(models.Model):
     tapu = models.ForeignKey(GTapu, on_delete=models.SET_NULL, verbose_name='Tapu', null=True, blank=True)
     kurum = models.ManyToManyField(Gkurum)
 
-    mustakil = models.CharField(max_length=128, verbose_name='müstakil ', choices=Mustakil, default=Hazine)
-    diger = models.CharField(max_length=128, verbose_name='digermulkiyet ', choices=Diger,
-                             default=Hukumet_konagi_icinde)
+    mustakil = models.CharField(max_length=128, verbose_name='müstakil ', choices=Mustakil, default=bos, null=True,
+                                blank=True)
+    diger = models.CharField(max_length=128, verbose_name='digermulkiyet ', choices=Diger, default=bos, null=True,
+                             blank=True)
 
     tahsisAmaci = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TAHSIS_AMACI,
                                    default=AB)
@@ -135,6 +141,7 @@ class Gtasinmaz(models.Model):
     binaustTur = models.ForeignKey(GtasinmazUstTur, on_delete=models.SET_NULL, verbose_name='binaüsttur', blank=True,
                                    null=True)
 
-
+    tahsisDurumu = models.CharField(max_length=128, verbose_name='tahsis durumu ', choices=TahsisDurumu,
+                                    default=Arsa)
 
     kobilid = models.IntegerField(null=True, blank=True, default=2)

@@ -11,7 +11,8 @@ class GtasinmazForm(ModelForm):
         fields = (
             'name', 'sirano', 'tkgmno',
             'arsaDegeri', 'definition',
-            'tasinmazinTuru',)
+            'tasinmazinTuru',
+            'tahsisDurumu')
 
         labels = {'name': 'Tanımı',
                   'sirano': 'Sıra numarası',
@@ -19,6 +20,7 @@ class GtasinmazForm(ModelForm):
 
                   'tasinmazinTuru': 'Taşınmazın Türü',
                   'definition': 'Açıklama',
+                  'tahsisDurumu': 'Tahsis Durmumu',
                   }
 
         widgets = {
@@ -34,5 +36,8 @@ class GtasinmazForm(ModelForm):
                 attrs={'class': 'form-control ', }),
             'definition': forms.Textarea(
                 attrs={'class': 'form-control ', 'rows': '2'}),
+
+            'tahsisDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                'style': 'width: 100%; ', 'required': 'required'}),
 
         }

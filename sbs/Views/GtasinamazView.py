@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from oxiterp.settings.base import MEDIA_URL
+from sbs.Forms.GkiraForm import GkiraForm
+from sbs.Forms.GtahsisForm import GtahsisForm
 #   adalet alanina göre form üretimi oldu
 from sbs.Forms.GtasinmazAdliyeForm import GtasinmazAdliyeForm
 from sbs.Forms.GtasinmazForm import GtasinmazForm
@@ -19,11 +21,14 @@ from sbs.Forms.KurumForm import KurumForm
 from sbs.Forms.TapuForm import TapuForm
 from sbs.models import City
 from sbs.models.GTapu import GTapu
+from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
+from sbs.models.Gtahsis import Gtahsis
 from sbs.models.Gtasinmaz import Gtasinmaz
 from sbs.models.GtasinmazBinaAltTur import GtasinmazAltTur
 from sbs.models.GtasinmazDocument import GtasinmazDocument
 from sbs.models.Gteskilat import Gteskilat
+from sbs.models.Town import Town
 from sbs.services import general_methods
 from sbs.services.general_methods import getProfileImage
 
@@ -73,6 +78,25 @@ def edit_tasinmaz(request, pk):
         project_form = GtasinmazAdliyeForm(request.POST or None, instance=tasinmaz)
         gkurum = Gkurum.objects.all()
         tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+        if tasinmaz.tahsisDurumu == Gtasinmaz.Kira:
+            if tasinmaz.kira:
+                tahsis_form = GkiraForm(request.POST, instance=tasinmaz.kira)
+            else:
+                kira = Gkira()
+                kira.save()
+                tasinmaz.kira = kira
+                tasinmaz.save()
+                tahsis_form = GkiraForm(request.POST, instance=tasinmaz.kira)
+
+        else:
+            if tasinmaz.tahsis:
+                tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
+            else:
+                tahsis = Gtahsis()
+                tahsis.save()
+                tasinmaz.tahsis = tahsis
+                tasinmaz.save()
+                tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
 
         if request.method == 'POST':
 
@@ -82,13 +106,16 @@ def edit_tasinmaz(request, pk):
                 tasinmaz.documents.add(document)
                 tasinmaz.save()
 
-            if project_form.is_valid() and tapu_form.is_valid():
+            if project_form.is_valid() and tapu_form.is_valid() and tahsis_form.is_valid():
                 projectSave = project_form.save(commit=False)
                 projectSave.save()
                 tapu_form.save()
+                tahsis_form.save()
                 log = str(tasinmaz.name) + "tasinmaz  güncelledi"
                 log = general_methods.logwrite(request, log)
+                print('log')
             else:
+                print('alanlari kontrol ediniz')
                 messages.warning(request, 'Alanlari kontrol ediniz')
 
         if tasinmaz.binaustTur:
@@ -99,11 +126,21 @@ def edit_tasinmaz(request, pk):
                 project_form.fields['binaAltTur'].queryset = GtasinmazAltTur.objects.filter(ust=tasinmaz.binaustTur)
         else:
             project_form.fields['binaAltTur'].queryset = GtasinmazAltTur.objects.none()
+
+        if tasinmaz.tapu.city:
+            if tasinmaz.tapu.town:
+                tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+                tapu_form.fields['town'].initial = tasinmaz.tapu.town.name
+            else:
+                tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+        else:
+            tapu_form.fields['town'].queryset = Town.objects.none()
         return render(request, 'tasinmaz/tasinmazAdliyeGuncelle.html',
                       {'project_form': project_form,
                        'project': tasinmaz,
                        'tapu_form': tapu_form,
-                       'gkurum': gkurum
+                       'gkurum': gkurum,
+                       'tahsis_form': tahsis_form
                        })
     elif tasinmaz.tasinmazinTuru == tasinmaz.kiraliktasinmaz:
         return render(request, 'tasinmaz/tasinmazKiraGuncelle.html',
