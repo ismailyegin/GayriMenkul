@@ -118,7 +118,7 @@ class Gtasinmaz(models.Model):
     tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TasinmazType,
                                       default=adaletYapisi)
 
-    kira = models.ForeignKey(Gkira, on_delete=models.SET_NULL, verbose_name='Kurum', null=True, blank=True)
+    kira = models.ForeignKey(Gkira, on_delete=models.SET_NULL, verbose_name='kira', null=True, blank=True)
     tahsis = models.ForeignKey(Gtahsis, on_delete=models.SET_NULL, verbose_name='Tahsis', null=True, blank=True)
     definition = models.CharField(max_length=128, verbose_name='Tasınmaz Açıklama ', null=True, blank=True)
 

@@ -78,13 +78,13 @@ def edit_tasinmaz(request, pk):
         project_form = GtasinmazAdliyeForm(request.POST or None, instance=tasinmaz)
         gkurum = Gkurum.objects.all()
         tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
-        if not tasinmaz.tahsis:
+        if not (tasinmaz.tahsis):
             tahsis = Gtahsis()
             tahsis.save()
             tasinmaz.tahsis = tahsis
             tasinmaz.save()
 
-        if not tasinmaz.kira:
+        if not (tasinmaz.kira):
             kira = Gkira()
             kira.save()
             tasinmaz.kira = kira
@@ -110,12 +110,14 @@ def edit_tasinmaz(request, pk):
             else:
                 print('alanlari kontrol ediniz')
                 messages.warning(request, 'Alanlari kontrol ediniz')
-            if kiralik_form:
-                if kiralik_form.is_valid():
-                    kiralik_form.save()
-            if tahsis_form:
-                if tahsis_form.is_valid():
-                    tahsis_form.save()
+            # kaydetme testi yapılacak
+            if kiralik_form.is_valid():
+                kiralik_form.save()
+
+            if tahsis_form.is_valid():
+                tahsis_form.save()
+
+
 
         if tasinmaz.binaustTur:
             if tasinmaz.binaAltTur:
