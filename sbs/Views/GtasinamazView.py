@@ -242,12 +242,12 @@ def edit_tasinmaz(request, pk):
                 log = str(tasinmaz.name) + "tasinmaz  güncelledi"
                 log = general_methods.logwrite(request, log)
                 print('log lojman ')
+                return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
 
 
             else:
                 print('alanlari kontrol ediniz lojman')
                 messages.warning(request, 'Alanlari kontrol ediniz')
-            return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
 
         if tasinmaz.tapu.city:
             if tasinmaz.tapu.town:

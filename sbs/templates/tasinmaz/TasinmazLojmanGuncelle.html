@@ -745,8 +745,7 @@
                 </div>
 
                 <div class="row">
-                    <form method="post" enctype="multipart/form-data" role="form">
-                        {% csrf_token %}
+
                         <div class="col-md-6">
                             <div class="box box-info collapsed-box">
                                 <div class="box-header with-border">
@@ -1287,7 +1286,7 @@
 
                             </div>
                         </div>
-                    </form>
+
                 </div>
             </form>
         {% endif %}
@@ -1529,7 +1528,7 @@
                     $("#id_binaAltTur").append('<option value="">-----------</option>');
 
                     for (item in result.data) {
-                        $("#id_binaAltTur").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                        $("#id_binaAltTur").append('<option value="' + result.data[item].pk + '">' + result.data[item].name + '</option>');
                     }
                 }
             });
