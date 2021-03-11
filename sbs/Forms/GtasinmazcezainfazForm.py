@@ -10,8 +10,19 @@ class GtasinmazcezainfazForm(ModelForm):
 
         fields = (
             'name', 'sirano', 'tkgmno',
-            'arsaDegeri', 'definition',
-            'tasinmazinTuru',)
+            'arsaDegeri',
+            'definition',
+            'tasinmazinTuru',
+            'yapimyili',
+
+            'arsaEmsal',
+            'tipi',
+            'kapasitesi',
+            'brutKapaliAlan',
+            'arsayuzolcumu',
+            'tahsisDurumu'
+
+        )
 
         labels = {'name': 'Tanımı',
                   'sirano': 'Sıra numarası',
@@ -19,6 +30,13 @@ class GtasinmazcezainfazForm(ModelForm):
 
                   'tasinmazinTuru': 'Taşınmazın Türü',
                   'definition': 'Açıklama',
+                  'arsaEmsal': 'Arsa Emsal Bilgisi ',
+                  'tipi': 'Tipi',
+                  'kapasitesi': 'Kapasitesi',
+                  'brutKapaliAlan': 'Brüt Kapali Kullanim Alanı',
+                  'arsayuzolcumu': 'Arsa Yüz Ölçümü',
+                  'tahsisDurumu': 'Tahsis Durumu',
+                  'yapimyili': 'Yapım Yılı ',
                   }
 
         widgets = {
@@ -33,5 +51,19 @@ class GtasinmazcezainfazForm(ModelForm):
                 attrs={'class': 'form-control ', }),
             'definition': forms.Textarea(
                 attrs={'class': 'form-control ', 'rows': '2'}),
+
+            'arsaEmsal': forms.TextInput(attrs={'class': 'form-control'}),
+            'tipi': forms.TextInput(attrs={'class': 'form-control', }),
+            'kapasitesi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'brutKapaliAlan': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'tahsisDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                'style': 'width: 100%; '}),
+            'yapimyili': forms.DateInput(
+                attrs={'class': 'form-control  pull-right', 'id': 'datepicker4', 'autocomplete': 'on',
+                       'onkeydown': 'return true'}),
+            'arsayuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+
+
+
 
         }

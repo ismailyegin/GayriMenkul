@@ -16,6 +16,7 @@ from sbs.Forms.GtasinmazAdliyeForm import GtasinmazAdliyeForm
 from sbs.Forms.GtasinmazArsaForm import GtasinmazArsaForm
 from sbs.Forms.GtasinmazForm import GtasinmazForm
 from sbs.Forms.GtasinmazSearchForm import GtasinmazSearchForm
+from sbs.Forms.GtasinmazcezainfazForm import GtasinmazcezainfazForm
 from sbs.Forms.GtasinmazlojmanForm import GtasinmazlojmanForm
 from sbs.Forms.GteskilatForm import GteskilatForm
 from sbs.Forms.GteskilatSearchForm import GteskilatSearchForm
@@ -240,10 +241,11 @@ def edit_tasinmaz(request, pk):
                 log = general_methods.logwrite(request, log)
                 print('log lojman ')
 
-                return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
+
             else:
                 print('alanlari kontrol ediniz lojman')
                 messages.warning(request, 'Alanlari kontrol ediniz')
+            return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
 
         if tasinmaz.tapu.city:
             if tasinmaz.tapu.town:
@@ -263,18 +265,64 @@ def edit_tasinmaz(request, pk):
                       })
 
 
-
-
-
-
-
-
-
-
     elif tasinmaz.tasinmazinTuru == tasinmaz.cezaInfazKurumlari:
+        project_form = GtasinmazcezainfazForm(request.POST or None, instance=tasinmaz)
+        tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+        if not (tasinmaz.tahsis):
+            tahsis = Gtahsis()
+            tahsis.save()
+            tasinmaz.tahsis = tahsis
+            tasinmaz.save()
+
+        if not (tasinmaz.kira):
+            kira = Gkira()
+            kira.save()
+            tasinmaz.kira = kira
+            tasinmaz.save()
+        kiralik_form = GkiraForm(request.POST, instance=tasinmaz.kira)
+        tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
+        if request.method == 'POST':
+
+            if request.FILES.get('file'):
+                document = GtasinmazDocument(name=request.FILES.get('file'))
+                document.save()
+                tasinmaz.documents.add(document)
+                tasinmaz.save()
+            if kiralik_form.is_valid():
+                kiralik_form.save()
+
+            if tahsis_form.is_valid():
+                tahsis_form.save()
+
+            if project_form.is_valid() and tapu_form.is_valid():
+                projectSave = project_form.save(commit=False)
+                projectSave.save()
+                tapu_form.save()
+                log = str(tasinmaz.name) + "tasinmaz  güncelledi"
+                log = general_methods.logwrite(request, log)
+                print('log ceza ')
+                return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
+
+
+            else:
+                print('alanlari kontrol ediniz ceza')
+                messages.warning(request, 'Alanlari kontrol ediniz')
+
+        if tasinmaz.tapu.city:
+            if tasinmaz.tapu.town:
+                tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+                tapu_form.fields['town'].initial = tasinmaz.tapu.town.name
+            else:
+                tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+        else:
+            tapu_form.fields['town'].queryset = Town.objects.none()
+
         return render(request, 'tasinmaz/tasinmazCezaInfazGuncellle.html',
                       {
-                          # 'project_form': project_form,
+                          'project_form': project_form,
+                          'tapu_form': tapu_form,
+                          'kiralik_form': kiralik_form,
+                          'tahsis_form': tahsis_form,
                       })
     else:
         return redirect('sbs:tasinmaz-list')

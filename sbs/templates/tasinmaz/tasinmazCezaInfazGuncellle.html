@@ -678,7 +678,7 @@
                             </div>
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label> {{ project_form.name.label }}</label>
                                             {{ project_form.name }}
@@ -699,64 +699,24 @@
                                         </div>
                                     </div>
 
-                                    {#                                <div class="col-lg-3">#}
-                                    {#                                    <div class="form-group">#}
-                                    {#                                        <label> ilçe</label>#}
-                                    {#                                        <select name="town" class="form-control select2 select2-hidden-accessible"#}
-                                    {#                                                style="width: 100%;" id="town" maxlength="120" tabindex="-1"#}
-                                    {#                                                aria-hidden="true">#}
-                                    {#                                            <option value="{{ project.town }}" selected>{{ project.town }}</option>#}
-                                    {#                                        </select>#}
-                                    {#                                    </div>#}
-                                    {#                                </div>#}
-                                    <div class="col-lg-12">
-                                        <div class="row">
 
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label> {{ project_form.mulkiyet.label }}</label>
-                                                    {{ project_form.mulkiyet }}
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label> {{ project_form.tahsis_durumu.label }}</label>
-                                                    {{ project_form.tahsis_durumu }}
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label> {{ project_form.tasinmazinTuru.label }}</label>
-                                                    {{ project_form.tasinmazinTuru }}
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label> {{ project_form.arsaTuru.label }}</label>
-                                                    {{ project_form.arsaTuru }}
-                                                </div>
-                                            </div>
-
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label> {{ project_form.tasinmazinTuru.label }}</label>
+                                            {{ project_form.tasinmazinTuru }}
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-
-
-                                        <div class="row">
-
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label> {{ project_form.definition.label }}</label>
-                                                    {{ project_form.definition }}
-                                                </div>
-                                            </div>
-
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label> {{ project_form.tahsisDurumu.label }}</label>
+                                            {{ project_form.tahsisDurumu }}
                                         </div>
-
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <label> {{ project_form.definition.label }}</label>
+                                            {{ project_form.definition }}
+                                        </div>
                                     </div>
 
                                 </div>
@@ -770,13 +730,376 @@
 
 
                 </div>
+
+                <div class="row">
+                    <form method="post" enctype="multipart/form-data" role="form">
+                        {% csrf_token %}
+                        <div class="col-md-6">
+                            <div class="box box-info collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">CEZA İNFAZ KURUMU TAŞINMAZ BİLGİSİ</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                                class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.box-tools -->
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ project_form.yapimyili.label }}</label>
+                                                {{ project_form.yapimyili }}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ project_form.tipi.label }}</label>
+                                                {{ project_form.tipi }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ project_form.kapasitesi.label }}</label>
+                                                {{ project_form.kapasitesi }}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ project_form.brutKapaliAlan.label }}</label>
+                                                {{ project_form.brutKapaliAlan }}
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <button class="btn btn-primary" type="submit">Kaydet</button>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="box box-info collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">İNŞA EDİLDİGİ ARSA BİLGİLERİ</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                                class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.box-tools -->
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ tapu_form.city.label }}</label>
+                                                {{ tapu_form.city }}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ tapu_form.town.label }}</label>
+                                                {{ tapu_form.town }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ tapu_form.neighborhood.label }}</label>
+                                                {{ tapu_form.neighborhood }}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ tapu_form.island.label }}</label>
+                                                {{ tapu_form.island }}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ tapu_form.parcel.label }}</label>
+                                                {{ tapu_form.parcel }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ project_form.arsayuzolcumu.label }}</label>
+                                            {{ project_form.arsayuzolcumu }}
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ project_form.arsaEmsal.label }}</label>
+                                                {{ project_form.arsaEmsal }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <button class="btn btn-primary" type="submit">Kaydet</button>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+
+                        {#tahsis bilgileri#}
+                        {% if project_form.instance.tahsisDurumu == "Tahsisli Arsa" %}
+                            <div class="col-md-6">
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">TAHSİS BİLGİLERİ</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                                    class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.box-tools -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body" style="display: none;">
+                                        <div class="row" style="padding-bottom: 10px">
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ tahsis_form.tahsisTarihi.label }}</label>
+                                                    {{ tahsis_form.tahsisTarihi }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ tahsis_form.tahsisSuresi.label }}</label>
+                                                    {{ tahsis_form.tahsisSuresi }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ tahsis_form.tahsis_amaci.label }}</label>
+                                                    {{ tahsis_form.tahsis_amaci }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ tahsis_form.tahsis_kurum.label }}</label>
+                                                    {{ tahsis_form.tahsis_kurum }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ tahsis_form.emsal.label }}</label>
+                                                    {{ tahsis_form.emsal }}
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="box-footer text-right">
+                                            <button class="btn btn-primary " type="submit">Kaydet</button>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+
+                        {% else %}
+                            {#kiralama bilgileri#}
+                            <div class="col-md-6">
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">KİRALAMA BİLGİLERİ </h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                                    class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.box-tools -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body" style="display: none;">
+                                        <div class="row" style="padding-bottom: 10px">
+
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.sahibi.label }}</label>
+                                                    {{ kiralik_form.sahibi }}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.tahsis_amaci.label }}</label>
+                                                    {{ kiralik_form.tahsis_amaci }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.onayTarihi.label }}</label>
+                                                    {{ kiralik_form.onayTarihi }}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.sozlesmeTarihi.label }}</label>
+                                                    {{ kiralik_form.sozlesmeTarihi }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.sozlesmeSonTarihi.label }}</label>
+                                                    {{ kiralik_form.sozlesmeSonTarihi }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.kiralamaSuresi.label }}</label>
+                                                    {{ kiralik_form.kiralamaSuresi }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.adres.label }}</label>
+                                                    {{ kiralik_form.adres }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.kapalialan.label }}</label>
+                                                    {{ kiralik_form.kapalialan }}
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="box-footer text-right">
+                                            <button class="btn btn-primary " type="submit">Kaydet</button>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+
+
+                        {% endif %}
+
+
+
+                        {#    tapu bilgileri           ------------------------------#}
+
+
+                        {#            görüs ve öneriler#}
+                        <div class="col-md-6">
+                            <div class="box box-info collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">GÖRÜŞ VE ÖNERİLER</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                                class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.box-tools -->
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body" style="display: none;">
+
+                                    <div class="box-footer">
+                                        <div class="input-group">
+                                            <input class="form-control" id="offer" placeholder="Mesaj Giriniz...">
+
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-success"
+                                                        onclick=addOffer({{ project.pk }})><i class="fa fa-plus"
+                                                                                              data-toggle="modal"
+                                                ></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-body chat" id="chat-box"
+                                         style="overflow: auto; width: auto; height: 250px; ">
+                                        {% if project.offers.all %}
+                                            {% for item in project.offers.all|dictsortreversed:"creationDate" %}
+                                                <div class="item" id="offset-{{ item.pk }}">
+                                                    <img src="{{ MEDIA_URL }}/profile/user.png" alt="user image"
+                                                         class="offline">
+
+                                                    <p class="message">
+
+
+                                                        <a href="#" class="name">
+                                                            <small class="text-muted pull-right"><i
+                                                                    class="fa fa-clock-o"></i> {{ item.creationDate | date:"d/m/Y H:i" }}
+
+
+                                                                {#                                                        {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}#}
+                                                                <i class="fa fa-trash-o"
+                                                                   onclick=deleteoffers({{ project.pk }},{{ item.pk }})></i>
+                                                                {#                                                        {% endif %}#}
+                                                            </small>
+                                                            {{ item.added_by.first_name }} {{ item.added_by.last_name }}
+                                                        </a>
+
+
+                                                        {{ item.message }}
+                                                    </p>
+
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+
+                                        <!-- /.box-body -->
+                                    </div>
+
+                                    <!-- /.box -->
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </form>
         {% endif %}
 
+
+
+
+
+
         <div class="row">
-
-
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="box box-info collapsed-box">
                     <div class="box-header with-border">
                         <h3 class="box-title">DÖKÜMAN EKLE</h3>
@@ -810,33 +1133,9 @@
 
                             </form>
 
+
                         </div>
 
-
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
-
-
-            {#     proje dökümanlari           ----------------------------------------#}
-
-
-            <div class="col-md-6">
-                <div class="box box-info collapsed-box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">DÖKÜMANLAR</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                        <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body" style="display: none;">
 
                         <div class="row">
                             <div class="col-lg-12">
@@ -850,7 +1149,6 @@
 
                                     </tr>
                                     </thead>
-
                                     <tbody>
                                     {% if project.documents.all %}
                                         {% for item in project.documents.all %}
@@ -864,12 +1162,6 @@
                                                            data-toggle="modal"
                                                            href="{{ MEDIA_URL }}{{ item.name }}" download><i
                                                                 class="fa fa-download"></i></a>
-
-
-                                                        {#                                                        <a class="btn btn-danger"#}
-                                                        {#                                                           data-toggle="modal"#}
-                                                        {#                                                           onclick=deletedocument({{ project.pk }},{{ item.pk }})><i#}
-                                                        {#                                                                class="fa fa-trash"></i></a>#}
 
                                                     </div>
                                                 </td>
@@ -885,510 +1177,13 @@
 
 
                         </div>
+
+
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
             </div>
-
-
-            {#                {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}#}
-            {#    taşınmazin yapı   bilgileri           ------------------------------#}
-
-            <form method="post" enctype="multipart/form-data" role="form">
-                {% csrf_token %}
-                <div class="col-md-6">
-                    <div class="box box-info collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">YAPI BİLGİLERİ</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body" style="display: none;">
-                            <div class="row" style="padding-bottom: 10px">
-
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ project_form.floor.label }}</label>
-                                        {{ project_form.floor }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ project_form.UsageArea.label }}</label>
-                                        {{ project_form.UsageArea }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ project_form.block.label }}</label>
-                                        {{ project_form.block }}
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="box-footer text-right">
-                                <button class="btn btn-primary " type="submit">Kaydet</button>
-                            </div>
-
-
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-
-                {#            Proje Alt Firma #}
-                <div class="col-md-6">
-                    <div class="box box-info collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">KULLANAN BİRİMLER</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body" style="display: none;">
-                            <div class="row" style="padding-bottom: 10px">
-                                <div class="col-lg-12">
-                                    <div class="btn-group">
-                                        <a class="btn btn-success"
-                                           data-toggle="modal"
-                                           onclick=AddsubCompany({{ project.pk }})><i
-                                                class="fa fa-plus"></i> Birim Ekle</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <table id="birim" class="table table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Birim</th>
-                                            <th>İşlemler</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        {% if project.kurum.all %}
-                                            {% for item in project.kurum.all %}
-                                                <tr id="birim-{{ item.pk }}">
-                                                    <td>{{ forloop.counter }} </td>
-                                                    <td>{{ item.name }}</td>
-
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            {#                                                            <a class="btn btn-success"#}
-                                                            {#                                                               data-toggle="modal"#}
-                                                            {#                                                               onclick=exammineSubCompany({{ project.pk }},{{ item.pk }})><i#}
-                                                            {#                                                                    class="fa fa-play-circle"></i></a>#}
-                                                            {##}
-                                                            {#                                                            <a class="btn btn-warning"#}
-                                                            {#                                                               data-toggle="modal"#}
-                                                            {#                                                               onclick=editSubCompany({{ project.pk }},{{ item.pk }})><i#}
-                                                            {#                                                                    class="fa fa-edit"></i></a>#}
-
-
-                                                            <a class="btn btn-danger"
-                                                               data-toggle="modal"
-                                                               onclick=deleteSubcompany({{ project.pk }},{{ item.pk }})><i
-                                                                    class="fa fa-trash"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                            {% endfor %}
-                                        {% endif %}
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-
-
-                {#    taşınmazin deger  bilgileri           ------------------------------#}
-
-
-                <div class="col-md-6">
-                    <div class="box box-info collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">DEGER BİLGİLERİ</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body" style="display: none;">
-                            <div class="row" style="padding-bottom: 10px">
-
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ project_form.yapiMalitet.label }}</label>
-                                        {{ project_form.yapiMalitet }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ project_form.yapiRaic.label }}</label>
-                                        {{ project_form.yapiRaic }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ project_form.arsaDegeri.label }}</label>
-                                        {{ project_form.arsaDegeri }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ project_form.aifinish.label }}</label>
-                                        {{ project_form.aifinish }}
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="box-footer text-right">
-                                <button class="btn btn-primary " type="submit">Kaydet</button>
-                            </div>
-
-
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-
-                {#    tapu bilgileri           ------------------------------#}
-
-
-                <div class="col-md-6">
-                    <div class="box box-info collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">TAPU BİLGİLERİ</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-
-
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tapu_form.country.label }}</label>
-                                        {{ tapu_form.country }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tapu_form.city.label }}</label>
-                                        {{ tapu_form.city }}
-                                    </div>
-                                </div>
-
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tapu_form.town.label }}</label>
-                                        {{ tapu_form.town }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tapu_form.neighborhood.label }}</label>
-                                        {{ tapu_form.neighborhood }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tapu_form.location.label }}</label>
-                                        {{ tapu_form.location }}
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ tapu_form.parcel.label }}</label>
-                                            {{ tapu_form.parcel }}
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ tapu_form.island.label }}</label>
-                                            {{ tapu_form.island }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tapu_form.area.label }}</label>
-                                        {{ tapu_form.area }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tapu_form.year.label }} </label>
-                                        {{ tapu_form.year }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            <button class="btn btn-primary" type="submit">Kaydet</button>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-
-
-                {#                {% if project.tahsis_durumu == "Tahsisli Arsa" %}#}
-                {#   tahsis arsa bilgileri ödenek             ----------------------------------------#}
-                <div class="col-md-6">
-                    <div class="box box-info collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">TAHSİS BİLGİLERİ</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tahsis_form.tahsisTarihi.label }}</label>
-                                        {{ tahsis_form.tahsisTarihi }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tahsis_form.tahsisSuresi.label }}</label>
-                                        {{ tahsis_form.tahsisSuresi }}
-                                    </div>
-                                </div>
-
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tahsis_form.tahsis_amaci.label }}</label>
-                                        {{ tahsis_form.tahsis_amaci }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tahsis_form.tahsis_kurum.label }}</label>
-                                        {{ tahsis_form.tahsis_kurum }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label> {{ tahsis_form.emsal.label }} </label>
-                                        {{ tahsis_form.emsal }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            <button class="btn btn-primary" type="submit">Kaydet</button>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-                {#                {% endif %}#}
-                {% if project.tahsis_durumu == "Kiralık" %}
-                    {#        kiralama  bilgileri        ----------------------------------------#}
-                    <div class="col-md-6">
-                        <div class="box box-info collapsed-box">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">KİRALAMA BİLGİLERİ</h3>
-
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                            class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                                <!-- /.box-tools -->
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.sahibi.label }}</label>
-                                            {{ kira_form.sahibi }}
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.tahsis_amaci.label }}</label>
-                                            {{ kira_form.tahsis_amaci }}
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.onayTarihi.label }}</label>
-                                            {{ kira_form.onayTarihi }}
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.sozlesmeTarihi.label }}</label>
-                                            {{ kira_form.sozlesmeTarihi }}
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.sozlesmeSonTarihi.label }}</label>
-                                            {{ kira_form.sozlesmeSonTarihi }}
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.kiralamaSuresi.label }}</label>
-                                            {{ kira_form.kiralamaSuresi }}
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.adres.label }}</label>
-                                            {{ kira_form.adres }}
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label> {{ kira_form.kapalialan.label }}</label>
-                                            {{ kira_form.kapalialan }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <button class="btn btn-primary" type="submit">Kaydet</button>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                {% endif %}
-
-
-                {#            görüs ve öneriler#}
-                <div class="col-md-6">
-                    <div class="box box-info collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">GÖRÜŞ VE ÖNERİLER</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body" style="display: none;">
-
-                            <div class="box-footer">
-                                <div class="input-group">
-                                    <input class="form-control" id="offer" placeholder="Mesaj Giriniz...">
-
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-success"
-                                                onclick=addOffer({{ project.pk }})><i class="fa fa-plus"
-                                                                                      data-toggle="modal"
-                                        ></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-body chat" id="chat-box"
-                                 style="overflow: auto; width: auto; height: 250px; ">
-                                {% if project.offers.all %}
-                                    {% for item in project.offers.all|dictsortreversed:"creationDate" %}
-                                        <div class="item" id="offset-{{ item.pk }}">
-                                            <img src="{{ MEDIA_URL }}/profile/user.png" alt="user image"
-                                                 class="offline">
-
-                                            <p class="message">
-
-
-                                                <a href="#" class="name">
-                                                    <small class="text-muted pull-right"><i
-                                                            class="fa fa-clock-o"></i> {{ item.creationDate | date:"d/m/Y H:i" }}
-
-
-                                                        {#                                                        {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}#}
-                                                        <i class="fa fa-trash-o"
-                                                           onclick=deleteoffers({{ project.pk }},{{ item.pk }})></i>
-                                                        {#                                                        {% endif %}#}
-                                                    </small>
-                                                    {{ item.added_by.first_name }} {{ item.added_by.last_name }}
-                                                </a>
-
-
-                                                {{ item.message }}
-                                            </p>
-
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-
-                                <!-- /.box-body -->
-                            </div>
-
-                            <!-- /.box -->
-                        </div>
-
-
-                    </div>
-                </div>
-            </form>
         </div>
         {#harita bilgiler #}
         <div class="row">
@@ -1491,6 +1286,14 @@
                 $("#id_town").empty();
                 ilce(city);
             });
+
+            $("#id_binaustTur").change(function () {
+                var bina = $(this).find('option:selected').text();
+                $("#id_binaAltTur").empty();
+                binaAlt(bina);
+            });
+
+
         });
 
         function ilce(city) {
@@ -1507,6 +1310,27 @@
 
                     for (item in result.data) {
                         $("#id_town").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                    }
+                }
+            });
+
+        };
+
+
+        function binaAlt(bina) {
+            $.ajax({
+                url: "{% url "sbs:binaAlttur-bilgi" %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    "cmd": bina,
+                },
+                success: function (result) {
+
+                    $("#id_binaAltTur").append('<option value="">-----------</option>');
+
+                    for (item in result.data) {
+                        $("#id_binaAltTur").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
                     }
                 }
             });

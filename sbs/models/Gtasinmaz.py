@@ -197,8 +197,11 @@ class Gtasinmaz(models.Model):
     arsayuzolcumu = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     mustakilAyriBlock = models.BooleanField(default=True, choices=IsFormal)
     blockicindeDaire = models.IntegerField(blank=True, null=True, )
-
-
+    # ceza infaz kurumlari
+    arsaEmsal = models.CharField(max_length=128, verbose_name='arsa emsal bilgisi ', null=True, blank=True)
+    tipi = models.CharField(max_length=128, verbose_name='tipi ', null=True, blank=True)
+    kapasitesi = models.IntegerField(blank=True, null=True, )
+    brutKapaliAlan = models.IntegerField(blank=True, null=True, )
 
 
 
