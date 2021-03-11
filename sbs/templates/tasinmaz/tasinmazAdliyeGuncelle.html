@@ -811,7 +811,6 @@
 
                                     </tr>
                                     </thead>
-
                                     <tbody>
                                     {% if project.documents.all %}
                                         {% for item in project.documents.all %}
@@ -825,12 +824,6 @@
                                                            data-toggle="modal"
                                                            href="{{ MEDIA_URL }}{{ item.name }}" download><i
                                                                 class="fa fa-download"></i></a>
-
-
-                                                        {#                                                        <a class="btn btn-danger"#}
-                                                        {#                                                           data-toggle="modal"#}
-                                                        {#                                                           onclick=deletedocument({{ project.pk }},{{ item.pk }})><i#}
-                                                        {#                                                                class="fa fa-trash"></i></a>#}
 
                                                     </div>
                                                 </td>
