@@ -714,12 +714,16 @@
                                             </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label> {{ project_form.mulkiyet.label }}</label>
-                                            {{ project_form.mulkiyet }}
+                                            <label> {{ project_form.binaustTur.label }}</label>
+                                            {{ project_form.binaustTur }}
                                         </div>
                                     </div>
-
-
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label> {{ project_form.binaAltTur.label }}</label>
+                                            {{ project_form.binaAltTur }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="box-footer">
@@ -1273,6 +1277,14 @@
                 $("#id_town").empty();
                 ilce(city);
             });
+
+            $("#id_binaustTur").change(function () {
+                var bina = $(this).find('option:selected').text();
+                $("#id_binaAltTur").empty();
+                binaAlt(bina);
+            });
+
+
         });
 
         function ilce(city) {
@@ -1289,6 +1301,27 @@
 
                     for (item in result.data) {
                         $("#id_town").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                    }
+                }
+            });
+
+        };
+
+
+        function binaAlt(bina) {
+            $.ajax({
+                url: "{% url "sbs:binaAlttur-bilgi" %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    "cmd": bina,
+                },
+                success: function (result) {
+
+                    $("#id_binaAltTur").append('<option value="">-----------</option>');
+
+                    for (item in result.data) {
+                        $("#id_binaAltTur").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
                     }
                 }
             });

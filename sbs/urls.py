@@ -432,8 +432,7 @@ urlpatterns = [
         EPProjectViews.ihtiyac_list, name='ihtiyac-bilgi'),
     url(r'etut-proje/proje-asama-bilgi/$',
         EPProjectViews.asama_list, name='asama-bilgi'),
-    url(r'etut-proje/proje-town/$',
-        EPProjectViews.town, name='ilce-bilgi'),
+    url(r'etut-proje/proje-town/$', EPProjectViews.town, name='ilce-bilgi'),
     url(r'etut-proje/proje/delete/(?P<pk>\d+)$', EPProjectViews.deleteReferee,
         name='proje-delete'),
     url(r'etut-proje/proje-dokuman-sil/(?P<project_pk>\d+)/(?P<employee_pk>\d+)/$',
@@ -531,6 +530,8 @@ urlpatterns = [
     url(r'gayrimenkul/birimEkle/(?P<pk>\d+)$', GtasinamazView.project_subfirma, name='proje-birim-ekle'),
     url(r'gayrimenkul/tasinmaz-birim-sil/(?P<tasinmaz>\d+)/(?P<kurum>\d+)/$', GtasinamazView.delete_birim_tasinmaz,
         name='tasinmaz-birim-kaldir'),
+
+    url(r'gayrimenkul/tasinmaz-binaAltturu/$', GtasinamazView.tasimazAltTur, name='binaAlttur-bilgi'),
 
 
 

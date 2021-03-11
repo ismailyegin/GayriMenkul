@@ -5,6 +5,8 @@ from sbs.models.GTapu import GTapu
 from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
 from sbs.models.Gtahsis import Gtahsis
+from sbs.models.GtasinmazBinaAltTur import GtasinmazAltTur
+from sbs.models.GtasinmazBinaUstTur import GtasinmazUstTur
 from sbs.models.GtasinmazDocument import GtasinmazDocument
 
 
@@ -128,6 +130,10 @@ class Gtasinmaz(models.Model):
     blokadeti = models.IntegerField(null=True, blank=True)
     katadedi = models.IntegerField(null=True, blank=True)
     kapalikullanimalani = models.IntegerField(null=True, blank=True)
+    binaAltTur = models.ForeignKey(GtasinmazAltTur, on_delete=models.SET_NULL, verbose_name='binaalttur', blank=True,
+                                   null=True)
+    binaustTur = models.ForeignKey(GtasinmazUstTur, on_delete=models.SET_NULL, verbose_name='binaüsttur', blank=True,
+                                   null=True)
 
 
 

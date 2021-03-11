@@ -21,6 +21,7 @@ from sbs.models import City
 from sbs.models.GTapu import GTapu
 from sbs.models.Gkurum import Gkurum
 from sbs.models.Gtasinmaz import Gtasinmaz
+from sbs.models.GtasinmazBinaAltTur import GtasinmazAltTur
 from sbs.models.GtasinmazDocument import GtasinmazDocument
 from sbs.models.Gteskilat import Gteskilat
 from sbs.services import general_methods
@@ -90,6 +91,14 @@ def edit_tasinmaz(request, pk):
             else:
                 messages.warning(request, 'Alanlari kontrol ediniz')
 
+        if tasinmaz.binaustTur:
+            if tasinmaz.binaAltTur:
+                project_form.fields['binaAltTur'].queryset = GtasinmazAltTur.objects.filter(ust=tasinmaz.binaustTur)
+                project_form.fields['binaAltTur'].initial = tasinmaz.binaAltTur
+            else:
+                project_form.fields['binaAltTur'].queryset = GtasinmazAltTur.objects.filter(ust=tasinmaz.binaustTur)
+        else:
+            project_form.fields['binaAltTur'].queryset = GtasinmazAltTur.objects.none()
         return render(request, 'tasinmaz/tasinmazAdliyeGuncelle.html',
                       {'project_form': project_form,
                        'project': tasinmaz,
@@ -461,4 +470,31 @@ def delete_birim_tasinmaz(request, tasinmaz, kurum):
             return JsonResponse({'status': 'Fail', 'msg': 'Object does not exist'})
 
     else:
+        return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+
+
+@login_required
+def tasimazAltTur(request):
+    perm = general_methods.control_access_personel(request)
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    try:
+        if request.method == 'POST':
+            project = GtasinmazAltTur.objects.filter(ust__name=request.POST.get('cmd'))
+            beka = []
+            for item in project:
+                data = {
+                    'pk': item.pk,
+                    'name': item.name,
+                }
+                beka.append(data)
+            return JsonResponse(
+                {
+                    'data': beka,
+                    'msg': 'Valid is  request'
+                })
+
+    except:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})

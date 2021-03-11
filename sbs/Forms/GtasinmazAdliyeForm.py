@@ -14,7 +14,6 @@ class GtasinmazAdliyeForm(ModelForm):
             'tkgmno',
             'definition',
             'tasinmazinTuru',
-
             'yapimyili',
             'edinimyili',
             'kapalikullanimalani',
@@ -22,6 +21,9 @@ class GtasinmazAdliyeForm(ModelForm):
             'katadedi',
             'mustakil',
             'diger',
+            'binaAltTur',
+            'binaustTur',
+
         )
 
         labels = {
@@ -39,6 +41,8 @@ class GtasinmazAdliyeForm(ModelForm):
             'mulkiyet': 'Mülkiyet',
             'mustakil': 'Müstakil',
             'diger': 'Diger',
+            'binaAltTur': 'Bina Alt Türü',
+            'binaustTur': 'Bina Üst Türü',
         }
 
         widgets = {
@@ -67,5 +71,10 @@ class GtasinmazAdliyeForm(ModelForm):
             'kapalikullanimalani': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'blokadeti': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'katadedi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+
+            'binaAltTur': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                              'style': 'width: 100%; '}),
+            'binaustTur': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                              'style': 'width: 100%; '}),
 
         }
