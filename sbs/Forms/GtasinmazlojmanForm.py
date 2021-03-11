@@ -9,8 +9,10 @@ class GtasinmazlojmanForm(ModelForm):
         model = Gtasinmaz
 
         fields = (
-            'name', 'sirano', 'tkgmno',
-            'arsaDegeri', 'definition',
+            'name',
+            'sirano',
+            'tkgmno',
+            'definition',
             'tasinmazinTuru',
             'tahsisDurumu',
             'mustakil',
@@ -18,17 +20,17 @@ class GtasinmazlojmanForm(ModelForm):
             'daireSayisi',
             'lojmanYapimYili',
             'lojmanturu',
-            'daireKapaliKulllanimAlaniBrut',
-            'daireKapaliKulllanimAlaniNet',
-            'lojmanKullanimDurumu',
-            'hazinelojmaniDaireSayisi',
-            'atvglojmaniDaireSayisi',
-            'isyurtlariDaireSayisi',
-            'mahaldekiToplamDaireSayisi',
-            'mahaldekiToplamHakimSavcıSayisi',
+            'daireAlaniNet',
+            'daireBrut',
+            'lojmanKullanim',
+            'hDaireSayisi',
+            'atvgdaireSayisi',
+            'isDaireSayisi',
+            'mDaireSayisi',
+            'mSavciSayisi',
             'arsayuzolcumu',
-            'mustakilAyriBlock',
-            'blockicindeDaire'
+            'mAyriBlock',
+            'blockDaire'
 
         )
 
@@ -44,17 +46,17 @@ class GtasinmazlojmanForm(ModelForm):
                   'daireSayisi': 'Daire Sayısı ',
                   'lojmanYapimYili': 'Lojman Yapım Yılı',
                   'lojmanturu': 'Lojman Turu ',
-                  'daireKapaliKulllanimAlaniBrut': ' Daire Kapalı Kullanim Alanı Brut',
-                  'daireKapaliKulllanimAlaniNet': 'Daire Kapalı Kullanim Alanı Net',
-                  'lojmanKullanimDurumu': 'Lojman Kullanim Durumu',
-                  'hazinelojmaniDaireSayisi': 'Hazine Lojman Daire Sayısı',
-                  'atvglojmaniDaireSayisi': 'Atvg Lojmanı Daire Sayısı',
-                  'isyurtlariDaireSayisi': 'İs yurtlari Daire Sayısı ',
-                  'mahaldekiToplamDaireSayisi': 'Mahaldeki Toplam Daire Sayisi',
-                  'mahaldekiToplamHakimSavcıSayisi': 'Mahaldeki Toplam Hakim ve Savcı Sayisi',
+                  'daireBrut': ' Daire Kapalı Kullanim Alanı Brut',
+                  'daireAlaniNet': 'Daire Kapalı Kullanim Alanı Net',
+                  'lojmanKullanim': 'Lojman Kullanim Durumu',
+                  'hDaireSayisi': 'Hazine Lojman Daire Sayısı',
+                  'atvgdaireSayisi': 'Atvg Lojmanı Daire Sayısı',
+                  'isDaireSayisi': 'İs yurtlari Daire Sayısı ',
+                  'mDaireSayisi': 'Mahaldeki Toplam Daire Sayisi',
+                  'mSavciSayisi': 'Mahaldeki Toplam Hakim ve Savcı Sayisi',
                   'arsayuzolcumu': 'Arsa Yüzölçümü',
-                  'mustakilAyriBlock': 'Müstakil Ayrı Blok',
-                  'blockicindeDaire': 'Blok İçinde Daire',
+                  'mAyriBlock': 'Müstakil Ayrı Blok',
+                  'blockDaire': 'Blok İçinde Daire',
 
 
                   }
@@ -79,29 +81,29 @@ class GtasinmazlojmanForm(ModelForm):
             'blockSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'daireSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'lojmanYapimYili': forms.DateInput(
-                attrs={'class': 'form-control  pull-right', 'id': 'datepicker4', 'autocomplete': 'off',
+                attrs={'class': 'form-control  pull-right', 'id': 'datepicker3', 'autocomplete': 'off',
                        'onkeydown': 'return false'}),
             'lojmanturu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                               'style': 'width: 100%; ', }),
-            'daireKapaliKulllanimAlaniBrut': forms.TextInput(
+            'daireBrut': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'daireKapaliKulllanimAlaniNet': forms.TextInput(
+            'daireAlaniNet': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'lojmanKullanimDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+            'lojmanKullanim': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                         'style': 'width: 100%; ', }),
-            'hazinelojmaniDaireSayisi': forms.TextInput(
+            'hDaireSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'atvglojmaniDaireSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'isyurtlariDaireSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'mahaldekiToplamDaireSayisi': forms.TextInput(
+            'atvgdaireSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'isDaireSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'mDaireSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'mahaldekiToplamHakimSavcıSayisi': forms.TextInput(
+            'mSavciSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'arsayuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
-            'mustakilAyriBlock': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+            'mAyriBlock': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                      'style': 'width: 100%; ', }),
-            'blockicindeDaire': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'blockDaire': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
 
         }

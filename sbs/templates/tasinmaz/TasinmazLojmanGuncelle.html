@@ -513,98 +513,10 @@
         <!-- /.modal-dialog -->
     </div>
 
-    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="requirement"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Bilgileri Giriniz</h4>
-                </div>
-                <div class="modal-body">
-                    <label for="amount">Adet</label>
-                    <input type="text" name="amount" id="amount" class="form-control" required>
-                    <label for="definition">Tanım</label>
-                    <input type="text" name="definition" id="definition" class="form-control" required>
-
-                </div>
 
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-requirement-gonder"
-                            data-dismiss="modal">Kaydet
-                    </button>
-                    <button type="button" class="btn btn-outline" id="btn-requirement-reddet">Geri Dön</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
-    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="requirementFile"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Bilgileri Giriniz</h4>
-                </div>
-                <div class="modal-body">
-                    <label for="amount">Adet</label>
-                    <input type="text" name="amount" id="amount" class="form-control" required>
-                    <label for="definition">Tanım</label>
-                    <input type="text" name="definition" id="definition" class="form-control" required>
-
-                </div>
 
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline pull-left btn-ok" id="btn-requirementfile-gonder"
-                            data-dismiss="modal">Kaydet
-                    </button>
-                    <button type="button" class="btn btn-outline" id="btn-requirementfile-reddet">Geri Dön</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
-    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="phase"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Bilgileri Giriniz</h4>
-                </div>
-                <div class="modal-body">
-                    <label for="phaseDate">Tarih</label>
-                    <input type="text" id="phaseDate" name="phaseDate" class="form-control"
-                           data-inputmask="'alias': 'dd/mm/yyyy'"
-                           data-mask="">
-                    <label for="phaseDefinition">Açıklama</label>
-                    <textarea class="form-control" rows="3" name="phaseDefinition" id="phaseDefinition"
-                              placeholder="..."></textarea>
-
-                </div>
-
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-phase-gonder"
-                            data-dismiss="modal">Kaydet
-                    </button>
-                    <button type="button" class="btn btn-outline" id="btn-phase-reddet">Geri Dön</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
 
     {% if messages %}
         {% for message in messages %}
@@ -771,14 +683,14 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.mustakilAyriBlock.label }}</label>
-                                                {{ project_form.mustakilAyriBlock }}
+                                                <label> {{ project_form.mAyriBlock.label }}</label>
+                                                {{ project_form.mAyriBlock }}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.blockicindeDaire.label }}</label>
-                                                {{ project_form.blockicindeDaire }}
+                                                <label> {{ project_form.blockDaire.label }}</label>
+                                                {{ project_form.blockDaire }}
                                             </div>
                                         </div>
 
@@ -835,14 +747,14 @@
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.daireKapaliKulllanimAlaniNet.label }}</label>
-                                                {{ project_form.daireKapaliKulllanimAlaniNet }}
+                                                <label> {{ project_form.daireAlaniNet.label }}</label>
+                                                {{ project_form.daireAlaniNet }}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.daireKapaliKulllanimAlaniBrut.label }}</label>
-                                                {{ project_form.daireKapaliKulllanimAlaniBrut }}
+                                                <label> {{ project_form.daireBrut.label }}</label>
+                                                {{ project_form.daireBrut }}
                                             </div>
                                         </div>
 
@@ -878,32 +790,32 @@
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.hazinelojmaniDaireSayisi.label }}</label>
-                                                {{ project_form.hazinelojmaniDaireSayisi }}
+                                                <label> {{ project_form.hDaireSayisi.label }}</label>
+                                                {{ project_form.hDaireSayisi }}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.atvglojmaniDaireSayisi.label }}</label>
-                                                {{ project_form.atvglojmaniDaireSayisi }}
+                                                <label> {{ project_form.atvgdaireSayisi.label }}</label>
+                                                {{ project_form.atvgdaireSayisi }}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.isyurtlariDaireSayisi.label }}</label>
-                                                {{ project_form.isyurtlariDaireSayisi }}
+                                                <label> {{ project_form.isDaireSayisi.label }}</label>
+                                                {{ project_form.isDaireSayisi }}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.mahaldekiToplamDaireSayisi.label }}</label>
-                                                {{ project_form.mahaldekiToplamDaireSayisi }}
+                                                <label> {{ project_form.mDaireSayisi.label }}</label>
+                                                {{ project_form.mDaireSayisi }}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ project_form.mahaldekiToplamHakimSavcıSayisi.label }}</label>
-                                                {{ project_form.mahaldekiToplamHakimSavcıSayisi }}
+                                                <label> {{ project_form.mSavciSayisi.label }}</label>
+                                                {{ project_form.mSavciSayisi }}
                                             </div>
                                         </div>
 

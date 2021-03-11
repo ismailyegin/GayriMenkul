@@ -184,19 +184,37 @@ class Gtasinmaz(models.Model):
     daireSayisi = models.IntegerField(blank=True, null=True, )
     lojmanYapimYili = models.DateTimeField(null=True, blank=True)
     lojmanturu = models.CharField(max_length=128, verbose_name='lojman_turu ', choices=lojmanTuru, default=Konut)
-    daireKapaliKulllanimAlaniNet = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    daireKapaliKulllanimAlaniBrut = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    lojmanKullanimDurumu = models.CharField(max_length=128, verbose_name='lojman_kullanim_turu',
+    daireAlaniNet = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    daireBrut = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    lojmanKullanim = models.CharField(max_length=128, verbose_name='lojman_kullanim_turu',
                                             choices=lojmanKullanimTuru, default=fall)
 
-    hazinelojmaniDaireSayisi = models.IntegerField(blank=True, null=True, )
-    atvglojmaniDaireSayisi = models.IntegerField(blank=True, null=True, )
-    isyurtlariDaireSayisi = models.IntegerField(blank=True, null=True, )
-    mahaldekiToplamDaireSayisi = models.IntegerField(blank=True, null=True, )
-    mahaldekiToplamHakimSavcıSayisi = models.IntegerField(blank=True, null=True, )
+    hDaireSayisi = models.IntegerField(blank=True, null=True, )
+    atvgdaireSayisi = models.IntegerField(blank=True, null=True, )
+    isDaireSayisi = models.IntegerField(blank=True, null=True, )
+    mDaireSayisi = models.IntegerField(blank=True, null=True, )
+    mSavciSayisi = models.IntegerField(blank=True, null=True, )
     arsayuzolcumu = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    mustakilAyriBlock = models.BooleanField(default=True, choices=IsFormal)
-    blockicindeDaire = models.IntegerField(blank=True, null=True, )
+    mAyriBlock = models.BooleanField(default=True, choices=IsFormal)
+    blockDaire = models.IntegerField(blank=True, null=True, )
+
+    # lojmanturu = models.CharField(max_length=128, verbose_name='lojman_turu ', choices=lojmanTuru, default=Konut)
+    # daireKapaliKulllanimAlaniNet = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    # daireKapaliKulllanimAlaniBrut = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    # lojmanKullanimDurumu = models.CharField(max_length=128, verbose_name='lojman_kullanim_turu',
+    #                                         choices=lojmanKullanimTuru, default=fall)
+    #
+    # hazinelojmaniDaireSayisi = models.IntegerField(blank=True, null=True, )
+    # atvglojmaniDaireSayisi = models.IntegerField(blank=True, null=True, )
+    # isyurtlariDaireSayisi = models.IntegerField(blank=True, null=True, )
+    # mahaldekiToplamDaireSayisi = models.IntegerField(blank=True, null=True, )
+    # mahaldekiToplamHakimSavcıSayisi = models.IntegerField(blank=True, null=True, )
+    # arsayuzolcumu = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    # mustakilAyriBlock = models.BooleanField(default=True, choices=IsFormal)
+    # blockicindeDaire = models.IntegerField(blank=True, null=True, )
+
+
+
     # ceza infaz kurumlari
     arsaEmsal = models.CharField(max_length=128, verbose_name='arsa emsal bilgisi ', null=True, blank=True)
     tipi = models.CharField(max_length=128, verbose_name='tipi ', null=True, blank=True)
