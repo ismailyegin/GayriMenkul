@@ -1309,7 +1309,7 @@
                     $("#id_town").append('<option value="">-----------</option>');
 
                     for (item in result.data) {
-                        $("#id_town").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                        $("#id_town").append('<option value="' + result.data[item].pk + '">' + result.data[item].name + '</option>');
                     }
                 }
             });

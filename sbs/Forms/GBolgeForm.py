@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from sbs.models.Gbolge import Gbolge
 
 
-class GBimForm(ModelForm):
+class GbolgeForm(ModelForm):
     class Meta:
         model = Gbolge
 
@@ -12,12 +12,16 @@ class GBimForm(ModelForm):
 
             'town',
             'city',
+            'name',
+            'type'
 
         )
 
         labels = {
-            'town': 'Bim -İlçe ',
-            'city': 'Bim -Şehir',
+            'town': 'İlçe ',
+            'city': 'İl',
+            'name': 'Tanımı',
+            'type': 'Tipi'
         }
         widgets = {
 
@@ -26,5 +30,10 @@ class GBimForm(ModelForm):
 
             'town': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', }),
+            'type': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                        'style': 'width: 100%; ', }),
+            'name': forms.TextInput(
+                attrs={'class': 'form-control ', }),
+
 
         }

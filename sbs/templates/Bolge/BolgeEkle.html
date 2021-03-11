@@ -48,11 +48,11 @@
 
     <section class="content-header">
         <h1>
-            Yeni Taşınmaz Ekle
+            Bölge Ekle
 
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i>Yeni Taşınmaz Ekle</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i>Bölge Ekle</a></li>
 
         </ol>
     </section>
@@ -65,7 +65,7 @@
                 <div class="col-lg-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">GENEL BİLGİLER</h3>
+                            <h3 class="box-title">BÖLGE BİLGİLERİ</h3>
                         </div>
                         <div class="box-body">
                             <div class="row">
@@ -77,43 +77,24 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label> {{ project_form.sirano.label }}</label>
-                                        {{ project_form.sirano }}
+                                        <label> {{ project_form.type.label }}</label>
+                                        {{ project_form.type }}
                                     </div>
                                 </div>
 
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label> {{ project_form.tkgmno.label }}</label>
-                                        {{ project_form.tkgmno }}
+                                        <label> {{ project_form.city.label }}</label>
+                                        {{ project_form.city }}
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label> {{ project_form.tasinmazinTuru.label }}</label>
-                                        {{ project_form.tasinmazinTuru }}
+                                        <label> {{ project_form.town.label }}</label>
+                                        {{ project_form.town }}
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label> {{ project_form.tahsisDurumu.label }}</label>
-                                        {{ project_form.tahsisDurumu }}
-                                    </div>
-                                </div>
-
-
-                                {#                                <div class="col-lg-3">#}
-                                {#                                    <div class="form-group">#}
-                                {#                                        <label> ilçe</label>#}
-                                {#                                        <select name="town" class="form-control select2 select2-hidden-accessible"#}
-                                {#                                                style="width: 100%;" id="town" maxlength="120" tabindex="-1"#}
-                                {#                                                aria-hidden="true">#}
-                                {#                                            <option value="{{ project.town }}" selected>{{ project.town }}</option>#}
-                                {#                                        </select>#}
-                                {#                                    </div>#}
-                                {#                                </div>#}
-
 
                             </div>
                         </div>
@@ -125,6 +106,72 @@
                 </div>
 
 
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Bolge Listesi</h3>
+                        </div>
+
+                        <div class="box-body">
+
+                            <table id="kurum" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th> Tanımı</th>
+                                    <th> Tipi</th>
+                                    <th> İl</th>
+                                    <th> İlçe</th>
+                                    <th>İşlemler</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if regions.all %}
+                                    {% for belt in regions %}
+                                        <tr>
+
+                                            <td>{{ forloop.counter }} </td>
+
+                                            <td>{{ belt.name }}</td>
+                                            <td>{{ belt.type }}</td>
+                                            <td>{{ belt.city }}</td>
+                                            <td>{{ belt.town }}</td>
+
+
+                                            <td>
+                                                <div class="btn-group">
+                                                    {% if user.groups.all.0.name == 'Yonetim' or user.groups.all.0.name == 'Admin' %}
+                                                        <a href="{% url "sbs:bolge-duzenle" pk=belt.pk %}"
+                                                           type="button" class="btn btn-success"><i
+                                                                class="fa fa-edit"></i>Güncelle
+                                                        </a>
+
+
+                                                        <a href=""
+                                                           type="button" class="btn btn-danger"><i
+                                                                class="fa fa-trash"></i>Sil</a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+
+
+                                        </tr>
+
+                                    {% endfor %}
+                                {% endif %}
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -139,9 +186,9 @@
         $(function () {
 
 
-            $("#sehir").change(function () {
+            $("#id_city").change(function () {
                 var city = $(this).find('option:selected').text();
-                $("#town").empty();
+                $("#id_town").empty();
                 ilce(city);
             });
 
@@ -159,10 +206,11 @@
                 success: function (result) {
                     console.log(result)
 
-                    $("#town").append('<option value="">-----------</option>');
+                    $("#id_town").append('<option value="">-----------</option>');
                     {#for (var i = 0, l = Object.keys(result).length; i <= l; i++) {#}
                     for (item in result.data) {
-                        $("#town").append('<option value="' + result.data[item].pk + '">' + result.data[item].name + '</option>');
+                        console.log()
+                        $("#id_town").append('<option value="' + result.data[item].pk + '">' + result.data[item].name + '</option>');
                     }
                 }
             });

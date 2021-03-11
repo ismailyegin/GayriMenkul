@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from oxiterp.settings.base import MEDIA_URL
+from sbs.Forms.GBolgeForm import GbolgeForm
 from sbs.Forms.GkiraForm import GkiraForm
 from sbs.Forms.GtahsisForm import GtahsisForm
 #   adalet alanina göre form üretimi oldu
@@ -24,6 +25,7 @@ from sbs.Forms.KurumForm import KurumForm
 from sbs.Forms.TapuForm import TapuForm
 from sbs.models import City
 from sbs.models.GTapu import GTapu
+from sbs.models.Gbolge import Gbolge
 from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
 from sbs.models.Gtahsis import Gtahsis
@@ -697,3 +699,53 @@ def tasimazAltTur(request):
 
     except:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+
+
+@login_required
+def BolgeAdd(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    if request.method == 'POST':
+        project_form = GbolgeForm(request.POST)
+        if project_form.is_valid():
+            project_form.save()
+        else:
+            print('alanlari kontrol ediniz')
+    project_form = GbolgeForm()
+    regions = Gbolge.objects.all()
+
+    project_form.fields['town'].queryset = Town.objects.none()
+    return render(request, 'Bolge/BolgeEkle.html', {
+        'regions': regions,
+        'project_form': project_form
+    })
+
+
+@login_required
+def bolgeUpdate(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    region = Gbolge.objects.get(pk=pk)
+    project_form = GbolgeForm(request.POST or None, instance=region)
+
+    if request.method == 'POST':
+        if project_form.is_valid():
+            project_form.save()
+            return redirect('sbs:bolge-ekle')
+    if region.town:
+        project_form.fields['town'].queryset = Town.objects.filter(cityId=region.city.pk)
+        project_form.fields['town'].initial = region.name
+    else:
+        project_form.fields['town'].queryset = Town.objects.filter(cityId=region.city.pk)
+
+    return render(request, 'Bolge/BolgeGuncelle.html', {
+        'project_form': project_form
+    })

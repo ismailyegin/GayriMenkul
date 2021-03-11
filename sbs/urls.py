@@ -533,6 +533,9 @@ urlpatterns = [
 
     url(r'gayrimenkul/tasinmaz-binaAltturu/$', GtasinamazView.tasimazAltTur, name='binaAlttur-bilgi'),
 
+    url(r'gayrimenkul/teskilat-bolgeEkle/$', GtasinamazView.BolgeAdd, name='bolge-ekle'),
+    url(r'gayrimenkul/teskilat-bolgeGuncelle/(?P<pk>\d+)$', GtasinamazView.bolgeUpdate, name='bolge-duzenle'),
+
 
 
 
