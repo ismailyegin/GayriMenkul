@@ -77,62 +77,21 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label> {{ project_form.depremderecesi.label }}</label>
-                                        {{ project_form.depremderecesi }}
+                                        <label> {{ project_form.town.label }}</label>
+                                        {{ project_form.town }}
                                     </div>
                                 </div>
 
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label> {{ project_form.yargiBolgesi.label }}</label>
-                                        {{ project_form.yargiBolgesi }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label> {{ project_form.agirCezaMerkezi.label }}</label>
-                                        {{ project_form.agirCezaMerkezi }}
+                                        <label> {{ project_form.sirano.label }}</label>
+                                        {{ project_form.sirano }}
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
-                                    <div class="row">
 
 
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label> {{ project_form.asliyeCezaMerkezi.label }}</label>
-                                                {{ project_form.asliyeCezaMerkezi }}
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label> {{ project_form.hakim_sayisi.label }}</label>
-                                                {{ project_form.hakim_sayisi }}
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label> {{ project_form.savci_sayisi.label }}</label>
-                                                {{ project_form.savci_sayisi }}
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label> {{ project_form.personel_sayisi.label }}</label>
-                                                {{ project_form.personel_sayisi }}
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label> {{ project_form.mulhakat.label }}</label>
-                                                {{ project_form.mulhakat }}
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
 
 
                             </div>
@@ -153,7 +112,36 @@
 
     </section>
 
+    <script>
+        $(document).ready(function () {
+            $("#id_city").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_town").empty();
+                ilce(city);
+            });
+        });
 
+        function ilce(city) {
+            $.ajax({
+                url: "{% url "sbs:ilce-bilgi" %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    "cmd": city,
+                },
+                success: function (result) {
+
+                    $("#id_town").append('<option value="">-----------</option>');
+
+                    for (item in result.data) {
+                        $("#id_town").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                    }
+                }
+            });
+
+        };
+
+    </script>
 
 
 {% endblock %}

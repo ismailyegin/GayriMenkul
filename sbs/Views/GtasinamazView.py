@@ -335,8 +335,9 @@ def list_teskilat(request):
             depremderecesi = tasinmaz_form.cleaned_data.get('depremderecesi')
             city = tasinmaz_form.cleaned_data.get('city')
             yargiBolgesi = tasinmaz_form.cleaned_data.get('yargiBolgesi')
+            town = tasinmaz_form.cleaned_data.get('town')
 
-            if not (depremderecesi or city or yargiBolgesi):
+            if not (depremderecesi or city or yargiBolgesi or town):
                 teskilat = Gteskilat.objects.all()
             else:
                 query = Q()
@@ -344,14 +345,13 @@ def list_teskilat(request):
                     query &= Q(depremderecesi=depremderecesi)
                 if city:
                     query &= Q(city=city)
-                # if yargiBolgesi:
-                #     query &= Q(tkgmno=tkgmno)
+                if yargiBolgesi:
+                    query &= Q(yargiBolgesi=yargiBolgesi)
+                if town:
+                    query &= Q(town=town)
 
                 if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
                     teskilat = Gteskilat.objects.filter(query).distinct()
-
-
-
 
     return render(request, 'teskilat/teskilatlar.html',
                   {'teskilat': teskilat, 'teskilat_form': teskilat_form})
@@ -380,8 +380,6 @@ def edit_teskilat(request, pk):
     return render(request, 'teskilat/teskilatGuncelle.html',
                   {'project_form': teskilat_form,
                    })
-
-
 @login_required
 def add_teskilat_olustur(request):
     perm = general_methods.control_access(request)

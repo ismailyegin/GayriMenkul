@@ -139,19 +139,25 @@
                             <div class="box-body">
                                 {% csrf_token %}
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label> {{ teskilat_form.city.label }}</label>
                                         {{ teskilat_form.city }}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.town.label }}</label>
+                                        {{ teskilat_form.town }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label> {{ teskilat_form.depremderecesi.label }}</label>
                                         {{ teskilat_form.depremderecesi }}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label> {{ teskilat_form.yargiBolgesi.label }}</label>
                                         {{ teskilat_form.yargiBolgesi }}
@@ -208,19 +214,12 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Şehir</th>
-                                    <th>Merkez Nufus</th>
-                                    <th>Yargı Alani Nufusu</th>
-                                    <th>Hakim Sayısı</th>
-                                    <th>Savcı Sayısı</th>
-                                    <th>Personel Sayısı</th>
-                                    <th>mulhakat</th>
+                                    <th>İl</th>
+                                    <th>İlçe</th>
                                     <th>Yargı Bölgesi</th>
                                     <th>Deprem Derecesi</th>
                                     {% if user.groups.all.0.name == 'Admin' or  user.groups.all.0.name == 'Yonetim' %}
-
                                         <th>İşlemler</th>
-
                                     {% endif %}
 
 
@@ -232,14 +231,7 @@
                                         <tr>
                                             <td>{{ forloop.counter }} </td>
                                             <td>{{ item.city.name }} </td>
-                                            <td> {{ item.merkeznufus }}</td>
-                                            <td>{{ item.yargiAlaniNufus }} </td>
-                                            <td>{{ item.hakim_sayisi }} </td>
-                                            <td>{{ item.savci_sayisi }} </td>
-
-                                            <td>{{ item.personel_sayisi }}</td>
-
-                                            <td>{{ item.mulhakat }}</td>
+                                            <td>{{ item.town.name }}</td>
                                             <td>{{ item.yargiBolgesi }} </td>
                                             <td>{{ item.depremderecesi }} </td>
                                             <td>
@@ -250,14 +242,6 @@
                                                            type="button" class="btn btn-warning btn-lg"><i
                                                                 class="fa fa-edit"></i>
                                                         </a>
-
-
-                                                        {#                                                    {% else %}#}
-
-                                                        {#                                                        <a href="{% url "sbs:proje-incele-personel" project.pk %}"#}
-                                                        {#                                                           type="button" class="btn btn-warning btn-lg"><i#}
-                                                        {#                                                                class="fa fa-edit"></i>#}
-                                                        {#                                                        </a>#}
 
                                                     {% endif %}
 
@@ -373,10 +357,7 @@
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': true, "columnDefs": [
-                    {responsivePriority: 1, targets: 1},
-                    {responsivePriority: 2, targets: 7},
-                ],
+
                 'responsive': {
                     'details': {
 
@@ -393,15 +374,36 @@
 
 
             });
-            // Change the fixed ordering when the data source is updated
 
 
-            table.on('responsive-display', function (e, datatable, row, showHide, update) {
-                console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+            $("#id_city").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_town").empty();
+                ilce(city);
             });
 
 
         })
+
+
+        function ilce(city) {
+            $.ajax({
+                url: "{% url "sbs:ilce-bilgi" %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    "cmd": city,
+                },
+                success: function (result) {
+
+                    $("#id_town").append('<option value="">-----------</option>');
+
+                    for (item in result.data) {
+                        $("#id_town").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                    }
+                }
+            });
+        }
     </script>
 
 

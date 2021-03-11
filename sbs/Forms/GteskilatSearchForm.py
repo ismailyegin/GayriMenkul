@@ -11,9 +11,8 @@ class GteskilatSearchForm(ModelForm):
         fields = (
             'depremderecesi',
             'yargiBolgesi',
-            'merkeznufus',
-
-            'city'
+            'city',
+            'town'
 
         )
 
@@ -21,7 +20,8 @@ class GteskilatSearchForm(ModelForm):
             'depremderecesi': 'Deprem Derecesi',
             'yargiBolgesi': 'Yargı Bölgesi',
             'merkeznufus': 'Merkez Nufusu',
-            'city': 'Şehir'
+            'city': 'İl',
+            'town': 'İlçe'
 
         }
 
@@ -30,6 +30,8 @@ class GteskilatSearchForm(ModelForm):
             'depremderecesi': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                   'style': 'width: 100%; ', }),
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                        'style': 'width: 100%; ', }),
+            'town': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', }),
             'yargiBolgesi': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%; ', }),
@@ -45,3 +47,4 @@ class GteskilatSearchForm(ModelForm):
         self.fields['depremderecesi'].required = False
         self.fields['city'].required = False
         self.fields['yargiBolgesi'].required = False
+        self.fields['town'].required = False
