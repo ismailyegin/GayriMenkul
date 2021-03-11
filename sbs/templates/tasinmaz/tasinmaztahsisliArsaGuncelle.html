@@ -1,0 +1,1746 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <div class="modal fade" id="examine" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Firma Bilgileri</h3>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group ">
+                                <label> Firma Türü </label>
+                                <input type="text" name="sorumlu" value="" class="form-control" style="width: 100%;"
+                                       readonly="readonly" id="cType">
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label> İsim</label>
+                                <input type="text" name="projectStatus" value="" class="form-control"
+                                       style="width: 100%; " readonly="readonly" required="" id="cName">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label> Mail</label>
+                                <input type="text" name="projectStatus" value="" class="form-control"
+                                       style="width: 100%; " readonly="readonly" required="" id="cMail">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label> Cep Telefonu </label>
+                                <input type="text" name="projectStatus" value="" class="form-control"
+                                       style="width: 100%; " readonly="readonly" required="" id="cCepTel">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label> Sabit Telefon</label>
+                                <input type="text" name="projectStatus" value="" class="form-control"
+                                       style="width: 100%; " readonly="readonly" required="" id="cSabitTel">
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label> Sorumlusu</label>
+                                <input type="text" name="projectStatus" value="" class="form-control"
+                                       style="width: 100%; " readonly="readonly" required="" id="cUser">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    {#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="modelsubcompany"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Kullanan Birim Ekleyiniz Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="title">Birim</label>
+                    <select id="istanimi" name="istanimi" class="form-control" required>
+                        <option value="" selected>Seçiniz...</option>
+                        {% for title in gkurum %}
+                            <option value="{{ title.pk }}">{{ title.name }}</option>
+                        {% endfor %}
+
+                    </select>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-subcompanyAdd"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-closereddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         id="companys" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+                    <a href="{% url 'sbs:company-list' %}" class="list-group-item disabled">
+                        <h4 class="list-group-item-heading">Firmalar</h4>
+
+                    </a>
+                    <div class="list-group-item">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control companysearch" name="search" value=""
+                                   id="companysearch">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default companysearch" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+
+                                   </span>
+                                    Ara
+                                </button>
+                             </span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-body" id="company-list-main">
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="employee" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="" class="list-group-item disabled">
+                        <h4 class="list-group-item-heading">Personeller</h4>
+
+                    </a>
+                    <div class="list-group-item">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control searchEmloyee" name="searchEmloyee" value=""
+                                   id="searchEmloyee">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default searchEmloyee" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+
+                                   </span>
+                                    Ara
+                                </button>
+                             </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body list-group" id="employee-list-main">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal modal-warning  fade in deneme23" tabindex="-1" role="dialog" id="pdf"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="panel">
+                        <div class="box-header with-border">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#sec"
+                               aria-expanded="false" class="collapsed btn btn-lg">
+                                <h4 class="box-title">
+
+                                    Makam Seç
+
+                                </h4>
+                            </a>
+                        </div>
+                        <div id="sec" class="panel-collapse collapse" aria-expanded="false"
+                             style="height: 0px;">
+                            <div class="box-body">
+                                <select class="form-control form-control-lg" id="pdfselect">
+
+
+                                    <option value="" selected>Seçiniz</option>
+
+                                    <option value="Müdürüm">Müdürüm</option>
+
+                                    <option value="Başkanım">Başkanım</option>
+
+                                    <option value="Bakanım">Bakanım</option>
+
+
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel  ">
+                        <div class="box-header with-border">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#ekle"
+                               aria-expanded="false" class="collapsed btn btn-lg">
+                                <h4 class="box-title">
+
+                                    Makamı Ekle
+
+                                </h4>
+                            </a>
+                        </div>
+                        <div id="ekle" class="panel-collapse collapse" aria-expanded="false"
+                             style="height: 0px;">
+                            <div class="box-body">
+                                <input class="form-control form-control-lg" id="pdftext" type="text" placeholder="...">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success pull-left btn-ok" id="btn-pdf-gonder"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-danger" id="btn-phase-reddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false"
+         xmlns="http://www.w3.org/1999/html">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Yükleniyor...</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- success modal -->
+    <div class="modal modal-success modal-success-food fade in" id="modal-success" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">İşlem Başarılı</h4>
+                </div>
+                <div class="modal-body successModal">
+                    ...
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-outline btn-ok">Tamam</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-danger fade in deneme22" tabindex="-1" role="dialog" id="modal-danger"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Silmek istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-close">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-danger fade in deneme22" tabindex="-1" role="dialog" id="modal-deleteSubcompany"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Silmek istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-modal-deleteSubcompany-yes"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-modal-deleteSubcompany-no">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="editmodelsubcompany"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="title">İş Tanımı</label>
+                    <select id="editistanimi" name="editistanimi" class="form-control" required>
+                        <option value="" selected>Seçiniz...</option>
+                        {% for title in titles %}
+                            <option value="{{ title.pk }}">{{ title.name }}</option>
+                        {% endfor %}
+
+                    </select>
+                    <label for="employee">Firma </label>
+                    <select id="editsubcompanyAdd" name="subcompanyAdd" class="form-control" required>
+                        <option value="" selected>Seçiniz...</option>
+                        {% for item  in company %}
+                            <option value="{{ item.pk }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="edit-btn-subcompanyAdd"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="edit-btn-closereddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="personelEdit"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="title">İş Tanımı</label>
+                    <select id="titleEdit" name="titleEdit" class="form-control" required>
+                        <option value="" selected>Seçiniz...</option>
+                        {% for title in titles %}
+                            <option value="{{ title.pk }}">{{ title.name }}</option>
+                        {% endfor %}
+
+                    </select>
+                    <label for="employee">Personel</label>
+                    <select id="employeeEdit" name="employeeEdit" class="form-control" required>
+                        <option value="" selected>Seçiniz...</option>
+                        {% for employee in employees %}
+                            <option value="{{ employee.pk }}">{{ employee }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-gonder-personelEdit"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-closereddet-personelEdit">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="personelAdd"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="title">İş Tanımı</label>
+                    <select id="titleAdd" name="titleAdd" class="form-control" required>
+                        <option value="" selected>Seçiniz...</option>
+                        {% for title in titles %}
+                            <option value="{{ title.pk }}">{{ title.name }}</option>
+                        {% endfor %}
+
+                    </select>
+                    <label for="employee">Personel</label>
+                    <select id="employeeAdd" name="employeeAdd" class="form-control" required>
+                        <option value="" selected>Seçiniz...</option>
+                        {% for employee in employees %}
+                            <option value="{{ employee.pk }}">{{ employee }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-gonder"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-closereddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="vestmodal"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="title">Hakediş Tarihi</label>
+                    <input type="text" id="vestdate" name="vestdate" class="form-control"
+                           data-inputmask="'alias': 'dd/mm/yyyy'"
+                           data-mask="">
+
+                    <label for="employee">Hakediş Miktarı (KDV dahil)</label>
+                    <input type="number" name="vest" id="vest" class="form-control" required>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-vest"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-hakreddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="requirement"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="amount">Adet</label>
+                    <input type="text" name="amount" id="amount" class="form-control" required>
+                    <label for="definition">Tanım</label>
+                    <input type="text" name="definition" id="definition" class="form-control" required>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-requirement-gonder"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-requirement-reddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="requirementFile"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="amount">Adet</label>
+                    <input type="text" name="amount" id="amount" class="form-control" required>
+                    <label for="definition">Tanım</label>
+                    <input type="text" name="definition" id="definition" class="form-control" required>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline pull-left btn-ok" id="btn-requirementfile-gonder"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-requirementfile-reddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="phase"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Bilgileri Giriniz</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="phaseDate">Tarih</label>
+                    <input type="text" id="phaseDate" name="phaseDate" class="form-control"
+                           data-inputmask="'alias': 'dd/mm/yyyy'"
+                           data-mask="">
+                    <label for="phaseDefinition">Açıklama</label>
+                    <textarea class="form-control" rows="3" name="phaseDefinition" id="phaseDefinition"
+                              placeholder="..."></textarea>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-phase-gonder"
+                            data-dismiss="modal">Kaydet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-phase-reddet">Geri Dön</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+
+
+            {% if message.tags == 'warning' %}
+
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+
+
+            {% if message.tags == 'success' %}
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Başarılı!</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+
+    {% endif %}
+
+    <section class="content-header">
+        <h1>
+            Taşınmaz Düzenle
+
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Taşınmaz Düzenle</a></li>
+
+
+        </ol>
+    </section>
+
+    <section class="content">
+
+
+        {% if  user.groups.all.0.name == 'Yonetim' or user.groups.all.0.name == 'Admin' %}
+            <form method="post" enctype="multipart/form-data" role="form">
+                {% csrf_token %}
+                <div class="row">
+                    {#genel bilgiler #}
+                    <div class="col-lg-12">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">GENEL BİLGİLER</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ project_form.name.label }}</label>
+                                            {{ project_form.name }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label> {{ project_form.sirano.label }}</label>
+                                            {{ project_form.sirano }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label> {{ project_form.tkgmno.label }}</label>
+                                            {{ project_form.tkgmno }}
+                                        </div>
+                                    </div>
+
+                                    {#                                <div class="col-lg-3">#}
+                                    {#                                    <div class="form-group">#}
+                                    {#                                        <label> ilçe</label>#}
+                                    {#                                        <select name="town" class="form-control select2 select2-hidden-accessible"#}
+                                    {#                                                style="width: 100%;" id="town" maxlength="120" tabindex="-1"#}
+                                    {#                                                aria-hidden="true">#}
+                                    {#                                            <option value="{{ project.town }}" selected>{{ project.town }}</option>#}
+                                    {#                                        </select>#}
+                                    {#                                    </div>#}
+                                    {#                                </div>#}
+                                    <div class="col-lg-12">
+                                        <div class="row">
+
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label> {{ project_form.mulkiyet.label }}</label>
+                                                    {{ project_form.mulkiyet }}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label> {{ project_form.tahsis_durumu.label }}</label>
+                                                    {{ project_form.tahsis_durumu }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label> {{ project_form.tasinmazinTuru.label }}</label>
+                                                    {{ project_form.tasinmazinTuru }}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label> {{ project_form.arsaTuru.label }}</label>
+                                                    {{ project_form.arsaTuru }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+
+
+                                        <div class="row">
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ project_form.definition.label }}</label>
+                                                    {{ project_form.definition }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button class="btn btn-primary" type="submit">Kaydet</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </form>
+        {% endif %}
+
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <div class="box box-info collapsed-box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">DÖKÜMAN EKLE</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" style="display: none;">
+
+
+                        <div id="dropzone">
+                            <form action="{% url 'sbs:tasinmaz-duzenle' project_form.instance.pk %}"
+                                  class="dropzone needsclick dz-clickable"
+                                  id="pdf">
+
+
+                                {% csrf_token %}
+
+                                <div class="dz-message needsclick">
+                                    <button type="button" class="dz-button">Dosyalari buraya bırakın veya yüklemek
+                                        için tıklayın.
+                                    </button>
+
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+
+
+            {#     proje dökümanlari           ----------------------------------------#}
+
+
+            <div class="col-md-6">
+                <div class="box box-info collapsed-box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">DÖKÜMANLAR</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" style="display: none;">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table id="dokuman" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Dosya</th>
+                                        <th>İşlemler</th>
+
+
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% if project.documents.all %}
+                                        {% for item in project.documents.all %}
+                                            <tr id="documents-{{ item.pk }}">
+                                                <td>{{ forloop.counter }} </td>
+                                                <td>{{ item.name }}</td>
+
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-success"
+                                                           data-toggle="modal"
+                                                           href="{{ MEDIA_URL }}{{ item.name }}" download><i
+                                                                class="fa fa-download"></i></a>
+
+
+                                                        {#                                                        <a class="btn btn-danger"#}
+                                                        {#                                                           data-toggle="modal"#}
+                                                        {#                                                           onclick=deletedocument({{ project.pk }},{{ item.pk }})><i#}
+                                                        {#                                                                class="fa fa-trash"></i></a>#}
+
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+
+
+            {#                {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}#}
+            {#    taşınmazin yapı   bilgileri           ------------------------------#}
+
+            <form method="post" enctype="multipart/form-data" role="form">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <div class="box box-info collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">YAPI BİLGİLERİ</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="display: none;">
+                            <div class="row" style="padding-bottom: 10px">
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ project_form.floor.label }}</label>
+                                        {{ project_form.floor }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ project_form.UsageArea.label }}</label>
+                                        {{ project_form.UsageArea }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ project_form.block.label }}</label>
+                                        {{ project_form.block }}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="box-footer text-right">
+                                <button class="btn btn-primary " type="submit">Kaydet</button>
+                            </div>
+
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                {#            Proje Alt Firma #}
+                <div class="col-md-6">
+                    <div class="box box-info collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">KULLANAN BİRİMLER</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="display: none;">
+                            <div class="row" style="padding-bottom: 10px">
+                                <div class="col-lg-12">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success"
+                                           data-toggle="modal"
+                                           onclick=AddsubCompany({{ project.pk }})><i
+                                                class="fa fa-plus"></i> Birim Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table id="birim" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Birim</th>
+                                            <th>İşlemler</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% if project.kurum.all %}
+                                            {% for item in project.kurum.all %}
+                                                <tr id="birim-{{ item.pk }}">
+                                                    <td>{{ forloop.counter }} </td>
+                                                    <td>{{ item.name }}</td>
+
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            {#                                                            <a class="btn btn-success"#}
+                                                            {#                                                               data-toggle="modal"#}
+                                                            {#                                                               onclick=exammineSubCompany({{ project.pk }},{{ item.pk }})><i#}
+                                                            {#                                                                    class="fa fa-play-circle"></i></a>#}
+                                                            {##}
+                                                            {#                                                            <a class="btn btn-warning"#}
+                                                            {#                                                               data-toggle="modal"#}
+                                                            {#                                                               onclick=editSubCompany({{ project.pk }},{{ item.pk }})><i#}
+                                                            {#                                                                    class="fa fa-edit"></i></a>#}
+
+
+                                                            <a class="btn btn-danger"
+                                                               data-toggle="modal"
+                                                               onclick=deleteSubcompany({{ project.pk }},{{ item.pk }})><i
+                                                                    class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            {% endfor %}
+                                        {% endif %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+
+                {#    taşınmazin deger  bilgileri           ------------------------------#}
+
+
+                <div class="col-md-6">
+                    <div class="box box-info collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">DEGER BİLGİLERİ</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="display: none;">
+                            <div class="row" style="padding-bottom: 10px">
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ project_form.yapiMalitet.label }}</label>
+                                        {{ project_form.yapiMalitet }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ project_form.yapiRaic.label }}</label>
+                                        {{ project_form.yapiRaic }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ project_form.arsaDegeri.label }}</label>
+                                        {{ project_form.arsaDegeri }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ project_form.aifinish.label }}</label>
+                                        {{ project_form.aifinish }}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="box-footer text-right">
+                                <button class="btn btn-primary " type="submit">Kaydet</button>
+                            </div>
+
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                {#    tapu bilgileri           ------------------------------#}
+
+
+                <div class="col-md-6">
+                    <div class="box box-info collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">TAPU BİLGİLERİ</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+
+
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tapu_form.country.label }}</label>
+                                        {{ tapu_form.country }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tapu_form.city.label }}</label>
+                                        {{ tapu_form.city }}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tapu_form.town.label }}</label>
+                                        {{ tapu_form.town }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tapu_form.neighborhood.label }}</label>
+                                        {{ tapu_form.neighborhood }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tapu_form.location.label }}</label>
+                                        {{ tapu_form.location }}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tapu_form.parcel.label }}</label>
+                                            {{ tapu_form.parcel }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ tapu_form.island.label }}</label>
+                                            {{ tapu_form.island }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tapu_form.area.label }}</label>
+                                        {{ tapu_form.area }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tapu_form.year.label }} </label>
+                                        {{ tapu_form.year }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+
+                {#                {% if project.tahsis_durumu == "Tahsisli Arsa" %}#}
+                {#   tahsis arsa bilgileri ödenek             ----------------------------------------#}
+                <div class="col-md-6">
+                    <div class="box box-info collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">TAHSİS BİLGİLERİ</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tahsis_form.tahsisTarihi.label }}</label>
+                                        {{ tahsis_form.tahsisTarihi }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tahsis_form.tahsisSuresi.label }}</label>
+                                        {{ tahsis_form.tahsisSuresi }}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tahsis_form.tahsis_amaci.label }}</label>
+                                        {{ tahsis_form.tahsis_amaci }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tahsis_form.tahsis_kurum.label }}</label>
+                                        {{ tahsis_form.tahsis_kurum }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label> {{ tahsis_form.emsal.label }} </label>
+                                        {{ tahsis_form.emsal }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                {#                {% endif %}#}
+                {% if project.tahsis_durumu == "Kiralık" %}
+                    {#        kiralama  bilgileri        ----------------------------------------#}
+                    <div class="col-md-6">
+                        <div class="box box-info collapsed-box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">KİRALAMA BİLGİLERİ</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.sahibi.label }}</label>
+                                            {{ kira_form.sahibi }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.tahsis_amaci.label }}</label>
+                                            {{ kira_form.tahsis_amaci }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.onayTarihi.label }}</label>
+                                            {{ kira_form.onayTarihi }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.sozlesmeTarihi.label }}</label>
+                                            {{ kira_form.sozlesmeTarihi }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.sozlesmeSonTarihi.label }}</label>
+                                            {{ kira_form.sozlesmeSonTarihi }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.kiralamaSuresi.label }}</label>
+                                            {{ kira_form.kiralamaSuresi }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.adres.label }}</label>
+                                            {{ kira_form.adres }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label> {{ kira_form.kapalialan.label }}</label>
+                                            {{ kira_form.kapalialan }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button class="btn btn-primary" type="submit">Kaydet</button>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                {% endif %}
+
+
+                {#            görüs ve öneriler#}
+                <div class="col-md-6">
+                    <div class="box box-info collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">GÖRÜŞ VE ÖNERİLER</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="display: none;">
+
+                            <div class="box-footer">
+                                <div class="input-group">
+                                    <input class="form-control" id="offer" placeholder="Mesaj Giriniz...">
+
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-success"
+                                                onclick=addOffer({{ project.pk }})><i class="fa fa-plus"
+                                                                                      data-toggle="modal"
+                                        ></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body chat" id="chat-box"
+                                 style="overflow: auto; width: auto; height: 250px; ">
+                                {% if project.offers.all %}
+                                    {% for item in project.offers.all|dictsortreversed:"creationDate" %}
+                                        <div class="item" id="offset-{{ item.pk }}">
+                                            <img src="{{ MEDIA_URL }}/profile/user.png" alt="user image"
+                                                 class="offline">
+
+                                            <p class="message">
+
+
+                                                <a href="#" class="name">
+                                                    <small class="text-muted pull-right"><i
+                                                            class="fa fa-clock-o"></i> {{ item.creationDate | date:"d/m/Y H:i" }}
+
+
+                                                        {#                                                        {% if user.pk == project.sorumlu.user.pk or user.groups.all.0.name == 'Admin' %}#}
+                                                        <i class="fa fa-trash-o"
+                                                           onclick=deleteoffers({{ project.pk }},{{ item.pk }})></i>
+                                                        {#                                                        {% endif %}#}
+                                                    </small>
+                                                    {{ item.added_by.first_name }} {{ item.added_by.last_name }}
+                                                </a>
+
+
+                                                {{ item.message }}
+                                            </p>
+
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                                <!-- /.box-body -->
+                            </div>
+
+                            <!-- /.box -->
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        {#harita bilgiler #}
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="box box-info collapsed-box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">HARİTA BİLGİLERİ</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" style="background-color: white; height:600px;">
+
+                        <div id="map"></div>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+    <script>
+        // This example creates a simple polygon representing the Bermuda Triangle.
+        // When the user clicks on the polygon an info window opens, showing
+        // information about the polygon's coordinates.
+        let map;
+        let infoWindow;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 17,
+                center: {lat: 39.918299, lng: 32.852703},
+                mapTypeId: 'satellite'
+            });
+            // Define the LatLng coordinates for the polygon.
+            const triangleCoords = [
+                {lat: 39.916391, lng: 32.850489},
+                {lat: 39.918451, lng: 32.851766},
+                {lat: 39.918295, lng: 32.852825},
+                {lat: 39.916073, lng: 32.852225},
+            ];
+            // Construct the polygon.
+            const bermudaTriangle = new google.maps.Polygon({
+                paths: triangleCoords,
+                strokeColor: "#FF0000",
+                strokeOpacity: 0.8,
+                strokeWeight: 3,
+                fillColor: "#FF0000",
+                fillOpacity: 0.35,
+            });
+            bermudaTriangle.setMap(map);
+            // Add a listener for the click event.
+            bermudaTriangle.addListener("click", showArrays);
+            infoWindow = new google.maps.InfoWindow();
+        }
+
+        function showArrays(event) {
+            // Since this polygon has only one path, we can call getPath() to return the
+            // MVCArray of LatLngs.
+            const polygon = this;
+            const vertices = polygon.getPath();
+            let contentString =
+                "<b>Türkiye Adalet Bakanlıgı</b><br>" +
+                "Kordinatlar: <br>" +
+                event.latLng.lat() +
+                "," +
+                event.latLng.lng() +
+                "<br>";
+
+            // Iterate over the vertices.
+            for (let i = 0; i < vertices.getLength(); i++) {
+                const xy = vertices.getAt(i);
+                contentString +=
+                    "<br>" + "Kordinat: " + i + ":<br>" + xy.lat() + "," + xy.lng();
+            }
+            // Replace the info window's content and position.
+            infoWindow.setContent(contentString);
+            infoWindow.setPosition(event.latLng);
+            infoWindow.open(map);
+        }
+
+
+        $(document).ready(function () {
+            $("#id_city").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_town").empty();
+                ilce(city);
+            });
+        });
+
+        function ilce(city) {
+            $.ajax({
+                url: "{% url "sbs:ilce-bilgi" %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    "cmd": city,
+                },
+                success: function (result) {
+
+                    $("#id_town").append('<option value="">-----------</option>');
+
+                    for (item in result.data) {
+                        $("#id_town").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                    }
+                }
+            });
+
+        };
+
+
+        function addOffer(id,) {
+
+            $.ajax({
+                url: "{% url "sbs:tasinmaz-oneri-ekle" pk=212121223232323232  %}".replace(/212121223232323232/, id.toString()),
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    message: $('#offer').val(),
+                    isActive: 'False'
+
+                },
+                success: function (result) {
+
+                    var currentTime = new Date();
+                    $("#chat-box").prepend('<div class="item"><img src="' + result.image + '" alt="user image" class="offline">' +
+                        '<p class="message"><a href="#" class="name"><small class="text-muted pull-right">' +
+                        '<i class="fa fa-clock-o"></i>' + result.dates + '</small>' + result.username + '</a>' +
+                        $('#offer').val() + '</p></div>');
+
+                    $("#offer").val("");
+
+                }
+            });
+
+        };
+
+        function deleteoffers(id, competitionId) {
+
+            console.log(id);
+            var html = '';
+            $("#modal-danger").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function (e) {
+
+                    $.ajax({
+                        url: "{% url "sbs:tasinmaz-gorus-kaldir" project_pk=212121223232323232 employee_pk=999999999999999 %}".replace(/212121223232323232/, id.toString()).replace(/999999999999999/, competitionId.toString()),
+                        type: "POST",
+                        data: {
+                            'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                            isActive: 'False'
+                        },
+                        success: function (result) {
+                            if (result.status == 'Success') {
+                                html = 'Aşama başarıyla kaldırıldı.';
+                                $('#offset-' + competitionId).hide();
+
+                                console.log(result.status);
+
+
+                            }
+                        }
+                    });
+
+                });
+            }).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
+            });
+
+        };
+
+        function AddsubCompany(id) {
+
+            $("#modelsubcompany").on("shown.bs.modal", function (e) {
+
+
+                {#$('#title option:selected').text($('#personel-' + competitionId + ' td').eq(1).text());#}
+                {#$('#employee option:selected').text($('#personel-' + competitionId + ' td').eq(2).text());#}
+
+                console.log(e);
+                $("#btn-subcompanyAdd").click(function (e) {
+
+
+
+                    {#console.log('benden deneme ')#}
+                    if (e.handled !== true) { // This will prevent event triggering more then once
+                        e.handled = true;
+
+
+                        {#console.log($("#istanimi").val());#}
+                        {#console.log($("#subcompanyAdd").val());#}
+
+                        $.ajax({
+                            url: "{% url "sbs:proje-birim-ekle" pk=212121223232323232  %}".replace(/212121223232323232/, id.toString()),
+                            type: "POST",
+                            data: {
+                                'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                                title: $('#istanimi').val(),
+                                id: id,
+                                isActive: 'False'
+
+                            },
+                            success: function (result) {
+
+                                if (result.status == 'Success') {
+
+                                    var p = $('#birim').DataTable();
+                                    var count = p.rows().count() + 1;
+                                    p.row.add([
+                                        count.toString(),
+
+                                        $('#istanimi option:selected').text(),
+                                        '<div class="btn-group"><a type="button" class="btn btn-danger" onclick=deleteSubcompany({{ project.pk }},' + result.pk + ')>  <i class="fa fa-trash"></i></a></div>',
+
+                                    ]).node().id = 'birim-' + result.pk;
+                                    p.draw(true);
+
+
+                                } else {
+                                    console.log('Error');
+                                }
+                            }
+                        });
+                    }
+
+
+                });
+
+
+            }).modal('show');
+            $('#btn-closereddet').click(function () {
+
+
+                $('#modelsubcompany').modal('hide');
+                $('.modal').modal('hide');
+
+            });
+
+
+        }
+
+
+        function deleteSubcompany(id, competitionId) {
+
+            var html = '';
+            $("#modal-deleteSubcompany").on("shown.bs.modal", function (e) {
+                $("#btn-modal-deleteSubcompany-yes").click(function (e) {
+
+                    $.ajax({
+                        url: "{% url "sbs:tasinmaz-birim-kaldir" tasinmaz=212121223232323232 kurum=999999999999999 %}".replace(/212121223232323232/, id.toString()).replace(/999999999999999/, competitionId.toString()),
+                        type: "POST",
+                        data: {
+                            'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                            isActive: 'False'
+                        },
+                        success: function (result) {
+                            if (result.status == 'Success') {
+                                html = 'Birim  başarıyla kaldırıldı.';
+                                $('#birim-' + competitionId).hide();
+                                console.log(result.status)
+                            } else {
+                                console.log('error');
+                            }
+                        }
+                    });
+
+                });
+            }).modal('show');
+            $('#btn-modal-deleteSubcompany-no').click(function () {
+                $('#modal-deleteSubcompany').modal('hide');
+            });
+
+        }
+
+        function editSubCompany(id, competitionId) {
+
+            $("#editmodelsubcompany").on("shown.bs.modal", function (e) {
+
+
+                $('#editistanimi option:selected').text($('#subcompany-' + competitionId + ' td').eq(2).text());
+                $('#editsubcompanyAdd option:selected').text($('#subcompany-' + competitionId + ' td').eq(1).text());
+
+                console.log(e);
+                $("#edit-btn-subcompanyAdd").click(function (e) {
+                    if (e.handled !== true) { // This will prevent event triggering more then once
+                        e.handled = true;
+
+                        $.ajax({
+                            url: "{% url "sbs:proje-altproje-guncelle" pk=212121223232323232  %}".replace(/212121223232323232/, id.toString()),
+                            type: "POST",
+                            data: {
+                                'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                                title: $('#editistanimi').val(),
+                                company: $('#editsubcompanyAdd').val(),
+                                id: competitionId,
+                                isActive: 'False'
+
+                            },
+                            success: function (result) {
+
+                                if (result.status == 'Success') {
+                                    $('#subcompany-' + competitionId + ' td').eq(2).text($('#editistanimi option:selected').text());
+                                    $('#subcompany-' + competitionId + ' td').eq(1).text($('#editsubcompanyAdd option:selected').text());
+                                } else {
+                                    console.log('Error');
+                                }
+                            }
+                        });
+                    }
+
+
+                });
+
+
+            }).modal('show');
+            $('#edit-btn-closereddet').click(function () {
+
+
+                $('#editmodelsubcompany').modal('hide');
+                $('.modal').modal('hide');
+
+            });
+
+
+        }
+    </script>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdhFttkLXEZFcX9Gik0NzcbSonvpt2VWk&callback=initMap&libraries=&v=weekly"
+            async
+    ></script>
+
+
+
+
+
+
+{% endblock %}
+
+
+

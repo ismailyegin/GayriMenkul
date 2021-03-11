@@ -9,14 +9,14 @@ from sbs.models.GtasinmazDocument import GtasinmazDocument
 
 
 class Gtasinmaz(models.Model):
-    TahsisliArsa = "Tahsisli Arsa"
-    Kira = "Kiralık"
-
-    TahsisDurumu = (
-
-        (TahsisliArsa, 'Tahsisli Arsa '),
-        (Kira, 'Kiralık'),
-    )
+    # TahsisliArsa = "Tahsisli Arsa"
+    # Kira = "Kiralık"
+    #
+    # TahsisDurumu = (
+    #
+    #     (TahsisliArsa, 'Tahsisli Arsa '),
+    #     (Kira, 'Kiralık'),
+    # )
 
     Bina = "Bina"
     Arsa = "Arsa"
@@ -31,17 +31,33 @@ class Gtasinmaz(models.Model):
     Hukumet_konagi_icinde = "HÜKÜMET KONAGI İÇERİSİNDE"
     Hukumet_konagi_ayri = "HÜKÜMET KONAGI AYRİ BLOK"
     Is_yurtlari = "İŞ YURTLARI"
-    Diger = "DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR"
+    Diger = "DİĞER KAMU KURUM KURULUŞLARINDAN TAHSİSLİ "
+    Atvg = 'ATVG'
+    Kiralik = "KİRALIK"
+
 
     Mulkiyet = (
         (Hazine, 'HAZİNE'),
         (Hukumet_konagi_icinde, 'HÜKÜMET KONAĞI İÇİNDE'),
         (Hukumet_konagi_ayri, 'HÜKÜMET KONAĞINDA AYRI BLOK'),
         (Is_yurtlari, 'İŞ YURTLARI'),
+        (Atvg, 'ATVG'),
         (Diger, 'DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR'),
-
+        (Kiralik, 'KİRALIK')
     )
+    adaletYapisi = 'ADALET YAPILARI'
+    kiraliktasinmaz = 'KİRALIK TAŞINMAZLAR'
+    tahisisliArsalar = 'TAHSİSLİ ARSALAR'
+    lojmanlar = 'LOJMANLAR'
+    cezaInfazKurumlari = 'CEZA İNFAZ KURUMLARI'
 
+    TasinmazType = (
+        (adaletYapisi, 'ADALET YAPILARI'),
+        (kiraliktasinmaz, 'KİRALIK TAŞINMAZLAR'),
+        (tahisisliArsalar, 'TAHSİSLİ ARSALAR'),
+        (lojmanlar, 'LOJMANLAR'),
+        (cezaInfazKurumlari, 'CEZA İNFAZ KURUMLARI'),
+    )
     CIK = 'Ceza İnfaz Kurumu'
     AB = 'Adalet Binası'
     AT = 'Adli Tıp'
@@ -53,7 +69,6 @@ class Gtasinmaz(models.Model):
     LOJMAN = 'Lojman'
     SOS = "SOSYAL TESİS "
     HAK = "HAKİM EVİ"
-
     DIGER = 'Diğer'
 
     TAHSIS_AMACI = (
@@ -81,25 +96,32 @@ class Gtasinmaz(models.Model):
     tapu = models.ForeignKey(GTapu, on_delete=models.SET_NULL, verbose_name='Tapu', null=True, blank=True)
     kurum = models.ManyToManyField(Gkurum)
 
-    block = models.IntegerField(blank=True, null=True, )
-    floor = models.IntegerField(blank=True, null=True)
-    UsageArea = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-
     mulkiyet = models.CharField(max_length=128, verbose_name='Mülkiyet ', choices=Mulkiyet, default=Hazine)
 
-    tahsis_durumu = models.CharField(max_length=128, verbose_name='Tahsis durumu ', choices=TahsisDurumu, default=Arsa)
-    tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TAHSIS_AMACI, default=AB)
-    arsaTuru = models.CharField(max_length=128, verbose_name='Arsa Türü ', choices=ArsaDurumu, default=Arsa)
+    tahsisAmaci = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TAHSIS_AMACI,
+                                   default=AB)
+    tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TasinmazType,
+                                      default=adaletYapisi)
 
     kira = models.ForeignKey(Gkira, on_delete=models.SET_NULL, verbose_name='Kurum', null=True, blank=True)
     tahsis = models.ForeignKey(Gtahsis, on_delete=models.SET_NULL, verbose_name='Tahsis', null=True, blank=True)
     definition = models.CharField(max_length=128, verbose_name='Tasınmaz Açıklama ', null=True, blank=True)
 
+    offers = models.ManyToManyField(EPOffer)
+    documents = models.ManyToManyField(GtasinmazDocument)
+
+
     arsaDegeri = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     yapiMalitet = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     yapiRaic = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
 
-    offers = models.ManyToManyField(EPOffer)
-    documents = models.ManyToManyField(GtasinmazDocument)
+    # adalet yapı detayi
+    yapimyili = models.DateTimeField(null=True, blank=True)
+    edinimyili = models.DateTimeField(null=True, blank=True)
+    blokadeti = models.IntegerField(null=True, blank=True)
+    katadedi = models.IntegerField(null=True, blank=True)
+    kapalikullanimalani = models.IntegerField(null=True, blank=True)
+
+
 
     kobilid = models.IntegerField(null=True, blank=True, default=2)

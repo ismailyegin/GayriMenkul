@@ -9,8 +9,8 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from oxiterp.settings.base import MEDIA_URL
-from sbs.Forms.GkiraForm import GkiraForm
-from sbs.Forms.GtahsisForm import GtahsisForm
+#   adalet alanina göre form üretimi oldu
+from sbs.Forms.GtasinmazAdliyeForm import GtasinmazAdliyeForm
 from sbs.Forms.GtasinmazForm import GtasinmazForm
 from sbs.Forms.GtasinmazSearchForm import GtasinmazSearchForm
 from sbs.Forms.GteskilatForm import GteskilatForm
@@ -19,13 +19,10 @@ from sbs.Forms.KurumForm import KurumForm
 from sbs.Forms.TapuForm import TapuForm
 from sbs.models import City
 from sbs.models.GTapu import GTapu
-from sbs.models.Gkira import Gkira
 from sbs.models.Gkurum import Gkurum
-from sbs.models.Gtahsis import Gtahsis
 from sbs.models.Gtasinmaz import Gtasinmaz
 from sbs.models.GtasinmazDocument import GtasinmazDocument
 from sbs.models.Gteskilat import Gteskilat
-from sbs.models.Town import Town
 from sbs.services import general_methods
 from sbs.services.general_methods import getProfileImage
 
@@ -64,74 +61,94 @@ def edit_tasinmaz(request, pk):
         logout(request)
         return redirect('accounts:login')
     tasinmaz = Gtasinmaz.objects.get(pk=pk)
-    user = request.user
-    project_form = GtasinmazForm(request.POST or None, instance=tasinmaz)
-    gkurum = Gkurum.objects.all()
     if tasinmaz.tapu == None:
         tapu = GTapu()
         tapu.save()
         tasinmaz.tapu = tapu
         tasinmaz.save()
-        tapu_form = TapuForm(request.POST or None, instance=tapu)
-    else:
-        tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
+    print(tasinmaz.tasinmazinTuru)
 
-    if tasinmaz.tapu.city:
-        if tasinmaz.tapu.town:
-            tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
-            tapu_form.fields['town'].initial = tasinmaz.tapu.town
-        else:
-            tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
-    else:
-        tapu_form.fields['town'].queryset = Town.objects.none()
-
-    if tasinmaz.tahsis == None:
-        tahsis = Gtahsis()
-        tahsis.save()
-        tasinmaz.tahsis = tahsis
-        tasinmaz.save()
-    else:
-        tahsis = tasinmaz.tahsis
-    tahsis_form = GtahsisForm(request.POST or None, instance=tahsis)
-
-    if tasinmaz.kira == None:
-        kira = Gkira()
-        kira.save()
-        tasinmaz.kira = kira
-        tasinmaz.save()
-    else:
-        kira = tasinmaz.kira
-    kira_form = GkiraForm(request.POST or None, instance=kira)
-
-    if request.method == 'POST':
-
+    if tasinmaz.tasinmazinTuru == tasinmaz.adaletYapisi:
+        project_form = GtasinmazAdliyeForm(request.POST or None, instance=tasinmaz)
+        gkurum = Gkurum.objects.all()
         tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
-        kira_form = GkiraForm(request.POST, instance=tasinmaz.kira)
-        tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
-        project_form = GtasinmazForm(request.POST, instance=tasinmaz)
 
-        if request.FILES.get('file'):
-            document = GtasinmazDocument(name=request.FILES.get('file'))
-            document.save()
-            tasinmaz.documents.add(document)
-            tasinmaz.save()
+        if request.method == 'POST':
 
-        if project_form.is_valid() and tahsis_form.is_valid() and tapu_form.is_valid():
-            projectSave = project_form.save(commit=False)
-            projectSave.save()
-            tahsis_form.save(commit=False)
-            tapu_form.save()
-        else:
-            messages.warning(request, 'Alanlari kontrol ediniz')
+            if request.FILES.get('file'):
+                document = GtasinmazDocument(name=request.FILES.get('file'))
+                document.save()
+                tasinmaz.documents.add(document)
+                tasinmaz.save()
 
-        log = str(tasinmaz.name) + "tasinmaz  güncelledi"
-        log = general_methods.logwrite(request, log)
+            if project_form.is_valid() and tapu_form.is_valid():
+                projectSave = project_form.save(commit=False)
+                projectSave.save()
+                tapu_form.save()
+                log = str(tasinmaz.name) + "tasinmaz  güncelledi"
+                log = general_methods.logwrite(request, log)
+            else:
+                messages.warning(request, 'Alanlari kontrol ediniz')
 
-    return render(request, 'tasinmaz/tasinmazGuncelle.html',
-                  {'project_form': project_form,
-                   'project': tasinmaz, 'tahsis_form': tahsis_form, 'tapu_form': tapu_form,
-                   'kira_form': kira_form, 'gkurum': gkurum,
-                   })
+        return render(request, 'tasinmaz/tasinmazAdliyeGuncelle.html',
+                      {'project_form': project_form,
+                       'project': tasinmaz,
+                       'tapu_form': tapu_form,
+                       'gkurum': gkurum
+                       })
+    elif tasinmaz.tasinmazinTuru == tasinmaz.kiraliktasinmaz:
+        return render(request, 'tasinmaz/tasinmazKiraGuncelle.html',
+                      {
+                          # 'project_form': project_form,
+                      })
+    elif tasinmaz.tasinmazinTuru == tasinmaz.tahisisliArsalar:
+        return render(request, 'tasinmaz/tasinmaztahsisliArsaGuncelle.html',
+                      {
+                          # 'project_form': project_form,
+                      })
+    elif tasinmaz.tasinmazinTuru == tasinmaz.lojmanlar:
+        return render(request, 'tasinmaz/TasinmazLojmanGuncelle.html',
+                      {
+                          # 'project_form': project_form,
+                      })
+    elif tasinmaz.tasinmazinTuru == tasinmaz.cezaInfazKurumlari:
+        return render(request, 'tasinmaz/tasinmazCezaInfazGuncellle.html',
+                      {
+                          # 'project_form': project_form,
+                      })
+    else:
+        return redirect('sbs:tasinmaz-list')
+
+    # if tasinmaz.tapu.city:
+    #     if tasinmaz.tapu.town:
+    #         tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+    #         tapu_form.fields['town'].initial = tasinmaz.tapu.town
+    #     else:
+    #         tapu_form.fields['town'].queryset = Town.objects.filter(cityId=tasinmaz.tapu.city.pk)
+    # else:
+    #     tapu_form.fields['town'].queryset = Town.objects.none()
+
+    # if tasinmaz.tahsis == None:
+    #     tahsis = Gtahsis()
+    #     tahsis.save()
+    #     tasinmaz.tahsis = tahsis
+    #     tasinmaz.save()
+    # else:
+    #     tahsis = tasinmaz.tahsis
+    # tahsis_form = GtahsisForm(request.POST or None, instance=tahsis)
+    #
+    # if tasinmaz.kira == None:
+    #     kira = Gkira()
+    #     kira.save()
+    #     tasinmaz.kira = kira
+    #     tasinmaz.save()
+    # else:
+    #     kira = tasinmaz.kira
+    # kira_form = GkiraForm(request.POST or None, instance=kira)
+
+
+
+
 
 @login_required
 def tasinmaz_list(request):

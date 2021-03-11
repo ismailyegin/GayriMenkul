@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from sbs.models.Gtasinmaz import Gtasinmaz
 
 
-class GtasinmazForm(ModelForm):
+class GtasinmazkiraForm(ModelForm):
     class Meta:
         model = Gtasinmaz
 
@@ -22,7 +22,6 @@ class GtasinmazForm(ModelForm):
                   }
 
         widgets = {
-
 
             'tasinmazinTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                   'style': 'width: 100%; ', 'required': 'required'}),
