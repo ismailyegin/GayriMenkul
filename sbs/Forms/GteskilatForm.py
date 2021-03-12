@@ -24,10 +24,10 @@ class GteskilatForm(ModelForm):
             'bim',
 
             'ilkDereceAdliYargiHakimSayisi',
-            'ilkDereceAdliYargiSavcıSayisi',
+            'ilkDereceAdliYargiSavciSayisi',
             'ilkderecePersonelSayisi',
             'bolgeAdliyeHakimSayisi',
-            'bolgeAdliyeSavcıSayisi',
+            'bolgeAdliyeSavciSayisi',
             'bolgeAdliyePersonelSayisi',
 
             'bolgeIdaremahkemesiHakimSayisi',
@@ -57,10 +57,10 @@ class GteskilatForm(ModelForm):
 
 
             'ilkDereceAdliYargiHakimSayisi': 'İLK DERECE ADLİ YARGI HÂKİM SAYISI',
-            'ilkDereceAdliYargiSavcıSayisi': "İLK DERECE ADLİ YARGI SAVCI SAYISI",
+            'ilkDereceAdliYargiSavciSayisi': "İLK DERECE ADLİ YARGI SAVCI SAYISI",
             'ilkderecePersonelSayisi': "İLK DERECE PERSONEL SAYISI",
             'bolgeAdliyeHakimSayisi': 'BÖLGE ADLİYE MAHKEMESİ HÂKİM SAYISI',
-            'bolgeAdliyeSavcıSayisi': 'BÖLGE ADLİYE MAHKEMESİ SAVCI SAYISI',
+            'bolgeAdliyeSavciSayisi': 'BÖLGE ADLİYE MAHKEMESİ SAVCI SAYISI',
             'bolgeAdliyePersonelSayisi': 'BÖLGE ADLİYE PERSONEL SAYISI',
             'bolgeIdaremahkemesiHakimSayisi': 'BÖLGE İDARE MAHKEMESİ HÂKİM SAYISI',
             'bolgeIdareMahkemsiPersonelSayisi': 'BÖLGE İDARE MAHKEMESİ PERSONEL SAYISI',
@@ -96,12 +96,12 @@ class GteskilatForm(ModelForm):
 
             'ilkDereceAdliYargiHakimSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'ilkDereceAdliYargiSavcıSayisi': forms.TextInput(
+            'ilkDereceAdliYargiSavciSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'ilkderecePersonelSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'bolgeAdliyeHakimSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'bolgeAdliyeSavcıSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'bolgeAdliyeSavciSayisi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'bolgeAdliyePersonelSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'bolgeIdaremahkemesiHakimSayisi': forms.TextInput(

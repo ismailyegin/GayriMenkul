@@ -74,10 +74,10 @@ class Gteskilat(models.Model):
     acm = models.ForeignKey(Gbolge, on_delete=models.SET_NULL, verbose_name='acm', null=True, blank=True)
     # adli yargı
     ilkDereceAdliYargiHakimSayisi = models.IntegerField(blank=True, null=True, )
-    ilkDereceAdliYargiSavcıSayisi = models.IntegerField(blank=True, null=True, )
+    ilkDereceAdliYargiSavciSayisi = models.IntegerField(blank=True, null=True, )
     ilkderecePersonelSayisi = models.IntegerField(blank=True, null=True, )
     bolgeAdliyeHakimSayisi = models.IntegerField(blank=True, null=True, )
-    bolgeAdliyeSavcıSayisi = models.IntegerField(blank=True, null=True, )
+    bolgeAdliyeSavciSayisi = models.IntegerField(blank=True, null=True, )
     bolgeAdliyePersonelSayisi = models.IntegerField(blank=True, null=True, )
 
     # idari yargı

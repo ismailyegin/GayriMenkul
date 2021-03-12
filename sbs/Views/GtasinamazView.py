@@ -572,22 +572,33 @@ def list_teskilat(request):
             city = tasinmaz_form.cleaned_data.get('city')
             yargiBolgesi = tasinmaz_form.cleaned_data.get('yargiBolgesi')
             town = tasinmaz_form.cleaned_data.get('town')
+            bam = tasinmaz_form.cleaned_data.get('bam')
+            bim = tasinmaz_form.cleaned_data.get('bim')
+            acm = tasinmaz_form.cleaned_data.get('acm')
+            teskilatturu = tasinmaz_form.cleaned_data.get('teskilatturu')
 
-            if not (depremderecesi or city or yargiBolgesi or town):
+            if not (teskilatturu or city or yargiBolgesi or town or bim or bam or acm):
                 teskilat = Gteskilat.objects.all()
             else:
                 query = Q()
-                if depremderecesi:
-                    query &= Q(depremderecesi=depremderecesi)
+                if teskilatturu:
+                    query &= Q(teskilatturu=teskilatturu)
                 if city:
                     query &= Q(city=city)
                 if yargiBolgesi:
                     query &= Q(yargiBolgesi=yargiBolgesi)
-                if town:
-                    query &= Q(town=town)
+                if bam:
+                    query &= Q(bam=bam)
+                if bim:
+                    query &= Q(bim=bim)
+                if acm:
+                    query &= Q(acm=acm)
 
                 if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
                     teskilat = Gteskilat.objects.filter(query).distinct()
+    teskilat_form.fields['acm'].queryset = Gbolge.objects.filter(type=Gbolge.Acm)
+    teskilat_form.fields['bim'].queryset = Gbolge.objects.filter(type=Gbolge.Bim)
+    teskilat_form.fields['bam'].queryset = Gbolge.objects.filter(type=Gbolge.Bam)
 
     return render(request, 'teskilat/teskilatlar.html',
                   {'teskilat': teskilat, 'teskilat_form': teskilat_form})

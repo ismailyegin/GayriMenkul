@@ -9,10 +9,13 @@ class GteskilatSearchForm(ModelForm):
         model = Gteskilat
 
         fields = (
-            'depremderecesi',
             'yargiBolgesi',
             'city',
-            'town'
+            'town',
+            'teskilatturu',
+            'acm',
+            'bam',
+            'bim',
 
         )
 
@@ -21,14 +24,17 @@ class GteskilatSearchForm(ModelForm):
             'yargiBolgesi': 'Yargı Bölgesi',
             'merkeznufus': 'Merkez Nufusu',
             'city': 'İl',
-            'town': 'İlçe'
+            'town': 'İlçe',
+            'teskilatturu': 'Teşkilat Türü',
+            'acm': 'ACM',
+            'bam': 'BAM',
+            'bim': 'BİM',
 
         }
 
         widgets = {
 
-            'depremderecesi': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                                  'style': 'width: 100%; ', }),
+
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', }),
             'town': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
@@ -36,15 +42,23 @@ class GteskilatSearchForm(ModelForm):
             'yargiBolgesi': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%; ', }),
 
-            'merkeznufus': forms.TextInput(
-                attrs={'class': 'form-control ', }),
-
+            'acm': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                       'style': 'width: 100%; ', }),
+            'bam': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                       'style': 'width: 100%; ', }),
+            'bim': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                       'style': 'width: 100%; ', }),
+            'teskilatturu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                'style': 'width: 100%; ', }),
 
         }
 
     def __init__(self, *args, **kwargs):
         super(GteskilatSearchForm, self).__init__(*args, **kwargs)
-        self.fields['depremderecesi'].required = False
         self.fields['city'].required = False
         self.fields['yargiBolgesi'].required = False
         self.fields['town'].required = False
+        self.fields['teskilatturu'].required = False
+        self.fields['acm'].required = False
+        self.fields['bam'].required = False
+        self.fields['bim'].required = False
