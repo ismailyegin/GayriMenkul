@@ -39,10 +39,10 @@ class GkiraForm(ModelForm):
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker4', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),
             'sozlesmeTarihi': forms.DateInput(
-                attrs={'class': 'form-control  pull-right', 'id': 'datepicker3', 'autocomplete': 'on',
+                attrs={'class': 'form-control  pull-right', 'id': 'datepicker7', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),
             'sozlesmeSonTarihi': forms.DateInput(
-                attrs={'class': 'form-control  pull-right', 'id': 'datepicker2', 'autocomplete': 'on',
+                attrs={'class': 'form-control  pull-right', 'id': 'datepicker8', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),
             'adres': forms.TextInput(
                 attrs={'class': 'form-control ', }),

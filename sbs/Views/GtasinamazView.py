@@ -83,7 +83,8 @@ def edit_tasinmaz(request, pk):
     if tasinmaz.tasinmazinTuru == tasinmaz.adaletYapisi:
         project_form = GtasinmazAdliyeForm(request.POST or None, instance=tasinmaz)
         gkurum = Gkurum.objects.all()
-        tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+        tapu = GTapu.objects.get(pk=tasinmaz.tapu.pk)
+        tapu_form = TapuForm(request.POST or None, instance=tapu)
         if not (tasinmaz.tahsis):
             tahsis = Gtahsis()
             tahsis.save()
@@ -95,8 +96,10 @@ def edit_tasinmaz(request, pk):
             kira.save()
             tasinmaz.kira = kira
             tasinmaz.save()
-        kiralik_form = GkiraForm(request.POST, instance=tasinmaz.kira)
-        tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
+        kiralik = Gkira.objects.get(pk=tasinmaz.kira.pk)
+        tahsis = Gtahsis.objects.get(pk=tasinmaz.tahsis.pk)
+        kiralik_form = GkiraForm(request.POST or None, instance=kiralik)
+        tahsis_form = GtahsisForm(request.POST or None, instance=tahsis)
 
         if request.method == 'POST':
 
@@ -114,14 +117,17 @@ def edit_tasinmaz(request, pk):
                 log = general_methods.logwrite(request, log)
                 print('log')
             else:
-                print('alanlari kontrol ediniz')
+                print('alanlari kontrol ediniz adalet')
                 messages.warning(request, 'Alanlari kontrol ediniz')
             # kaydetme testi yapılacak
             if kiralik_form.is_valid():
                 kiralik_form.save()
+                print('kiralik save')
 
             if tahsis_form.is_valid():
                 tahsis_form.save()
+                print('tahsis save ')
+
             return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
 
 
@@ -154,7 +160,7 @@ def edit_tasinmaz(request, pk):
 
     elif tasinmaz.tasinmazinTuru == tasinmaz.tahisisliArsalar:
         project_form = GtasinmazArsaForm(request.POST or None, instance=tasinmaz)
-        tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+        tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
 
         if not (tasinmaz.tahsis):
             tahsis = Gtahsis()
@@ -162,7 +168,9 @@ def edit_tasinmaz(request, pk):
             tasinmaz.tahsis = tahsis
             tasinmaz.save()
 
-        tahsis_form = GtahsisForm(request.POST or None, instance=tasinmaz.tahsis)
+        tah = Gtahsis.objects.get(pk=tasinmaz.tahsis.pk)
+
+        tahsis_form = GtahsisForm(request.POST or None, instance=tah)
 
         if request.method == 'POST':
 
@@ -269,7 +277,7 @@ def edit_tasinmaz(request, pk):
 
     elif tasinmaz.tasinmazinTuru == tasinmaz.cezaInfazKurumlari:
         project_form = GtasinmazcezainfazForm(request.POST or None, instance=tasinmaz)
-        tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+        tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
         if not (tasinmaz.tahsis):
             tahsis = Gtahsis()
             tahsis.save()
@@ -281,8 +289,8 @@ def edit_tasinmaz(request, pk):
             kira.save()
             tasinmaz.kira = kira
             tasinmaz.save()
-        kiralik_form = GkiraForm(request.POST, instance=tasinmaz.kira)
-        tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
+        kiralik_form = GkiraForm(request.POST or None, instance=tasinmaz.kira)
+        tahsis_form = GtahsisForm(request.POST or None, instance=tasinmaz.tahsis)
         if request.method == 'POST':
 
             if request.FILES.get('file'):

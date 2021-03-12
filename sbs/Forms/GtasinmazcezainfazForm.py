@@ -59,7 +59,7 @@ class GtasinmazcezainfazForm(ModelForm):
             'tahsisDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%; '}),
             'yapimyili': forms.DateInput(
-                attrs={'class': 'form-control  pull-right', 'id': 'datepicker4', 'autocomplete': 'on',
+                attrs={'class': 'form-control  pull-right', 'id': 'datepicker3', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),
             'arsayuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
