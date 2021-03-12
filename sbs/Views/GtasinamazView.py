@@ -797,7 +797,7 @@ def bolgeUpdate(request, pk):
     if request.method == 'POST':
         if project_form.is_valid():
             project_form.save()
-            return redirect('sbs:bolge-ekle')
+            return redirect('sbs:bolge-list')
     if region.town:
         project_form.fields['town'].queryset = Town.objects.filter(cityId=region.city.pk)
         project_form.fields['town'].initial = region.name
