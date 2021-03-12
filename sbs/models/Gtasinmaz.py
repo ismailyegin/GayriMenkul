@@ -11,7 +11,7 @@ from sbs.models.GtasinmazDocument import GtasinmazDocument
 
 
 class Gtasinmaz(models.Model):
-    TahsisliArsa = "Tahsisli Arsa"
+    TahsisliArsa = "Tahsisli"
     Kira = "Kiralık"
 
     TahsisDurumu = (
@@ -99,9 +99,9 @@ class Gtasinmaz(models.Model):
     TasinmazType = (
         (adaletYapisi, 'ADALET BİNASI'),
         # (kiraliktasinmaz, 'KİRALIK TAŞINMAZLAR'),
-        (tahisisliArsalar, 'TAHSİSLİ ARSALAR'),
-        (lojmanlar, 'LOJMANLAR'),
-        (cezaInfazKurumlari, 'CEZA İNFAZ KURUMLARI'),
+        (tahisisliArsalar, 'ARSA'),
+        (lojmanlar, 'LOJMAN'),
+        (cezaInfazKurumlari, 'CEZA İNFAZ KURUMU'),
     )
     CIK = 'Ceza İnfaz Kurumu'
     AB = 'Adalet Binası'
@@ -172,8 +172,8 @@ class Gtasinmaz(models.Model):
     binaustTur = models.ForeignKey(GtasinmazUstTur, on_delete=models.SET_NULL, verbose_name='binaüsttur', blank=True,
                                    null=True)
     # tahsisli arsa
-    tahsisDurumu = models.CharField(max_length=128, verbose_name='tahsis durumu ', choices=TahsisDurumu,
-                                    default=TahsisliArsa)
+    tahsisDurumu = models.CharField(max_length=128, verbose_name='tahsis durumu ', choices=TahsisDurumu, blank=True,
+                                    null=True)
     kira = models.ForeignKey(Gkira, on_delete=models.SET_NULL, verbose_name='kira', null=True, blank=True)
     tahsis = models.ForeignKey(Gtahsis, on_delete=models.SET_NULL, verbose_name='Tahsis', null=True, blank=True)
 

@@ -17,13 +17,14 @@ class GtasinmazSearchForm(ModelForm):
         model = Gtasinmaz
 
         fields = (
-            'name', 'sirano', 'tkgmno', 'tasinmazinTuru',)
+            'name', 'sirano', 'tkgmno', 'tasinmazinTuru', 'tahsisDurumu')
 
         labels = {'name': 'Tanımı',
                   'sirano': 'Sıra numarası',
 
                   'tkgmno': 'Tkgm numarası',
-                  'tasinmazinTuru': 'Tasinmazin Türü'
+                  'tasinmazinTuru': 'Tasinmazin Türü',
+                  'tahsisDurumu': 'Tahsis Durumu'
 
                   }
 
@@ -40,5 +41,7 @@ class GtasinmazSearchForm(ModelForm):
                 attrs={'class': 'form-control ', }),
             'tasinmazinTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                   'style': 'width: 100%; ', }),
+            'tahsisDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                'style': 'width: 100%; ', }),
 
         }

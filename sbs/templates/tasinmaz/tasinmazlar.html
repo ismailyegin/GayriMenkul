@@ -169,16 +169,8 @@
 
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label> Tahsis durumu</label>
-                                        <select name="tahsis_durumu"
-                                                class="form-control select2 select2-hidden-accessible"
-                                                style="width: 100%; " id="id_tahsis_durumu">
-                                            <option value="" selected>Seçiniz</option>
-                                            <option value="Tahsisli Arsa">Tahsisli Arsa</option>
-
-                                            <option value="Kiralık">Kiralık</option>
-
-                                        </select>
+                                        <label> {{ tasinmaz_form.tahsisDurumu.label }}</label>
+                                        {{ tasinmaz_form.tahsisDurumu }}
                                     </div>
                                 </div>
 
@@ -240,7 +232,7 @@
                                     {#                                    <th>Binayı Kullanan Birim</th>#}
                                     <th>Sıra Numarası</th>
                                     <th>Tkgm Numarasi</th>
-                                    <th>Mülkiyet</th>
+
                                     <th>Tahsis Durumu</th>
                                     <th>Taşınmazin Türü</th>
                                     {#                                    <th>Açıklama</th>#}
@@ -258,9 +250,9 @@
                                             {#                                            <td> {{ project.kurum.name }}</td>#}
                                             <td>{{ project.sirano }} </td>
                                             <td>{{ project.tkgmno }} </td>
-                                            <td>{{ project.mulkiyet }} </td>
 
-                                            <td>{{ project.tahsis_durumu }}</td>
+
+                                            <td>{{ project.tahsisDurumu }}</td>
 
                                             <td>{{ project.tasinmazinTuru }}</td>
                                             {#                                            <td>{{ project.definition }} </td>#}

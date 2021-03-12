@@ -66,7 +66,7 @@ class GtasinmazlojmanForm(ModelForm):
             'tasinmazinTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                   'style': 'width: 100%; ', 'required': 'required'}),
             'tahsisDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                                'style': 'width: 100%; ', }),
+                                                'style': 'width: 100%; ', 'required': 'required'}),
             'mustakil': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                             'style': 'width: 100%; ', }),
             'sirano': forms.TextInput(

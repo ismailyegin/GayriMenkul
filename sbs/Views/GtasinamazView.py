@@ -384,10 +384,10 @@ def tasinmaz_list(request):
         name = request.POST.get('name')
         sirano = request.POST.get('sirano')
         tkgmno = request.POST.get('tkgmno')
-        tahsis_durumu = request.POST.get('tahsis_durumu')
+        tahsis_durumu = request.POST.get('tahsisDurumu')
         tasinmazinTuru = request.POST.get('tasinmazinTuru')
 
-        if not (name or sirano or tkgmno or tahsis_durumu):
+        if not (name or sirano or tkgmno or tasinmazinTuru or tahsis_durumu):
             projects = Gtasinmaz.objects.all()
         else:
             query = Q()
@@ -400,7 +400,7 @@ def tasinmaz_list(request):
             if tasinmazinTuru:
                 query &= Q(tasinmazinTuru=tasinmazinTuru)
             if tahsis_durumu:
-                query &= Q(tahsis_durumu=tahsis_durumu)
+                query &= Q(tahsisDurumu=tahsis_durumu)
 
             if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
                 projects = Gtasinmaz.objects.filter(query).distinct()

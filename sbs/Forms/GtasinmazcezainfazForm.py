@@ -57,7 +57,7 @@ class GtasinmazcezainfazForm(ModelForm):
             'kapasitesi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'brutKapaliAlan': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'tahsisDurumu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                                'style': 'width: 100%; '}),
+                                                'style': 'width: 100%; ', 'required': 'required'}),
             'yapimyili': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker3', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),
