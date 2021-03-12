@@ -148,8 +148,8 @@ class Gtasinmaz(models.Model):
 
     tahsisAmaci = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TAHSIS_AMACI,
                                    default=AB)
-    tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TasinmazType,
-                                      default=adaletYapisi)
+    tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TasinmazType, null=True,
+                                      blank=True)
 
 
     definition = models.CharField(max_length=128, verbose_name='Tasınmaz Açıklama ', null=True, blank=True)

@@ -38,5 +38,7 @@ class GtasinmazSearchForm(ModelForm):
 
             'name': forms.TextInput(
                 attrs={'class': 'form-control ', }),
+            'tasinmazinTuru': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                  'style': 'width: 100%; ', }),
 
         }

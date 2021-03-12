@@ -33,7 +33,7 @@ class GtasinmazForm(ModelForm):
             'tkgmno': forms.TextInput(
                 attrs={'class': 'form-control ', 'required': 'required'}),
             'name': forms.TextInput(
-                attrs={'class': 'form-control ', }),
+                attrs={'class': 'form-control ', 'required': 'required'}),
             'definition': forms.Textarea(
                 attrs={'class': 'form-control ', 'rows': '2'}),
 

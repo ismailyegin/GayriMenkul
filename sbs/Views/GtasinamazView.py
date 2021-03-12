@@ -384,11 +384,10 @@ def tasinmaz_list(request):
         name = request.POST.get('name')
         sirano = request.POST.get('sirano')
         tkgmno = request.POST.get('tkgmno')
-        mulkiyet = request.POST.get('mulkiyet')
         tahsis_durumu = request.POST.get('tahsis_durumu')
-        arsaTuru = request.POST.get('arsaTuru')
+        tasinmazinTuru = request.POST.get('tasinmazinTuru')
 
-        if not (name or sirano or tkgmno or mulkiyet or tahsis_durumu or arsaTuru):
+        if not (name or sirano or tkgmno or tahsis_durumu):
             projects = Gtasinmaz.objects.all()
         else:
             query = Q()
@@ -398,12 +397,10 @@ def tasinmaz_list(request):
                 query &= Q(sirano=sirano)
             if tkgmno:
                 query &= Q(tkgmno=tkgmno)
-            if mulkiyet:
-                query &= Q(mulkiyet=mulkiyet)
+            if tasinmazinTuru:
+                query &= Q(tasinmazinTuru=tasinmazinTuru)
             if tahsis_durumu:
                 query &= Q(tahsis_durumu=tahsis_durumu)
-            if arsaTuru:
-                query &= Q(arsaTuru=arsaTuru)
 
             if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
                 projects = Gtasinmaz.objects.filter(query).distinct()
@@ -593,7 +590,6 @@ def list_teskilat(request):
                     query &= Q(bim=bim)
                 if acm:
                     query &= Q(acm=acm)
-
                 if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
                     teskilat = Gteskilat.objects.filter(query).distinct()
     teskilat_form.fields['acm'].queryset = Gbolge.objects.filter(type=Gbolge.Acm)

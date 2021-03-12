@@ -138,47 +138,35 @@
                             <div class="box-body">
                                 {% csrf_token %}
 
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label> {{ tasinmaz_form.name.label }}</label>
                                         {{ tasinmaz_form.name }}
                                     </div>
                                 </div>
+
+
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label> Bina mı?</label>
-                                        <select name="arsaTuru" class="form-control select2 select2-hidden-accessible"
-                                                style="width: 100%; " id="id_arsaTuru">
-                                            <option value="" selected>Seçiniz</option>
-                                            <option value="Bina">Bina</option>
-
-                                            <option value="Arsa">Arsa</option>
-
-                                        </select>
+                                        <label> {{ tasinmaz_form.tkgmno.label }}</label>
+                                        {{ tasinmaz_form.tkgmno }}
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label> Mülkiyet</label>
-                                        <select name="mulkiyet" class="form-control select2 select2-hidden-accessible"
-                                                style="width: 100%; " id="id_mulkiyet">
-                                            <option value="" selected>Seçiniz</option>
-                                            <option value="HAZİNE">HAZİNE</option>
-
-                                            <option value="HÜKÜMET KONAGI İÇERİSİNDE">HÜKÜMET KONAĞI İÇİNDE</option>
-
-                                            <option value="HÜKÜMET KONAGI AYRİ BLOK">HÜKÜMET KONAĞINDA AYRI BLOK
-                                            </option>
-
-                                            <option value="İŞ YURTLARI">İŞ YURTLARI</option>
-
-                                            <option value="DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR">DİĞER KAMU KURUM
-                                                KURULUŞLARINA AİT YAPILAR
-                                            </option>
-
-                                        </select>
+                                        <label> {{ tasinmaz_form.sirano.label }}</label>
+                                        {{ tasinmaz_form.sirano }}
                                     </div>
                                 </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ tasinmaz_form.tasinmazinTuru.label }}</label>
+                                        {{ tasinmaz_form.tasinmazinTuru }}
+                                    </div>
+                                </div>
+
+
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label> Tahsis durumu</label>
@@ -191,18 +179,6 @@
                                             <option value="Kiralık">Kiralık</option>
 
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label> {{ tasinmaz_form.tkgmno.label }}</label>
-                                        {{ tasinmaz_form.tkgmno }}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label> {{ tasinmaz_form.sirano.label }}</label>
-                                        {{ tasinmaz_form.sirano }}
                                     </div>
                                 </div>
 
