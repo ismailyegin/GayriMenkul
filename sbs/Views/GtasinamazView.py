@@ -216,7 +216,7 @@ def edit_tasinmaz(request, pk):
     elif tasinmaz.tasinmazinTuru == tasinmaz.lojmanlar:
 
         project_form = GtasinmazlojmanForm(request.POST or None, instance=tasinmaz)
-        tapu_form = TapuForm(request.POST, instance=tasinmaz.tapu)
+        tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
         if not (tasinmaz.tahsis):
             tahsis = Gtahsis()
             tahsis.save()
@@ -228,8 +228,8 @@ def edit_tasinmaz(request, pk):
             kira.save()
             tasinmaz.kira = kira
             tasinmaz.save()
-        kiralik_form = GkiraForm(request.POST, instance=tasinmaz.kira)
-        tahsis_form = GtahsisForm(request.POST, instance=tasinmaz.tahsis)
+        kiralik_form = GkiraForm(request.POST or None, instance=tasinmaz.kira)
+        tahsis_form = GtahsisForm(request.POST or None, instance=tasinmaz.tahsis)
         if request.method == 'POST':
 
             if request.FILES.get('file'):
@@ -251,10 +251,10 @@ def edit_tasinmaz(request, pk):
                 log = general_methods.logwrite(request, log)
                 print('log lojman ')
                 return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
-
-
             else:
                 print('alanlari kontrol ediniz lojman')
+                for item in project_form.errors:
+                    print(item)
                 messages.warning(request, 'Alanlari kontrol ediniz')
 
         if tasinmaz.tapu.city:

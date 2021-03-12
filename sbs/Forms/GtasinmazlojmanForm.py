@@ -85,10 +85,8 @@ class GtasinmazlojmanForm(ModelForm):
                        'onkeydown': 'return false'}),
             'lojmanturu': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                               'style': 'width: 100%; ', }),
-            'daireBrut': forms.TextInput(
-                attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'daireAlaniNet': forms.TextInput(
-                attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'daireBrut': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'daireAlaniNet': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'lojmanKullanim': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                         'style': 'width: 100%; ', }),
             'hDaireSayisi': forms.TextInput(

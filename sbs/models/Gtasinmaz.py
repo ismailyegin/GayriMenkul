@@ -157,10 +157,9 @@ class Gtasinmaz(models.Model):
     offers = models.ManyToManyField(EPOffer)
     documents = models.ManyToManyField(GtasinmazDocument)
 
-
-    arsaDegeri = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    yapiMalitet = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    yapiRaic = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    arsaDegeri = models.IntegerField(blank=True, null=True, )
+    yapiMalitet = models.IntegerField(blank=True, null=True, )
+    yapiRaic = models.IntegerField(blank=True, null=True, )
 
     # adalet yapı detayi
     yapimyili = models.DateTimeField(null=True, blank=True)
@@ -184,17 +183,18 @@ class Gtasinmaz(models.Model):
     daireSayisi = models.IntegerField(blank=True, null=True, )
     lojmanYapimYili = models.DateTimeField(null=True, blank=True)
     lojmanturu = models.CharField(max_length=128, verbose_name='lojman_turu ', choices=lojmanTuru, default=Konut)
-    daireAlaniNet = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    daireBrut = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    daireAlaniNet = models.IntegerField(blank=True, null=True, )
+    daireBrut = models.IntegerField(blank=True, null=True, )
     lojmanKullanim = models.CharField(max_length=128, verbose_name='lojman_kullanim_turu',
-                                            choices=lojmanKullanimTuru, default=fall)
+                                      choices=lojmanKullanimTuru, default=fall, null=True
+                                      )
 
     hDaireSayisi = models.IntegerField(blank=True, null=True, )
     atvgdaireSayisi = models.IntegerField(blank=True, null=True, )
     isDaireSayisi = models.IntegerField(blank=True, null=True, )
     mDaireSayisi = models.IntegerField(blank=True, null=True, )
     mSavciSayisi = models.IntegerField(blank=True, null=True, )
-    arsayuzolcumu = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    arsayuzolcumu = models.IntegerField(blank=True, null=True, )
     mAyriBlock = models.BooleanField(default=True, choices=IsFormal)
     blockDaire = models.IntegerField(blank=True, null=True, )
 
