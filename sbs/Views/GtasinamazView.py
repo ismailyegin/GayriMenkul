@@ -10,6 +10,7 @@ from django.shortcuts import redirect, render
 
 from oxiterp.settings.base import MEDIA_URL
 from sbs.Forms.GBolgeForm import GbolgeForm
+from sbs.Forms.GbolgeSearchForm import GbolgeSearchForm
 from sbs.Forms.GkiraForm import GkiraForm
 from sbs.Forms.GtahsisForm import GtahsisForm
 #   adalet alanina göre form üretimi oldu
@@ -720,6 +721,47 @@ def tasimazAltTur(request):
 
 
 @login_required
+def BolgeList(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    project_form = GbolgeSearchForm()
+    regions = Gbolge.objects.none()
+
+    if request.method == 'POST':
+        project_form = GbolgeSearchForm(request.POST)
+        if project_form.is_valid():
+            town = project_form.cleaned_data.get('town')
+            type = project_form.cleaned_data.get('type')
+            city = project_form.cleaned_data.get('city')
+            name = project_form.cleaned_data.get('name')
+
+            if not (type or city or name or town):
+                regions = Gbolge.objects.filter(name__icontains=name)
+            else:
+                query = Q()
+                if type:
+                    query &= Q(type=type)
+                if city:
+                    query &= Q(city=city)
+                if town:
+                    query &= Q(town=town)
+                if name:
+                    query &= Q(name__icontains=name)
+                if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
+                    regions = Gbolge.objects.filter(query).distinct()
+
+    project_form.fields['town'].queryset = Town.objects.none()
+    return render(request, 'Bolge/BolgeList.html', {
+        'project_form': project_form,
+        'regions': regions,
+    })
+
+
+@login_required
 def BolgeAdd(request):
     perm = general_methods.control_access(request)
 
@@ -731,18 +773,16 @@ def BolgeAdd(request):
         project_form = GbolgeForm(request.POST)
         if project_form.is_valid():
             project_form.save()
+            return redirect('sbs:bolge-list')
+
         else:
             print('alanlari kontrol ediniz')
     project_form = GbolgeForm()
-    regions = Gbolge.objects.all()
 
     project_form.fields['town'].queryset = Town.objects.none()
-    return render(request, 'Bolge/BolgeEkle.html', {
-        'regions': regions,
+    return render(request, 'Bolge/BolgeAdd.html', {
         'project_form': project_form
     })
-
-
 @login_required
 def bolgeUpdate(request, pk):
     perm = general_methods.control_access(request)

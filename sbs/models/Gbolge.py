@@ -8,6 +8,7 @@ class Gbolge(models.Model):
     Bam = "BAM"
     Bim = "BİM"
     Acm = 'ACM'
+    bos = None
 
     mahal = (
 
@@ -19,7 +20,7 @@ class Gbolge(models.Model):
     modificationDate = models.DateTimeField(auto_now=True)
 
     name = models.CharField(max_length=120, null=False, blank=False)
-    type = models.CharField(max_length=128, verbose_name='Mahal', choices=mahal, default=Bam)
+    type = models.CharField(max_length=128, verbose_name='Mahal', choices=mahal, null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, verbose_name='sehir', null=False, blank=False)
     town = models.ForeignKey(Town, on_delete=models.SET_NULL, verbose_name='ilce', null=True, blank=True)
 
