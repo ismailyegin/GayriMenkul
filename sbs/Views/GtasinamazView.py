@@ -74,6 +74,7 @@ def edit_tasinmaz(request, pk):
         logout(request)
         return redirect('accounts:login')
     tasinmaz = Gtasinmaz.objects.get(pk=pk)
+    gkurum = Gkurum.objects.all()
     if tasinmaz.tapu == None:
         tapu = GTapu()
         tapu.save()
@@ -81,9 +82,10 @@ def edit_tasinmaz(request, pk):
         tasinmaz.save()
     print(tasinmaz.tasinmazinTuru)
 
+
     if tasinmaz.tasinmazinTuru == tasinmaz.adaletYapisi:
         project_form = GtasinmazAdliyeForm(request.POST or None, instance=tasinmaz)
-        gkurum = Gkurum.objects.all()
+
         tapu = GTapu.objects.get(pk=tasinmaz.tapu.pk)
         tapu_form = TapuForm(request.POST or None, instance=tapu)
         if not (tasinmaz.tahsis):
@@ -210,7 +212,9 @@ def edit_tasinmaz(request, pk):
                       {
                           'project_form': project_form,
                           'tapu_form': tapu_form,
-                          'tahsis_form': tahsis_form
+                          'tahsis_form': tahsis_form,
+                          'gkurum': gkurum,
+                          'project': tasinmaz,
 
 
                       })
@@ -273,6 +277,8 @@ def edit_tasinmaz(request, pk):
                           'tapu_form': tapu_form,
                           'tahsis_form': tahsis_form,
                           'kiralik_form': kiralik_form,
+                          'gkurum': gkurum,
+                          'project': tasinmaz,
                       })
 
 
@@ -334,6 +340,8 @@ def edit_tasinmaz(request, pk):
                           'tapu_form': tapu_form,
                           'kiralik_form': kiralik_form,
                           'tahsis_form': tahsis_form,
+                          'gkurum': gkurum,
+                          'project': tasinmaz,
                       })
     else:
         return redirect('sbs:tasinmaz-list')

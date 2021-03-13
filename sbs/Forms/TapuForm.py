@@ -15,6 +15,7 @@ class TapuForm(ModelForm):
             'neighborhood',
             'town',
             'city',
+            'arsayuzolcumu'
         )
 
         labels = {
@@ -24,6 +25,7 @@ class TapuForm(ModelForm):
             'neighborhood': 'Mahalle ',
             'town': 'İlçe ',
             'city': 'Şehir',
+            'arsayuzolcumu': 'Arsa Yüz Ölçümü',
 
         }
         widgets = {
@@ -47,5 +49,6 @@ class TapuForm(ModelForm):
 
             'town': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', }),
+            'arsayuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
         }

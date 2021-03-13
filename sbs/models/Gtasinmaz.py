@@ -194,7 +194,6 @@ class Gtasinmaz(models.Model):
     isDaireSayisi = models.IntegerField(blank=True, null=True, )
     mDaireSayisi = models.IntegerField(blank=True, null=True, )
     mSavciSayisi = models.IntegerField(blank=True, null=True, )
-    arsayuzolcumu = models.IntegerField(blank=True, null=True, )
     mAyriBlock = models.BooleanField(default=True, choices=IsFormal)
     blockDaire = models.IntegerField(blank=True, null=True, )
 

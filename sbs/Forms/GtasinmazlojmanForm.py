@@ -28,7 +28,6 @@ class GtasinmazlojmanForm(ModelForm):
             'isDaireSayisi',
             'mDaireSayisi',
             'mSavciSayisi',
-            'arsayuzolcumu',
             'mAyriBlock',
             'blockDaire'
 
@@ -54,7 +53,6 @@ class GtasinmazlojmanForm(ModelForm):
                   'isDaireSayisi': 'İs yurtlari Daire Sayısı ',
                   'mDaireSayisi': 'Mahaldeki Toplam Daire Sayisi',
                   'mSavciSayisi': 'Mahaldeki Toplam Hakim ve Savcı Sayisi',
-                  'arsayuzolcumu': 'Arsa Yüzölçümü',
                   'mAyriBlock': 'Müstakil Ayrı Blok',
                   'blockDaire': 'Blok İçinde Daire',
 
@@ -97,7 +95,6 @@ class GtasinmazlojmanForm(ModelForm):
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'mSavciSayisi': forms.TextInput(
                 attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-            'arsayuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
 
             'mAyriBlock': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                      'style': 'width: 100%; ', }),

@@ -19,7 +19,7 @@ class GtasinmazcezainfazForm(ModelForm):
             'tipi',
             'kapasitesi',
             'brutKapaliAlan',
-            'arsayuzolcumu',
+
             'tahsisDurumu'
 
         )
@@ -34,7 +34,7 @@ class GtasinmazcezainfazForm(ModelForm):
                   'tipi': 'Tipi',
                   'kapasitesi': 'Kapasitesi',
                   'brutKapaliAlan': 'Brüt Kapali Kullanim Alanı',
-                  'arsayuzolcumu': 'Arsa Yüz Ölçümü',
+
                   'tahsisDurumu': 'Tahsis Durumu',
                   'yapimyili': 'Yapım Yılı ',
                   }
@@ -61,9 +61,5 @@ class GtasinmazcezainfazForm(ModelForm):
             'yapimyili': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker3', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),
-            'arsayuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
-
-
-
 
         }
