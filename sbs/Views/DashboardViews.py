@@ -10,6 +10,9 @@ from sbs.models import SportClubUser, SportsClub, Coach, Level, Athlete, City, C
 from sbs.models.DirectoryMember import DirectoryMember
 from sbs.models.EPProject import EPProject
 from sbs.models.Employee import Employee
+from sbs.models.Gbolge import Gbolge
+from sbs.models.Gtasinmaz import Gtasinmaz
+from sbs.models.Gteskilat import Gteskilat
 from sbs.models.Message import Message
 from sbs.services import general_methods
 
@@ -58,11 +61,52 @@ def return_directory_dashboard(request):
     perm = general_methods.control_access(request)
 
     member = DirectoryMember.objects.get(user=request.user)
-
     if not perm or member.kobilid != 2:
         logout(request)
         return redirect('accounts:login')
-    return render(request, 'anasayfa/federasyon.html')
+
+    tasinmaz_count = Gtasinmaz.objects.count()
+    teskilat_count = Gteskilat.objects.count()
+    bolge_count = Gbolge.objects.count()
+    kiralik_count = Gtasinmaz.objects.filter(tahsisDurumu=Gtasinmaz.Kira).count()
+    tahsis_count = Gtasinmaz.objects.filter(tahsisDurumu=Gtasinmaz.TahsisliArsa).count()
+
+    adalet_yapilari_count = Gtasinmaz.objects.filter(tasinmazinTuru=Gtasinmaz.adaletYapisi).count()
+    ceza_infaz_count = Gtasinmaz.objects.filter(tasinmazinTuru=Gtasinmaz.cezaInfazKurumlari).count()
+    tahsisli_arsa_count = Gtasinmaz.objects.filter(tasinmazinTuru=Gtasinmaz.tahisisliArsalar).count()
+    lojman_count = Gtasinmaz.objects.filter(tasinmazinTuru=Gtasinmaz.lojmanlar).count()
+
+    bam_count = Gbolge.objects.filter(type=Gbolge.Bam).count()
+    bim_count = Gbolge.objects.filter(type=Gbolge.Bim).count()
+    acm_count = Gbolge.objects.filter(type=Gbolge.Acm).count()
+
+    bolge1 = Gteskilat.objects.filter(yargiBolgesi=Gteskilat.B1).count()
+    bolge2 = Gteskilat.objects.filter(yargiBolgesi=Gteskilat.B2).count()
+    bolge3 = Gteskilat.objects.filter(yargiBolgesi=Gteskilat.B3).count()
+    bolge4 = Gteskilat.objects.filter(yargiBolgesi=Gteskilat.B4).count()
+    bolge5 = Gteskilat.objects.filter(yargiBolgesi=Gteskilat.B5).count()
+
+    return render(request, 'anasayfa/federasyon.html', {
+        'bam_count': bam_count,
+        'bim_count': bim_count,
+        'acm_count': acm_count,
+
+        'lojman_count': lojman_count,
+        'adalet_yapilari_count': adalet_yapilari_count,
+        'tahsisli_arsa_count': tahsisli_arsa_count,
+        'ceza_infaz_count': ceza_infaz_count,
+
+        'tahsis_count': tahsis_count,
+        'kiralik_count': kiralik_count,
+        'bolge_count': bolge_count,
+        'teskilat_count': teskilat_count,
+        'tasinmaz_count': tasinmaz_count,
+        'bolge1': bolge1,
+        'bolge2': bolge2,
+        'bolge3': bolge3,
+        'bolge4': bolge4,
+        'bolge5': bolge5,
+    })
 
 
 @login_required
