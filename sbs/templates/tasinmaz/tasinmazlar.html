@@ -138,10 +138,23 @@
                             <div class="box-body">
                                 {% csrf_token %}
 
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label> {{ tasinmaz_form.name.label }}</label>
                                         {{ tasinmaz_form.name }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.city.label }}</label>
+                                        {{ teskilat_form.city }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label> {{ teskilat_form.town.label }}</label>
+                                        {{ teskilat_form.town }}
                                     </div>
                                 </div>
 
@@ -307,6 +320,15 @@
 
     <script>
         $(function () {
+
+
+            $("#id_city").change(function () {
+                var city = $(this).find('option:selected').text();
+                $("#id_town").empty();
+                ilce(city);
+            });
+
+
             $('#projects').DataTable({
 
                 dom: 'Bfrtip',
@@ -429,10 +451,27 @@
 
 
         })
-    </script>
 
 
-    <script>
+        function ilce(city) {
+            $.ajax({
+                url: "{% url "sbs:ilce-bilgi" %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                    "cmd": city,
+                },
+                success: function (result) {
+
+                    $("#id_town").append('<option value="">-----------</option>');
+
+                    for (item in result.data) {
+                        $("#id_town").append('<option value="' + result.data[item].name + '">' + result.data[item].name + '</option>');
+                    }
+                }
+            });
+        }
+
         function deleteReferee(id) {
 
             console.log(id);

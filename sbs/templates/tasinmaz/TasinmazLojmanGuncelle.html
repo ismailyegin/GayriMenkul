@@ -682,12 +682,7 @@
                                     <div class="row" style="padding-bottom: 10px">
 
 
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label> {{ project_form.arsayuzolcumu.label }}</label>
-                                                {{ project_form.arsayuzolcumu }}
-                                            </div>
-                                        </div>
+
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label> {{ project_form.mAyriBlock.label }}</label>
@@ -965,6 +960,13 @@
                                                     {{ kiralik_form.adres }}
                                                 </div>
                                             </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label> {{ kiralik_form.kirabastarihi.label }}</label>
+                                                    {{ kiralik_form.kirabastarihi }}
+                                                </div>
+                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label> {{ kiralik_form.kapalialan.label }}</label>
@@ -988,168 +990,87 @@
 
                         {% endif %}
                         {#            Proje Alt Firma #}
-                        <div class="col-md-6">
-                            <div class="box box-info collapsed-box">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">KULLANAN BİRİMLER</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                                class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                    <!-- /.box-tools -->
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body" style="display: none;">
-                                    <div class="row" style="padding-bottom: 10px">
-                                        <div class="col-lg-12">
-                                            <div class="btn-group">
-                                                <a class="btn btn-success"
-                                                   data-toggle="modal"
-                                                   onclick=AddsubCompany({{ project.pk }})><i
-                                                        class="fa fa-plus"></i> Birim Ekle</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <table id="birim" class="table table-bordered table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Birim</th>
-                                                    <th>İşlemler</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                {% if project.kurum.all %}
-                                                    {% for item in project.kurum.all %}
-                                                        <tr id="birim-{{ item.pk }}">
-                                                            <td>{{ forloop.counter }} </td>
-                                                            <td>{{ item.name }}</td>
-
-                                                            <td>
-                                                                <div class="btn-group">
-                                                                    {#                                                            <a class="btn btn-success"#}
-                                                                    {#                                                               data-toggle="modal"#}
-                                                                    {#                                                               onclick=exammineSubCompany({{ project.pk }},{{ item.pk }})><i#}
-                                                                    {#                                                                    class="fa fa-play-circle"></i></a>#}
-                                                                    {##}
-                                                                    {#                                                            <a class="btn btn-warning"#}
-                                                                    {#                                                               data-toggle="modal"#}
-                                                                    {#                                                               onclick=editSubCompany({{ project.pk }},{{ item.pk }})><i#}
-                                                                    {#                                                                    class="fa fa-edit"></i></a>#}
-
-
-                                                                    <a class="btn btn-danger"
-                                                                       data-toggle="modal"
-                                                                       onclick=deleteSubcompany({{ project.pk }},{{ item.pk }})><i
-                                                                            class="fa fa-trash"></i></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-
-                                                    {% endfor %}
-                                                {% endif %}
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-
-
-                        {#    tapu bilgileri           ------------------------------#}
-
-                    {#birimler#}
-
-                    <div class="col-md-6">
-                        <div class="box box-info collapsed-box">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">KULLANAN BİRİMLER</h3>
-
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                            class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                                <!-- /.box-tools -->
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body" style="display: none;">
-                                <div class="row" style="padding-bottom: 10px">
-                                    <div class="col-lg-12">
-                                        <div class="btn-group">
-                                            <a class="btn btn-success"
-                                               data-toggle="modal"
-                                               onclick=AddsubCompany({{ project.pk }})><i
-                                                    class="fa fa-plus"></i> Birim Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <table id="birim" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Birim</th>
-                                                <th>İşlemler</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            {% if project.kurum.all %}
-                                                {% for item in project.kurum.all %}
-                                                    <tr id="birim-{{ item.pk }}">
-                                                        <td>{{ forloop.counter }} </td>
-                                                        <td>{{ item.name }}</td>
-
-                                                        <td>
-                                                            <div class="btn-group">
-                                                                {#                                                            <a class="btn btn-success"#}
-                                                                {#                                                               data-toggle="modal"#}
-                                                                {#                                                               onclick=exammineSubCompany({{ project.pk }},{{ item.pk }})><i#}
-                                                                {#                                                                    class="fa fa-play-circle"></i></a>#}
-                                                                {##}
-                                                                {#                                                            <a class="btn btn-warning"#}
-                                                                {#                                                               data-toggle="modal"#}
-                                                                {#                                                               onclick=editSubCompany({{ project.pk }},{{ item.pk }})><i#}
-                                                                {#                                                                    class="fa fa-edit"></i></a>#}
+                    {#                        <div class="col-md-6">#}
+                    {#                            <div class="box box-info collapsed-box">#}
+                    {#                                <div class="box-header with-border">#}
+                    {#                                    <h3 class="box-title">KULLANAN BİRİMLER</h3>#}
+                    {##}
+                    {#                                    <div class="box-tools pull-right">#}
+                    {#                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i#}
+                    {#                                                class="fa fa-plus"></i>#}
+                    {#                                        </button>#}
+                    {#                                    </div>#}
+                    {#                                    <!-- /.box-tools -->#}
+                    {#                                </div>#}
+                    {#                                <!-- /.box-header -->#}
+                    {#                                <div class="box-body" style="display: none;">#}
+                    {#                                    <div class="row" style="padding-bottom: 10px">#}
+                    {#                                        <div class="col-lg-12">#}
+                    {#                                            <div class="btn-group">#}
+                    {#                                                <a class="btn btn-success"#}
+                    {#                                                   data-toggle="modal"#}
+                    {#                                                   onclick=AddsubCompany({{ project.pk }})><i#}
+                    {#                                                        class="fa fa-plus"></i> Birim Ekle</a>#}
+                    {#                                            </div>#}
+                    {#                                        </div>#}
+                    {#                                    </div>#}
+                    {#                                    <div class="row">#}
+                    {#                                        <div class="col-lg-12">#}
+                    {#                                            <table id="birim" class="table table-bordered table-hover">#}
+                    {#                                                <thead>#}
+                    {#                                                <tr>#}
+                    {#                                                    <th>No</th>#}
+                    {#                                                    <th>Birim</th>#}
+                    {#                                                    <th>İşlemler</th>#}
+                    {#                                                </tr>#}
+                    {#                                                </thead>#}
+                    {#                                                <tbody>#}
+                    {##}
+                    {#                                                {% if project.kurum.all %}#}
+                    {#                                                    {% for item in project.kurum.all %}#}
+                    {#                                                        <tr id="birim-{{ item.pk }}">#}
+                    {#                                                            <td>{{ forloop.counter }} </td>#}
+                    {#                                                            <td>{{ item.name }}</td>#}
+                    {##}
+                    {#                                                            <td>#}
+                    {#                                                                <div class="btn-group">#}
+                    {#                                                            <a class="btn btn-success"#}
+                    {#                                                               data-toggle="modal"#}
+                    {#                                                               onclick=exammineSubCompany({{ project.pk }},{{ item.pk }})><i#}
+                    {#                                                                    class="fa fa-play-circle"></i></a>#}
+                    {##}
+                    {#                                                            <a class="btn btn-warning"#}
+                    {#                                                               data-toggle="modal"#}
+                    {#                                                               onclick=editSubCompany({{ project.pk }},{{ item.pk }})><i#}
+                    {#                                                                    class="fa fa-edit"></i></a>#}
+                    {##}
+                    {##}
+                    {#                                                                    <a class="btn btn-danger"#}
+                    {#                                                                       data-toggle="modal"#}
+                    {#                                                                       onclick=deleteSubcompany({{ project.pk }},{{ item.pk }})><i#}
+                    {#                                                                            class="fa fa-trash"></i></a>#}
+                    {#                                                                </div>#}
+                    {#                                                            </td>#}
+                    {#                                                        </tr>#}
+                    {##}
+                    {#                                                    {% endfor %}#}
+                    {#                                                {% endif %}#}
+                    {##}
+                    {##}
+                    {#                                                </tbody>#}
+                    {#                                            </table>#}
+                    {#                                        </div>#}
+                    {##}
+                    {##}
+                    {#                                    </div>#}
+                    {#                                </div>#}
+                    {#                                <!-- /.box-body -->#}
+                    {#                            </div>#}
+                    {#                            <!-- /.box -->#}
+                    {#                        </div>#}
 
 
-                                                                <a class="btn btn-danger"
-                                                                   data-toggle="modal"
-                                                                   onclick=deleteSubcompany({{ project.pk }},{{ item.pk }})><i
-                                                                        class="fa fa-trash"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                {% endfor %}
-                                            {% endif %}
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
+                    {#    tapu bilgileri           ------------------------------#}
                         <div class="col-md-6">
                             <div class="box box-info collapsed-box">
                                 <div class="box-header with-border">
@@ -1206,6 +1127,18 @@
                                             <div class="form-group">
                                                 <label> {{ tapu_form.arsayuzolcumu.label }}</label>
                                                 {{ tapu_form.arsayuzolcumu }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ tapu_form.tahsisyuzolcumu.label }}</label>
+                                                {{ tapu_form.tahsisyuzolcumu }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label> {{ tapu_form.arsaEmsal.label }}</label>
+                                                {{ tapu_form.arsaEmsal }}
                                             </div>
                                         </div>
 
