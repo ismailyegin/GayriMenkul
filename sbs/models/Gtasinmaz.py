@@ -49,13 +49,13 @@ class Gtasinmaz(models.Model):
         (Arsa, 'Arsa'),
     )
 
-    fall = "Fall"
+    fall = "Faal"
     Atıl = "Atıl veya Metrut"
     yikik = 'Yıkık'
 
     lojmanKullanimTuru = (
 
-        (fall, 'Fall'),
+        (fall, 'Faal'),
         (Atıl, 'Atıl veya Metrut'),
         (yikik, 'Yıkık'),
     )
@@ -67,17 +67,19 @@ class Gtasinmaz(models.Model):
     Hukumet_konagi_ayri = "HÜKÜMET KONAGI AYRİ BLOK"
     Is_yurtlari = "İŞ YURTLARI"
     Diger = "DİĞER KAMU KURUM KURULUŞLARINDAN TAHSİSLİ "
-    Atvg = 'ATVG'
+    Atvg = 'ATGV'
     Kiralik = "KİRALIK"
+    belediye = 'BELEDİYE'
     bos = None
 
     Mustakil = (
-
+        (bos, 'Seçiniz'),
+        (belediye, 'BELEDİYE'),
         (Hazine, 'HAZİNE'),
         (Is_yurtlari, 'İŞ YURTLARI'),
-        (Atvg, 'ATVG'),
+        (Atvg, 'ATGV'),
         (Diger, 'DİĞER KAMU KURUM KURULUŞLARINA AİT YAPILAR'),
-        (bos, 'Seçiniz'),
+
 
     )
 
@@ -95,13 +97,21 @@ class Gtasinmaz(models.Model):
     tahisisliArsalar = 'ARSA'
     lojmanlar = 'LOJMAN'
     cezaInfazKurumlari = 'CEZA İNFAZ KURUMU'
+    adlitip = 'ADLİ TIP'
+    egitimMerkezi = 'EGİTİM MERKEZİ'
+    denetimli = 'DENETİMLİ SERBESTLİK'
+    sosyal = 'SOSYAL TESİS'
+
 
     TasinmazType = (
         (adaletYapisi, 'ADALET BİNASI'),
         # (kiraliktasinmaz, 'KİRALIK TAŞINMAZLAR'),
         (tahisisliArsalar, 'ARSA'),
         (lojmanlar, 'LOJMAN'),
-        (cezaInfazKurumlari, 'CEZA İNFAZ KURUMU'),
+        (adlitip, 'ADLİ TIP'),
+        (egitimMerkezi, 'EGİTİM MERKEZİ'),
+        (denetimli, 'DENETİMLİ SERBESTLİK'),
+        (sosyal, 'SOSYAL TESİS'),
     )
     CIK = 'Ceza İnfaz Kurumu'
     AB = 'Adalet Binası'
@@ -215,7 +225,7 @@ class Gtasinmaz(models.Model):
 
 
     # ceza infaz kurumlari
-    arsaEmsal = models.CharField(max_length=128, verbose_name='arsa emsal bilgisi ', null=True, blank=True)
+
     tipi = models.CharField(max_length=128, verbose_name='tipi ', null=True, blank=True)
     kapasitesi = models.IntegerField(blank=True, null=True, )
     brutKapaliAlan = models.IntegerField(blank=True, null=True, )

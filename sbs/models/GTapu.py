@@ -19,5 +19,7 @@ class GTapu(models.Model):
     country = models.ForeignKey(Country, on_delete=models.SET_NULL, verbose_name='Ülke', db_column='country',
                                 blank=True, null=True)
     arsayuzolcumu = models.IntegerField(blank=True, null=True, )
+    tahsisyuzolcumu = models.IntegerField(blank=True, null=True, )
+    arsaEmsal = models.CharField(max_length=128, verbose_name='arsa_emsal', null=True, blank=True)
 
     kobilid = models.IntegerField(null=True, blank=True, default=2)

@@ -15,7 +15,9 @@ class TapuForm(ModelForm):
             'neighborhood',
             'town',
             'city',
-            'arsayuzolcumu'
+            'arsayuzolcumu',
+            'tahsisyuzolcumu',
+            'arsaEmsal'
         )
 
         labels = {
@@ -26,6 +28,8 @@ class TapuForm(ModelForm):
             'town': 'İlçe ',
             'city': 'Şehir',
             'arsayuzolcumu': 'Arsa Yüz Ölçümü',
+            'tahsisyuzolcumu': 'Tahsisli Olan YüzÖlçümü',
+            'arsaEmsal': 'Arsa Emsal Bilgisi ',
 
         }
         widgets = {
@@ -50,5 +54,8 @@ class TapuForm(ModelForm):
             'town': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', }),
             'arsayuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+            'tahsisyuzolcumu': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
+
+            'arsaEmsal': forms.TextInput(attrs={'class': 'form-control'}),
 
         }

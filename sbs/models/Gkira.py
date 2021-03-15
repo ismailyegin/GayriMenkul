@@ -45,6 +45,7 @@ class Gkira(models.Model):
     adres = models.TextField(blank=True, null=True, verbose_name='Tasınmazin Kira Adresi')
     kapalialan = models.IntegerField(null=True, blank=True)
     tahsis_amaci = models.CharField(max_length=128, verbose_name='Kullanim Amaci', choices=TAHSİS_AMACİ, default=AB)
+    kirabastarihi = models.DateTimeField(null=True, blank=True)
     kobilid = models.IntegerField(null=True, blank=True, default=2)
 
     # block = models.IntegerField(blank=True, null=True, )

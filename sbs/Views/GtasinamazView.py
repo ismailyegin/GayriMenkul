@@ -387,15 +387,16 @@ def tasinmaz_list(request):
 
     projects = Gtasinmaz.objects.none()
     tasinmaz_form = GtasinmazSearchForm()
-
+    teskilat_form = GteskilatSearchForm()
     if request.method == 'POST':
         name = request.POST.get('name')
+        city = request.POST.get('city')
+        town = request.POST.get('town')
         sirano = request.POST.get('sirano')
         tkgmno = request.POST.get('tkgmno')
         tahsis_durumu = request.POST.get('tahsisDurumu')
         tasinmazinTuru = request.POST.get('tasinmazinTuru')
-
-        if not (name or sirano or tkgmno or tasinmazinTuru or tahsis_durumu):
+        if not (name or sirano or tkgmno or tasinmazinTuru or tahsis_durumu or city or town):
             projects = Gtasinmaz.objects.all()
         else:
             query = Q()
@@ -409,12 +410,18 @@ def tasinmaz_list(request):
                 query &= Q(tasinmazinTuru=tasinmazinTuru)
             if tahsis_durumu:
                 query &= Q(tahsisDurumu=tahsis_durumu)
+            if city:
+                query &= Q(tapu__city_id=int(city))
+            if town:
+                query &= Q(tapu__town_id=int(town))
+
 
             if request.user.groups.filter(name__in=['Yonetim', 'Admin']):
                 projects = Gtasinmaz.objects.filter(query).distinct()
 
 
     return render(request, 'tasinmaz/tasinmazlar.html', {'projects': projects,
+                                                         'teskilat_form': teskilat_form,
                                                          'tasinmaz_form': tasinmaz_form})
 
 

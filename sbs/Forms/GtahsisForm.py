@@ -12,19 +12,17 @@ class GtahsisForm(ModelForm):
                   'tahsisSuresi',
                   'tahsis_amaci',
                   'tahsis_kurum',
-                  'emsal')
+                  )
 
         labels = {'tahsisTarihi ': 'Tahsis Tarihi',
                   'tahsisSuresi ': 'Tahsis Süresi',
                   'tahsis_amaci ': 'Tahsis Amacı',
                   'tahsis_kurum ': 'Tahsis Eden Kurum',
-                  'emsal ': 'Emsal',
 
                   }
 
         widgets = {
-            'emsal': forms.TextInput(
-                attrs={'class': 'form-control ', }),
+
             'tahsisSuresi': forms.TextInput(
                 attrs={'class': 'form-control ', }),
 

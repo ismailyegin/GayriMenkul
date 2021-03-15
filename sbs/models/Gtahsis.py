@@ -36,7 +36,6 @@ class Gtahsis(models.Model):
 
     tahsisTarihi = models.DateTimeField(null=True, blank=True)
     tahsisSuresi = models.CharField(max_length=128, verbose_name='Tahsis Süresi', null=True, blank=True)
-    tahsis_amaci = models.CharField(max_length=128, verbose_name='Proje Cinsi', choices=TAHSİS_AMACİ, default=AB)
-    tahsis_kurum = models.CharField(max_length=128, verbose_name='Tahsis kurum', null=True, blank=True)
-    emsal = models.CharField(max_length=128, verbose_name='Emsal', null=True, blank=True)
+    tahsis_amaci = models.CharField(max_length=128, verbose_name='Tahsis Amaci', choices=TAHSİS_AMACİ, default=AB)
+    tahsis_kurum = models.CharField(max_length=128, verbose_name='Tahsis Kurum', null=True, blank=True)
     kobilid = models.IntegerField(null=True, blank=True, default=2)

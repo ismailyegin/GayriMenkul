@@ -17,15 +17,17 @@ class GkiraForm(ModelForm):
             'kiralamaSuresi',
             'adres',
             'kapalialan',
+            'kirabastarihi',
 
         )
 
         labels = {'sahibi': 'Sahibi',
                   'onayTarihi': ' Cumhurbaşkanlığı Onay Tarihi',
-                  'tahsis_amaci': 'Tahsis Amacı',
+                  'tahsis_amaci': 'Kiralama Amacı',
                   'sozlesmeTarihi': 'Sözleşme Tarihi',
                   'sozlesmeSonTarihi': 'Sözleşme Bitiş Tarihi',
                   'kiralamaSuresi': 'Kiralama Süresi',
+                  'kirabastarihi': 'Kira Başlangıç Tarihi',
                   'adres': 'Adres',
                   'kapalialan': 'Kapalı Alan ',
 
@@ -43,6 +45,9 @@ class GkiraForm(ModelForm):
                        'onkeydown': 'return true'}),
             'sozlesmeSonTarihi': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker8', 'autocomplete': 'on',
+                       'onkeydown': 'return true'}),
+            'kirabastarihi': forms.DateInput(
+                attrs={'class': 'form-control  pull-right', 'id': 'datepicker9', 'autocomplete': 'on',
                        'onkeydown': 'return true'}),
             'adres': forms.TextInput(
                 attrs={'class': 'form-control ', }),

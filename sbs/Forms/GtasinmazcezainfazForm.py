@@ -9,17 +9,16 @@ class GtasinmazcezainfazForm(ModelForm):
         model = Gtasinmaz
 
         fields = (
-            'name', 'sirano', 'tkgmno',
+            'name',
+            'sirano',
+            'tkgmno',
             'arsaDegeri',
             'definition',
             'tasinmazinTuru',
             'yapimyili',
-
-            'arsaEmsal',
             'tipi',
             'kapasitesi',
             'brutKapaliAlan',
-
             'tahsisDurumu'
 
         )
@@ -27,14 +26,11 @@ class GtasinmazcezainfazForm(ModelForm):
         labels = {'name': 'Tanımı',
                   'sirano': 'Sıra numarası',
                   'tkgmno': 'Tkgm numarası',
-
                   'tasinmazinTuru': 'Taşınmazın Türü',
                   'definition': 'Açıklama',
-                  'arsaEmsal': 'Arsa Emsal Bilgisi ',
                   'tipi': 'Tipi',
                   'kapasitesi': 'Kapasitesi',
                   'brutKapaliAlan': 'Brüt Kapali Kullanim Alanı',
-
                   'tahsisDurumu': 'Tahsis Durumu',
                   'yapimyili': 'Yapım Yılı ',
                   }
@@ -52,7 +48,6 @@ class GtasinmazcezainfazForm(ModelForm):
             'definition': forms.Textarea(
                 attrs={'class': 'form-control ', 'rows': '2'}),
 
-            'arsaEmsal': forms.TextInput(attrs={'class': 'form-control'}),
             'tipi': forms.TextInput(attrs={'class': 'form-control', }),
             'kapasitesi': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
             'brutKapaliAlan': forms.TextInput(attrs={'class': 'form-control', 'onkeypress': 'validate(event)'}),
