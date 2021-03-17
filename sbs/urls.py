@@ -537,6 +537,9 @@ urlpatterns = [
     url(r'gayrimenkul/teskilat-BolgeList/$', GtasinamazView.BolgeList, name='bolge-list'),
     url(r'gayrimenkul/teskilat-bolgeGuncelle/(?P<pk>\d+)$', GtasinamazView.bolgeUpdate, name='bolge-duzenle'),
 
+    url(r'gayrimenkul/maps1/$', GtasinamazView.mapscitryone, name='il-selectone'),
+    url(r'gayrimenkul/maps2/$', GtasinamazView.mapscitrytwo, name='il-selecttwo'),
+
 
 
 

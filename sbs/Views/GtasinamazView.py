@@ -348,7 +348,6 @@ def edit_tasinmaz(request, pk):
         project_form = GtasinmazForm(request.POST or None, instance=tasinmaz)
         tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
         # gkurum = Gkurum.objects.all()
-
         if project_form.is_valid() and tapu_form.is_valid():
             projectSave = project_form.save(commit=False)
             projectSave.save()
@@ -848,3 +847,27 @@ def bolgeUpdate(request, pk):
     return render(request, 'Bolge/BolgeGuncelle.html', {
         'project_form': project_form
     })
+
+
+@login_required
+def mapscitryone(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    return render(request, 'harita/ilce.html', {
+
+    })
+
+
+@login_required
+def mapscitrytwo(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    return render(request, 'harita/fullilceler.html')
