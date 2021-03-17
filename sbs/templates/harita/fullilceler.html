@@ -56,11 +56,15 @@
     </style>
     <script type="text/javascript">
         $(function () {
+
+
             $(".sehir").hover(
+
                 function (e) {
+                    $(".sehir g  path").css("fill", "#666");
                     var id = $(this).attr("id");
                     console.log('sehir=' + id)
-
+                    $("#" + id + " g  path").css("fill", "#1094F6");
                 });
 
 
