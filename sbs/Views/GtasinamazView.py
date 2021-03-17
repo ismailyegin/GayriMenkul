@@ -344,7 +344,23 @@ def edit_tasinmaz(request, pk):
                           'project': tasinmaz,
                       })
     else:
-        return redirect('sbs:tasinmaz-list')
+
+        project_form = GtasinmazForm(request.POST or None, instance=tasinmaz)
+        tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
+
+        if project_form.is_valid() and tapu_form.is_valid():
+            projectSave = project_form.save(commit=False)
+            projectSave.save()
+            tapu_form.save()
+            log = str(tasinmaz.name) + "tasinmaz  güncelledi"
+            log = general_methods.logwrite(request, log)
+            print('log karma ')
+            return redirect('sbs:tasinmaz-duzenle', pk=projectSave.pk)
+        return render(request, 'tasinmaz/tasinmazGuncelle.html',
+                      {
+                          'project_form': project_form,
+                          'tapu_form': tapu_form,
+                      })
 
     # if tasinmaz.tapu.city:
     #     if tasinmaz.tapu.town:

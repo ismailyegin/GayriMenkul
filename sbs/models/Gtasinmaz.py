@@ -157,7 +157,7 @@ class Gtasinmaz(models.Model):
                              blank=True)
 
     tahsisAmaci = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TAHSIS_AMACI,
-                                   default=AB)
+                                   null=True, blank=True)
     tasinmazinTuru = models.CharField(max_length=128, verbose_name='Tasinmazin Türü ', choices=TasinmazType, null=True,
                                       blank=True)
 
