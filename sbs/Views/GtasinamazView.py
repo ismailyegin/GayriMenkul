@@ -347,6 +347,7 @@ def edit_tasinmaz(request, pk):
 
         project_form = GtasinmazForm(request.POST or None, instance=tasinmaz)
         tapu_form = TapuForm(request.POST or None, instance=tasinmaz.tapu)
+        # gkurum = Gkurum.objects.all()
 
         if project_form.is_valid() and tapu_form.is_valid():
             projectSave = project_form.save(commit=False)
@@ -360,6 +361,8 @@ def edit_tasinmaz(request, pk):
                       {
                           'project_form': project_form,
                           'tapu_form': tapu_form,
+                          'gkurum': gkurum,
+                          'project': tasinmaz,
                       })
 
     # if tasinmaz.tapu.city:
